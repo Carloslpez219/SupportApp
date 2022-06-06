@@ -1,0 +1,416 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="menuId" class="icon-menu" style="color:#ffffff;"></ion-menu-button>
+    </ion-buttons>
+    <ion-icon name="documents" class="ion-icon-toolbar" style="zoom:1.7;"></ion-icon>
+    <ion-title style="font-size:17px; color: #ffffff;">Support</ion-title>
+  </ion-toolbar>
+  <ion-segment (ionChange)="segmentChanged($event)" value="asignados">
+    <ion-segment-button value="asignados">
+      <ion-label>Asignados</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="mis tickets">
+      <ion-label>Mis tickets</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="dashboard">
+      <ion-label>Dashboard</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-menu side="start" menuId="menuId" contentId="main" mode="md">
+  <ion-header>
+    <ion-toolbar class="menu">
+      <img src="../../assets/img/logo.png" width="72%" slot="start" class="img" style="margin-left: 42px;">
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="menu-content">
+    <ion-menu-toggle>
+      <ion-list>
+        <ion-menu-toggle>
+          <ion-item routerLink="/">
+            <ion-icon name="home" slot="start" style="color:#66615B; zoom: 1.2;"></ion-icon>
+            <ion-label style="font-size: 18px;">Inicio</ion-label>
+          </ion-item>
+          <ion-item routerLink="/perfil">
+            <ion-icon name="person-circle" slot="start" style="color:#66615B; zoom: 1.2;"></ion-icon>
+            <ion-label>Perfil</ion-label>
+          </ion-item>
+          <ion-item routerLink="/reset-password">
+            <ion-icon name="lock-closed" slot="start" style="color:#66615B; zoom: 1.2;"></ion-icon>
+            <ion-label style="font-size: 18px;">Seguridad y Contraseña</ion-label>
+          </ion-item>
+          <ion-item routerLink="/reset-password">
+            <ion-icon name="key" slot="start" style="color:#66615B; zoom: 1.2;"></ion-icon>
+            <ion-label style="font-size: 18px;">Token</ion-label>
+          </ion-item>
+          <ion-item routerLink="/nuevo">
+            <ion-icon name="add" slot="start" style="color:#66615B; zoom: 1.2;"></ion-icon>
+            <ion-label style="font-size: 18px;">Nuevo ticket</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-menu-toggle>
+  </ion-content>
+  <ion-footer>
+    <ion-menu-toggle>
+      <ion-toolbar>
+        <ion-buttons slot="end" mode="ios" class="item-padding-salir">
+          <ion-button color="dark" (click)="logOut()">
+            <ion-icon slot="start" name="log-out-outline" class="icon-menu" style="color:#ffffff; zoom: 1.2;"></ion-icon>
+            <ion-note color="light" style="font-size: 20px;">Salir</ion-note>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-menu-toggle>
+  </ion-footer>
+</ion-menu>
+<ion-router-outlet id="main"></ion-router-outlet>
+
+<ion-fab horizontal="end" vertical="bottom" slot="fixed">
+  <ion-fab-button color="medium" class="width">
+    <ion-icon name="apps"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="top">  
+    <ion-fab-button routerLink="/reset-password" color="medium" class="width" style="zoom: 1.3;">
+      <ion-icon name="lock-closed" style="zoom:1.2;"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button routerLink="/perfil" color="medium" class="width" style="zoom: 1.3;">
+      <ion-icon name="person-circle" style="zoom:1.2;"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button routerLink="/perfil" color="medium" class="width" style="zoom: 1.3;">
+      <ion-icon name="key" style="zoom:1.2;"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button routerLink="/nuevo" color="medium" class="width" style="zoom: 1.3;">
+      <ion-icon name="add" style="zoom:1.2;"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
+
+<!-- //////////////////////////////////////////////////////// -->
+
+<ion-content *ngIf="dash">
+
+  <div>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefreshDash($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  </div>
+  <ion-row class="row-refresh">
+    <ion-col size="12" class="center">
+        <p style="color: rgb(180, 180, 180);"><ion-icon name="arrow-down-outline" style="zoom:0.9;" class="ion-icon-refresh" slot="start"></ion-icon>
+          Desliza para recargar
+          <ion-icon name="arrow-down-outline" style="zoom:0.9;" class="ion-icon-refresh" slot="end"></ion-icon></p>
+    </ion-col>
+  </ion-row>
+  <br>
+  <ion-list>
+    <ion-list-header> 
+      <ion-col size="7.5">
+        Tickets
+      </ion-col>
+      <ion-col size="4">
+        <ion-button expand="block" fill="outline" style="margin-bottom: -10px; padding: 6px;" (click)="presentModalFiltrosDash()">
+          Filtros
+        <ion-icon slot="start" name="search"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="0.5">
+      </ion-col>
+  </ion-list-header>
+  </ion-list>
+
+  <div *ngIf="cardSkeleton">
+    <ion-list style="margin-top: 30px;">
+    <ion-item *ngFor="let cards of skeletonScreen" lines="none">
+      <ion-col size="2">
+          <ion-skeleton-text animated style="height: 50px; border-radius: 25px;"></ion-skeleton-text>
+      </ion-col>
+      <ion-col size="10">
+        <h2>
+          <ion-skeleton-text animated style="width: 45%"></ion-skeleton-text>
+        </h2>
+        <h3>
+          <ion-skeleton-text animated style="width: 8%"></ion-skeleton-text>
+        </h3>
+      </ion-col>
+    </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngIf="!cardSkeleton">
+    <ion-list style="margin-top: 20px;">
+    <br>
+      <ion-item *ngFor="let ticket of conteoTickets" class="animate__animated animate__fadeInUp" (click)="getListadoPorStatus(ticket.codigo)" style="margin-bottom: 9px;
+      border-radius: 15px;
+      --background: #f9f9f9;
+      margin-left: 10px;
+      margin-right: 10px;" lines="none">
+        <ion-avatar slot="start" [style]=" ticket.color">
+        </ion-avatar>
+        <ion-label>
+          <header>{{ticket.nombre}} </header>
+          <h3 style="font-weight: 550;">{{ticket.cantidad}}</h3>
+        </ion-label>
+        <ion-icon slot="end" name="clipboard-outline"></ion-icon>
+      </ion-item>
+
+    </ion-list>
+
+  </div>
+
+</ion-content>
+
+<!-- //////////////////////////////////////////////////////// -->
+
+<ion-content *ngIf="mis">
+
+  <div>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefreshMis($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  </div>
+  <ion-row class="row-refresh">
+    <ion-col size="12" class="center">
+        <p style="color: rgb(180, 180, 180);"><ion-icon name="arrow-down-outline" style="zoom:0.9;" class="ion-icon-refresh" slot="start"></ion-icon>
+          Desliza para recargar
+          <ion-icon name="arrow-down-outline" style="zoom:0.9;" class="ion-icon-refresh" slot="end"></ion-icon></p>
+    </ion-col>
+  </ion-row>
+
+  <ion-list style="margin-top: 20px;">
+    <ion-list-header> 
+        <ion-col size="7.5">
+          Tickets
+        </ion-col>
+        <ion-col size="4">
+          <ion-button expand="block" fill="outline" style="margin-bottom: -10px; padding: 6px;" (click)="presentModalFiltros()">
+            Filtros
+          <ion-icon slot="start" name="search"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size="0.5">
+        </ion-col>
+    </ion-list-header>
+  </ion-list>
+
+  <div *ngIf="mostrarM" >
+    <ion-card *ngFor="let item of misTickets" (click)="getMisTicket(item.codigo)"  class="ion-activatable animate__animated animate__bounceInLeft">
+      <ion-card-header>
+        <ion-card-subtitle>{{item.categoria}}</ion-card-subtitle>
+        <ion-card-title style="font-size: 22px;">#{{item.codigo}} | {{item.incidente}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="4.2">
+              <ion-badge class="badge">Fecha/ Hora :</ion-badge>
+            </ion-col>
+            <ion-col size="7.8">
+              <ion-text>
+                <h3 class="descripcion">{{item.fecha}}</h3>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="3.5">
+              <ion-badge class="badge">Prioridad :</ion-badge>
+            </ion-col>
+            <ion-col size="8.5">
+              <ion-text>
+                <h3 class="descripcion">{{item.prioridad}}</h3>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="3.5">
+              <ion-badge class="badge">Situación :</ion-badge>
+            </ion-col>
+            <ion-col size="8.5">
+              <ion-text>
+                <h3 class="descripcion">{{item.status}}</h3>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-card>
+  </div> 
+
+  <div *ngIf="!mostrarM" >
+    <ion-card *ngFor="let cards of skeletonScreen">
+      <ion-card-header>
+        <ion-card-subtitle>
+          <ion-skeleton-text animated style="width: 27%"></ion-skeleton-text>
+        </ion-card-subtitle>
+        <ion-card-title>
+          <ion-skeleton-text animated style="width: 40%" class="skeleton-tittle"></ion-skeleton-text>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="2">
+              <ion-skeleton-text animated class="skeleton-badge"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="10">
+              <ion-text>
+                <ion-skeleton-text animated style="width: 65%"></ion-skeleton-text>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="2.5">
+              <ion-skeleton-text animated class="skeleton-badge"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="9.5">
+              <ion-text>
+                <ion-skeleton-text animated style="width: 85%"></ion-skeleton-text>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="2.5">
+              <ion-skeleton-text animated class="skeleton-badge"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="9.5">
+              <ion-text>
+                <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>
+
+<!-- //////////////////////////////////////////////////////// -->
+
+<ion-content *ngIf="asignados">
+
+  <div>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefreshAsig($event)">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  </div>
+  <ion-row class="row-refresh">
+    <ion-col size="12" class="center">
+        <p style="color: rgb(180, 180, 180);"><ion-icon name="arrow-down-outline" style="zoom:0.9;" class="ion-icon-refresh" slot="start"></ion-icon>
+          Desliza para recargar
+          <ion-icon name="arrow-down-outline" style="zoom:0.9;" class="ion-icon-refresh" slot="end"></ion-icon></p>
+    </ion-col>
+  </ion-row>
+
+
+    <ion-list style="margin-top: 20px;">
+      <ion-list-header> 
+          <ion-col size="7.5">
+            Tickets
+          </ion-col>
+          <ion-col size="4">
+            <ion-button expand="block" fill="outline" style="margin-bottom: -10px; padding: 6px;" (click)="presentModalFiltros()">
+              Filtros
+            <ion-icon slot="start" name="search"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="0.5">
+          </ion-col>
+      </ion-list-header>
+    </ion-list>
+
+  <div *ngIf="!mostrar" >
+    <ion-card *ngFor="let cards of skeletonScreen">
+      <ion-card-header>
+        <ion-card-subtitle>
+          <ion-skeleton-text animated style="width: 27%"></ion-skeleton-text>
+        </ion-card-subtitle>
+        <ion-card-title>
+          <ion-skeleton-text animated style="width: 40%" class="skeleton-tittle"></ion-skeleton-text>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="2">
+              <ion-skeleton-text animated class="skeleton-badge"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="10">
+              <ion-text>
+                <ion-skeleton-text animated style="width: 65%"></ion-skeleton-text>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="2.5">
+              <ion-skeleton-text animated class="skeleton-badge"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="9.5">
+              <ion-text>
+                <ion-skeleton-text animated style="width: 85%"></ion-skeleton-text>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="2.5">
+              <ion-skeleton-text animated class="skeleton-badge"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="9.5">
+              <ion-text>
+                <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div *ngIf="mostrar" >
+    <ion-card *ngFor="let item of ticketsAsignados" (click)="getTicket(item.codigo)" class="ion-activatable animate__animated animate__bounceInLeft">
+      <ion-card-header>
+        <ion-card-subtitle>{{item.categoria}}</ion-card-subtitle>
+        <ion-card-title style="font-size: 22px;">#{{item.codigo}} | {{item.incidente}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="4.2">
+              <ion-badge class="badge">Fecha/ Hora :</ion-badge>
+            </ion-col>
+            <ion-col size="7.8">
+              <ion-text>
+                <h3 class="descripcion">{{item.fecha}}</h3>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="3.5">
+              <ion-badge class="badge">Prioridad :</ion-badge>
+            </ion-col>
+            <ion-col size="8.5">
+              <ion-text>
+                <h3 class="descripcion">{{item.prioridad}}</h3>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="3.5">
+              <ion-badge class="badge">Situación :</ion-badge>
+            </ion-col>
+            <ion-col size="8.5">
+              <ion-text>
+                <h3 class="descripcion">{{item.status}}</h3>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-card>
+  </div> 
+  
+</ion-content>

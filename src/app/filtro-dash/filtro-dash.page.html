@@ -1,0 +1,108 @@
+<ion-header *ngIf="viewEntered" class="animate__animated animate__fadeInDown">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()" color="light">Atrás
+        <ion-icon slot="start" name="arrow-back-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Filtros</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="viewEntered" class="animate__animated animate__fadeInUp">
+
+  <br>
+  <ion-list>
+    <ion-item>
+      <ion-label>Sede</ion-label>
+      <ion-select (ionChange)="selectSede($event)">
+        <ion-select-option *ngFor="let categoria of sedes" value="{{categoria.codigo}}">{{categoria.nombre}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-row>
+      <ion-col size="8">
+        <ion-item>
+          <ion-icon slot="start" name="calendar-outline"></ion-icon>
+          <ion-label>{{desde}}</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button id="trigger-button" expand="block" >
+          Desde
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="8">
+        <ion-item>
+          <ion-icon slot="start" name="calendar-outline"></ion-icon>
+          <ion-label>{{hasta}}</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button id="trigger-button2" expand="block" >
+          Hasta
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <br>
+    <ion-row>
+      <ion-col size="3"></ion-col>
+      <ion-col size="6">
+        <ion-button expand="block" class="button-save" strong="true" (click)="aceptar()">Aceptar
+                  <ion-icon slot="start" color="white" name="save"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="3"></ion-col>
+    </ion-row>
+  </ion-list>
+
+  <ion-modal [isOpen]="false" [breakpoints]="[0.1, 0.7, 1]" [initialBreakpoint]="0.7" trigger="trigger-button">
+    <ng-template>
+      <ion-header translucent>
+        <ion-toolbar>
+          <ion-title>Fecha</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-card>
+          <ion-datetime min="2020-01-01" (ionChange)="cambioFecha($event)" presentation="date"></ion-datetime>
+        </ion-card>
+        <ion-row>
+          <ion-col size="3"></ion-col>
+          <ion-col size="6">
+            <ion-button expand="block" shape="round" (click)="dismissModal()">
+              Aceptar
+            </ion-button>
+          </ion-col>
+          <ion-col size="3"></ion-col>
+        </ion-row>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+<ion-modal [isOpen]="false" [breakpoints]="[0.1, 0.7, 1]" [initialBreakpoint]="0.7" trigger="trigger-button2">
+  <ng-template>
+    <ion-header translucent>
+      <ion-toolbar>
+        <ion-title>Fecha</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-card>
+        <ion-datetime min="2020-01-01" (ionChange)="cambioFecha2($event)" presentation="date"></ion-datetime>
+      </ion-card>
+      <ion-row>
+        <ion-col size="3"></ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" shape="round" (click)="dismissModal()">
+            Aceptar
+          </ion-button>
+        </ion-col>
+        <ion-col size="3"></ion-col>
+      </ion-row>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+</ion-content>

@@ -1,0 +1,44 @@
+<ion-header *ngIf="viewEntered" class="animate__animated animate__fadeInDown">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()" color="light">Atrás
+        <ion-icon slot="start" name="arrow-back-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Agregar falla</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="viewEntered" class="animate__animated animate__fadeInUp">
+<br>
+  <ion-list>
+    <ion-item>
+      <ion-label>Activo</ion-label>
+      <ion-select (ionChange)="selectCategoria($event)">
+        <ion-select-option *ngFor="let activo of activos" value="{{activo.codigo}}">{{activo.nombre}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Falla :</ion-label>
+      <ion-textarea rows="4" placeholder="Falla..." [(ngModel)]="falla">  </ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label>Comentario :</ion-label>
+      <ion-textarea rows="4" placeholder="Comentario..." [(ngModel)]="descripcion">  </ion-textarea>
+    </ion-item>
+    <br>
+    <ion-datetime [value]="maxDate.toISOString()" min="2020-01-01" (ionChange)="cambioFechaHasta($event)" style="margin-left: 20px;
+    border-radius: 20px;"></ion-datetime>
+  </ion-list>
+<br>
+  <ion-row>
+    <ion-col size="3"></ion-col>
+    <ion-col size="6">
+      <ion-button expand="block" class="button-save" strong="true" (click)="agregarFalla()">Guardar
+                <ion-icon slot="start" color="white" name="save"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="3"></ion-col>
+  </ion-row>
+
+</ion-content>

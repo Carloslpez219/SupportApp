@@ -1,0 +1,90 @@
+<ion-header *ngIf="viewEntered" class="animate__animated animate__fadeInDown">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()" color="light">Atrás
+        <ion-icon slot="start" name="arrow-back-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Actualización de ticket</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="viewEntered" class="animate__animated animate__fadeInUp">
+
+  <br>
+  <ion-list>
+    <ion-item>
+      <ion-label>Categoría</ion-label>
+      <ion-select (ionChange)="selectCategoria($event)" [value]="categoriaActual">
+        <ion-select-option *ngFor="let categoria of categorias" value="{{categoria.codigo}}">{{categoria.nombre}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Área</ion-label>
+      <ion-select (ionChange)="selectArea($event)" [value]="areaActual">
+        <ion-select-option *ngFor="let area of areas" value="{{area.codigo}}">{{area.nombre}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Incidente</ion-label>
+      <ion-select (ionChange)="selectIncidente($event)" [value]="incidenteActual">
+        <ion-select-option *ngFor="let incidente of incidentes" value="{{incidente.codigo}}">{{incidente.nombre}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Sede</ion-label>
+      <ion-select (ionChange)="selectSede($event)" [value]="sedeActual">
+        <ion-select-option *ngFor="let sede of sedes" value="{{sede.codigo}}">{{sede.nombre}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Sector</ion-label>
+      <ion-select (ionChange)="selectSector($event)" [value]="sectorActual">
+        <ion-select-option *ngFor="let sector of sectores" value="{{sector.codigo}}">{{sector.nombre}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Prioridad</ion-label>
+      <ion-select (ionChange)="selectPrioridad($event)" [value]="prioridadActual">
+        <ion-select-option *ngFor="let prioridad of prioridades" value="{{prioridad.codigo}}">{{prioridad.nombre}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Status</ion-label>
+      <ion-select (ionChange)="selectCategoria($event)" [value]="estadoActual">
+        <ion-select-option *ngFor="let estado of status" value="{{estado.codigo}}">{{estado.nombre}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Descripción :</ion-label>
+      <ion-textarea rows="4" placeholder="Descripción..." [(ngModel)]="descripcion">  </ion-textarea>
+    </ion-item>
+  </ion-list>
+<br>
+
+<ion-row>
+  <ion-col size="2.7"></ion-col>
+  <ion-col size="6.6">
+    <div class="file-input">
+      <input type="file" id="file" class="file" (change)="onFileSelected($event)">
+      <label for="file">
+        Seleccionar archivo
+        <p class="file-name"></p>
+      </label>
+    </div>
+  </ion-col>
+  <ion-col size="2.7"></ion-col>
+</ion-row>
+
+  <br>
+  <ion-row>
+    <ion-col size="3"></ion-col>
+    <ion-col size="6">
+      <ion-button expand="block" class="button-save" strong="true" (click)="editar()">Grabar
+                <ion-icon slot="start" color="white" name="save"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="3"></ion-col>
+  </ion-row>
+
+</ion-content>

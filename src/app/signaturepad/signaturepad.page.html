@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()" color="primary">Atrás
+        <ion-icon slot="start" name="arrow-back-outline" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Firma</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <br>
+  
+  <div class="ion-padding">
+    <div class="signature-pad">
+      <div class="signature-pad--body">
+        <canvas #sPad width="400" height="400" style="touch-action: none;"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <ion-row>
+    <ion-col>
+      <ion-button style="--background: #3197f7; margin-left: 12px; margin-right: 12px;" expand="block" round strong (click)="save()">Aceptar</ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button style="--background: #3197f7; margin-left: 12px; margin-right: 12px;" expand="block" round strong (click)="clear()">Borrar</ion-button>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

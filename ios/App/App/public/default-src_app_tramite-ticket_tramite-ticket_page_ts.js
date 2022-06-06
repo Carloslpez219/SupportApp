@@ -1,0 +1,604 @@
+"use strict";
+(self["webpackChunkapp"] = self["webpackChunkapp"] || []).push([["default-src_app_tramite-ticket_tramite-ticket_page_ts"],{
+
+/***/ 8710:
+/*!*****************************************************!*\
+  !*** ./src/app/agregar-falla/agregar-falla.page.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AgregarFallaPage": () => (/* binding */ AgregarFallaPage)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _D_FarasiSoftware_Support_node_modules_ngtools_webpack_src_loaders_direct_resource_js_agregar_falla_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./agregar-falla.page.html */ 9830);
+/* harmony import */ var _agregar_falla_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./agregar-falla.page.scss */ 1201);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _services_bpm_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/bpm.service */ 2152);
+/* harmony import */ var _services_alert_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/alert.service */ 4571);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 8099);
+
+
+
+
+
+
+
+let AgregarFallaPage = class AgregarFallaPage {
+    constructor(bpmService, alertService, loadingController, modalController) {
+        this.bpmService = bpmService;
+        this.alertService = alertService;
+        this.loadingController = loadingController;
+        this.modalController = modalController;
+        this.viewEntered = false;
+        this.descripcion = '';
+        this.falla = '';
+        this.hasta = this.getDate();
+        this.situacion = 1;
+    }
+    ngOnInit() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            (yield this.bpmService.getStatus()).subscribe((resp) => {
+                console.log(resp);
+                if (resp.status) {
+                    this.activos = resp.data;
+                }
+                else {
+                    this.alertService.presentAlert('Ha ocurrido un error en el servidor, intente de nuevo más tarde');
+                }
+            });
+        });
+    }
+    ionViewDidEnter() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            this.viewEntered = true;
+            yield this.loadingController.dismiss();
+        });
+    }
+    ionViewWillLeave() {
+        this.viewEntered = false;
+    }
+    back() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            this.modalController.dismiss();
+        });
+    }
+    selectCategoria(ev) {
+        this.activo = ev.detail.value;
+    }
+    cambioFechaHasta(event) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            this.hasta = yield event.detail.value.split('T');
+            this.hora = yield this.hasta[1];
+            this.hasta = yield this.hasta[0].replace('-', '/');
+            this.hora = yield this.hora.split('-');
+            this.hora = yield this.hora[0];
+        });
+    }
+    getDate() {
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth()).padStart(2, '0');
+        const yyyy = today.getFullYear();
+        this.maxDate = new Date(yyyy, parseInt(mm, 10), parseInt(dd, 10));
+        const hoy = this.maxDate;
+        return hoy;
+    }
+    agregarFalla() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            (yield this.bpmService.agregarFalla(this.ticket.codigo, this.activo, this.falla, this.situacion, this.hasta, this.hora, this.descripcion))
+                .subscribe((resp) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+                console.log(resp);
+                if (resp.status) {
+                    yield (yield this.bpmService.getTicket(this.ticket.codigo)).subscribe((res) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+                        this.ticketNuevo = yield res.data;
+                        this.alertService.presentToast('Falla agregada correctamente', 'success', 2500);
+                        this.presentLoading();
+                        yield this.modalController.dismiss(this.ticketNuevo);
+                    }));
+                }
+                else {
+                    this.alertService.presentAlert(resp.message);
+                }
+            }));
+        });
+    }
+    presentLoading() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const loading = yield this.loadingController.create({
+                message: 'Cargando...'
+            });
+            yield loading.present();
+        });
+    }
+};
+AgregarFallaPage.ctorParameters = () => [
+    { type: _services_bpm_service__WEBPACK_IMPORTED_MODULE_2__.BPMService },
+    { type: _services_alert_service__WEBPACK_IMPORTED_MODULE_3__.AlertService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.LoadingController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.ModalController }
+];
+AgregarFallaPage.propDecorators = {
+    ticket: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input }]
+};
+AgregarFallaPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+        selector: 'app-agregar-falla',
+        template: _D_FarasiSoftware_Support_node_modules_ngtools_webpack_src_loaders_direct_resource_js_agregar_falla_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_agregar_falla_page_scss__WEBPACK_IMPORTED_MODULE_1__]
+    })
+], AgregarFallaPage);
+
+
+
+/***/ }),
+
+/***/ 2877:
+/*!*****************************************************!*\
+  !*** ./src/app/cambio-status/cambio-status.page.ts ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CambioStatusPage": () => (/* binding */ CambioStatusPage)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _D_FarasiSoftware_Support_node_modules_ngtools_webpack_src_loaders_direct_resource_js_cambio_status_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./cambio-status.page.html */ 9733);
+/* harmony import */ var _cambio_status_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cambio-status.page.scss */ 7177);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _services_bpm_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/bpm.service */ 2152);
+/* harmony import */ var _services_alert_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/alert.service */ 4571);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 8099);
+
+
+
+
+
+
+
+let CambioStatusPage = class CambioStatusPage {
+    constructor(bpmService, alertService, loadingController, modalController) {
+        this.bpmService = bpmService;
+        this.alertService = alertService;
+        this.loadingController = loadingController;
+        this.modalController = modalController;
+        this.viewEntered = false;
+        this.descripcion = '';
+        this.estadoActual = '';
+    }
+    ngOnInit() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            console.log(this.ticket);
+            (yield this.bpmService.getStatus()).subscribe((resp) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+                console.log(resp);
+                if (resp.status) {
+                    this.status = yield resp.data;
+                    this.estadoActual = yield this.ticket.estatus_codigo;
+                }
+                else {
+                    this.alertService.presentAlert('Ha ocurrido un error en el servidor, intente de nuevo más tarde');
+                }
+            }));
+        });
+    }
+    ionViewDidEnter() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            this.viewEntered = true;
+            yield this.loadingController.dismiss();
+        });
+    }
+    ionViewWillLeave() {
+        this.viewEntered = false;
+    }
+    back() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            this.modalController.dismiss();
+        });
+    }
+    selectCategoria(ev) {
+        this.estado = ev.detail.value;
+    }
+    cambiosStatus() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            (yield this.bpmService.cambiarStatus(this.descripcion, this.ticket.codigo, this.estado))
+                .subscribe((resp) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+                console.log(resp);
+                if (resp.status) {
+                    yield (yield this.bpmService.getTicket(resp.data.ticket_codigo)).subscribe((res) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+                        this.ticketNuevo = yield res.data;
+                        yield this.alertService.presentToast('El ticket se ha actualizado correctamente', 'success', 2500);
+                        this.presentLoading();
+                        yield this.modalController.dismiss(this.ticketNuevo);
+                    }));
+                }
+                else {
+                    this.alertService.presentAlert(resp.message);
+                }
+            }));
+        });
+    }
+    presentLoading() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const loading = yield this.loadingController.create({
+                message: 'Cargando...'
+            });
+            yield loading.present();
+        });
+    }
+};
+CambioStatusPage.ctorParameters = () => [
+    { type: _services_bpm_service__WEBPACK_IMPORTED_MODULE_2__.BPMService },
+    { type: _services_alert_service__WEBPACK_IMPORTED_MODULE_3__.AlertService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.LoadingController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.ModalController }
+];
+CambioStatusPage.propDecorators = {
+    ticket: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input }]
+};
+CambioStatusPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+        selector: 'app-cambio-status',
+        template: _D_FarasiSoftware_Support_node_modules_ngtools_webpack_src_loaders_direct_resource_js_cambio_status_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_cambio_status_page_scss__WEBPACK_IMPORTED_MODULE_1__]
+    })
+], CambioStatusPage);
+
+
+
+/***/ }),
+
+/***/ 5690:
+/*!***********************************************!*\
+  !*** ./src/app/comentario/comentario.page.ts ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ComentarioPage": () => (/* binding */ ComentarioPage)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _D_FarasiSoftware_Support_node_modules_ngtools_webpack_src_loaders_direct_resource_js_comentario_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./comentario.page.html */ 9046);
+/* harmony import */ var _comentario_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./comentario.page.scss */ 572);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _services_bpm_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/bpm.service */ 2152);
+/* harmony import */ var _services_alert_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/alert.service */ 4571);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 8099);
+
+
+
+
+
+
+
+let ComentarioPage = class ComentarioPage {
+    constructor(bpmService, alertService, loadingController, modalController) {
+        this.bpmService = bpmService;
+        this.alertService = alertService;
+        this.loadingController = loadingController;
+        this.modalController = modalController;
+        this.viewEntered = false;
+        this.comentario = '';
+    }
+    ngOnInit() {
+    }
+    ionViewDidEnter() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            this.viewEntered = true;
+            yield this.loadingController.dismiss();
+        });
+    }
+    ionViewWillLeave() {
+        this.viewEntered = false;
+    }
+    back() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            this.modalController.dismiss();
+        });
+    }
+    comentar() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            (yield this.bpmService.comentar(this.comentario, this.ticket.codigo))
+                .subscribe((resp) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+                console.log(resp);
+                if (resp.status) {
+                    this.ticketCodigo = yield resp.data.ticket_codigo;
+                    yield this.post();
+                    this.alertService.presentToast('Comentario agregado correctamente', 'success', 2500);
+                    this.modalController.dismiss();
+                }
+                else {
+                    this.alertService.presentAlert(resp.message);
+                }
+            }));
+        });
+    }
+    onFileSelected(ev) {
+        console.log(ev);
+        this.selectedFile = ev.target.files[0];
+    }
+    post() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            console.log(this.selectedFile);
+            (yield this.bpmService.post(this.ticketCodigo, 1, this.selectedFile, this.comentario)).subscribe((resp) => {
+                console.log(resp);
+            });
+        });
+    }
+};
+ComentarioPage.ctorParameters = () => [
+    { type: _services_bpm_service__WEBPACK_IMPORTED_MODULE_2__.BPMService },
+    { type: _services_alert_service__WEBPACK_IMPORTED_MODULE_3__.AlertService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.LoadingController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.ModalController }
+];
+ComentarioPage.propDecorators = {
+    ticket: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input }]
+};
+ComentarioPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+        selector: 'app-comentario',
+        template: _D_FarasiSoftware_Support_node_modules_ngtools_webpack_src_loaders_direct_resource_js_comentario_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_comentario_page_scss__WEBPACK_IMPORTED_MODULE_1__]
+    })
+], ComentarioPage);
+
+
+
+/***/ }),
+
+/***/ 7030:
+/*!*******************************************************!*\
+  !*** ./src/app/tramite-ticket/tramite-ticket.page.ts ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TramiteTicketPage": () => (/* binding */ TramiteTicketPage)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _D_FarasiSoftware_Support_node_modules_ngtools_webpack_src_loaders_direct_resource_js_tramite_ticket_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./tramite-ticket.page.html */ 7703);
+/* harmony import */ var _tramite_ticket_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tramite-ticket.page.scss */ 862);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var _cambio_status_cambio_status_page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../cambio-status/cambio-status.page */ 2877);
+/* harmony import */ var _comentario_comentario_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../comentario/comentario.page */ 5690);
+/* harmony import */ var _agregar_falla_agregar_falla_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../agregar-falla/agregar-falla.page */ 8710);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/platform-browser */ 6219);
+/* harmony import */ var _services_alert_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/alert.service */ 4571);
+
+
+
+
+
+
+
+
+
+
+let TramiteTicketPage = class TramiteTicketPage {
+    constructor(loadingController, modalController, sanitizer, alertService) {
+        this.loadingController = loadingController;
+        this.modalController = modalController;
+        this.sanitizer = sanitizer;
+        this.alertService = alertService;
+        this.viewEntered = false;
+    }
+    ngOnInit() {
+        console.log(this.ticket);
+    }
+    ionViewDidEnter() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            setTimeout(() => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+                this.viewEntered = yield true;
+                yield this.loadingController.dismiss();
+            }), 800);
+        });
+    }
+    ionViewWillLeave() {
+        this.viewEntered = false;
+    }
+    back() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            this.modalController.dismiss();
+        });
+    }
+    cambiarStatus(ticket) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            this.presentLoading();
+            const modal = yield this.modalController.create({
+                component: _cambio_status_cambio_status_page__WEBPACK_IMPORTED_MODULE_2__.CambioStatusPage,
+                backdropDismiss: false,
+                componentProps: { ticket }
+            });
+            yield modal.present();
+            const value = yield modal.onDidDismiss();
+            console.log(value);
+            if (value.data) {
+                this.viewEntered = yield false;
+                this.ticket = yield value.data;
+                setTimeout(() => {
+                    this.viewEntered = true;
+                    this.loadingController.dismiss();
+                }, 800);
+            }
+            else {
+                this.loadingController.dismiss();
+            }
+        });
+    }
+    cambiarComentar(ticket) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            this.presentLoading();
+            const modal = yield this.modalController.create({
+                component: _comentario_comentario_page__WEBPACK_IMPORTED_MODULE_3__.ComentarioPage,
+                backdropDismiss: false,
+                componentProps: { ticket }
+            });
+            yield modal.present();
+        });
+    }
+    agregarFalla(ticket) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            this.presentLoading();
+            const modal = yield this.modalController.create({
+                component: _agregar_falla_agregar_falla_page__WEBPACK_IMPORTED_MODULE_4__.AgregarFallaPage,
+                backdropDismiss: false,
+                componentProps: { ticket }
+            });
+            yield modal.present();
+            const value = yield modal.onDidDismiss();
+            console.log(value);
+            if (value.data) {
+                this.viewEntered = yield false;
+                this.ticket = yield value.data;
+                setTimeout(() => {
+                    this.viewEntered = true;
+                    this.loadingController.dismiss();
+                }, 800);
+            }
+        });
+    }
+    presentLoading() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            const loading = yield this.loadingController.create({
+                message: 'Cargando...'
+            });
+            yield loading.present();
+        });
+    }
+    verpdf(url) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            console.log(url);
+            if (url !== '' && url !== undefined) {
+                const safeUrl = yield this.sanitizer.bypassSecurityTrustResourceUrl(url);
+                yield window.open(safeUrl.changingThisBreaksApplicationSecurity, '_system');
+            }
+            else {
+                this.alertService.presentAlert('No hay archivo disponible.');
+            }
+        });
+    }
+};
+TramiteTicketPage.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.LoadingController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.ModalController },
+    { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_8__.DomSanitizer },
+    { type: _services_alert_service__WEBPACK_IMPORTED_MODULE_5__.AlertService }
+];
+TramiteTicketPage.propDecorators = {
+    ticket: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__.Input }]
+};
+TramiteTicketPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
+        selector: 'app-tramite-ticket',
+        template: _D_FarasiSoftware_Support_node_modules_ngtools_webpack_src_loaders_direct_resource_js_tramite_ticket_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_tramite_ticket_page_scss__WEBPACK_IMPORTED_MODULE_1__]
+    })
+], TramiteTicketPage);
+
+
+
+/***/ }),
+
+/***/ 9830:
+/*!**********************************************************************************************************************!*\
+  !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/agregar-falla/agregar-falla.page.html ***!
+  \**********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInDown\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button (click)=\"back()\" color=\"light\">Atrás\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"light\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>Agregar falla</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInUp\">\n<br>\n  <ion-list>\n    <ion-item>\n      <ion-label>Activo</ion-label>\n      <ion-select (ionChange)=\"selectCategoria($event)\">\n        <ion-select-option *ngFor=\"let activo of activos\" value=\"{{activo.codigo}}\">{{activo.nombre}}</ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Falla :</ion-label>\n      <ion-textarea rows=\"4\" placeholder=\"Falla...\" [(ngModel)]=\"falla\">  </ion-textarea>\n    </ion-item>\n    <ion-item>\n      <ion-label>Comentario :</ion-label>\n      <ion-textarea rows=\"4\" placeholder=\"Comentario...\" [(ngModel)]=\"descripcion\">  </ion-textarea>\n    </ion-item>\n    <br>\n    <ion-datetime [value]=\"maxDate.toISOString()\" min=\"2020-01-01\" (ionChange)=\"cambioFechaHasta($event)\" style=\"margin-left: 20px;\n    border-radius: 20px;\"></ion-datetime>\n  </ion-list>\n<br>\n  <ion-row>\n    <ion-col size=\"3\"></ion-col>\n    <ion-col size=\"6\">\n      <ion-button expand=\"block\" class=\"button-save\" strong=\"true\" (click)=\"agregarFalla()\">Guardar\n                <ion-icon slot=\"start\" color=\"white\" name=\"save\"></ion-icon>\n      </ion-button>\n    </ion-col>\n    <ion-col size=\"3\"></ion-col>\n  </ion-row>\n\n</ion-content>\n");
+
+/***/ }),
+
+/***/ 9733:
+/*!**********************************************************************************************************************!*\
+  !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/cambio-status/cambio-status.page.html ***!
+  \**********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInDown\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button (click)=\"back()\" color=\"light\">Atrás\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"light\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>Cambio de status</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInUp\">\n<br>\n  <ion-list>\n    <ion-item>\n      <ion-label>Status</ion-label>\n      <ion-select (ionChange)=\"selectCategoria($event)\" [value]=\"estadoActual\">\n        <ion-select-option *ngFor=\"let estado of status\" value=\"{{estado.codigo}}\">{{estado.nombre}}</ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Comentario :</ion-label>\n      <ion-textarea rows=\"4\" placeholder=\"Comentario...\" [(ngModel)]=\"descripcion\">  </ion-textarea>\n    </ion-item>\n  </ion-list>\n<br>\n  <ion-row>\n    <ion-col size=\"3\"></ion-col>\n    <ion-col size=\"6\">\n      <ion-button expand=\"block\" class=\"button-save\" strong=\"true\" (click)=\"cambiosStatus()\">Guardar\n                <ion-icon slot=\"start\" color=\"white\" name=\"save\"></ion-icon>\n      </ion-button>\n    </ion-col>\n    <ion-col size=\"3\"></ion-col>\n  </ion-row>\n\n\n</ion-content>\n");
+
+/***/ }),
+
+/***/ 9046:
+/*!****************************************************************************************************************!*\
+  !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/comentario/comentario.page.html ***!
+  \****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInDown\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button (click)=\"back()\" color=\"light\">Atrás\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"light\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>Cambio de status</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInUp\">\n<br>\n  <ion-list>\n    <ion-item>\n      <ion-label>Comentario :</ion-label>\n      <ion-textarea rows=\"6\" placeholder=\"Comentario...\" [(ngModel)]=\"comentario\">  </ion-textarea>\n    </ion-item>\n  </ion-list>\n<br>\n  <ion-row>\n    <ion-col size=\"2.7\"></ion-col>\n    <ion-col size=\"6.6\">\n      <div class=\"file-input\">\n        <input type=\"file\" id=\"file\" class=\"file\" (change)=\"onFileSelected($event)\">\n        <label for=\"file\">\n          Seleccionar archivo\n          <p class=\"file-name\"></p>\n        </label>\n      </div>\n    </ion-col>\n    <ion-col size=\"2.7\"></ion-col>\n  </ion-row>\n\n  <ion-row>\n    <ion-col size=\"3\"></ion-col>\n    <ion-col size=\"6\">\n      <ion-button expand=\"block\" class=\"button-save\" strong=\"true\" (click)=\"comentar()\">Guardar\n                <ion-icon slot=\"start\" color=\"white\" name=\"save\"></ion-icon>\n      </ion-button>\n    </ion-col>\n    <ion-col size=\"3\"></ion-col>\n  </ion-row>\n\n</ion-content>\n");
+
+/***/ }),
+
+/***/ 7703:
+/*!************************************************************************************************************************!*\
+  !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/tramite-ticket/tramite-ticket.page.html ***!
+  \************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInDown\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button (click)=\"back()\" color=\"light\">Atrás\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"light\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>Ticket</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInUp\">\n\n  <ion-row>\n    <ion-col size=\"6\">\n      <ion-card style=\"background-color: #f0f0f0; margin-top: 15px; margin-bottom: 10px; height: 80%;\">\n        <ion-card-subtitle class=\"ion-margin\">Status actual:</ion-card-subtitle>\n        <h2 style=\"color: cornflowerblue\" class=\"ion-margin\">{{ticket.estatus}}</h2>\n      </ion-card>\n    </ion-col>\n    <ion-col size=\"6\">\n      <ion-button expand=\"block\" style=\"--background: #2D383F\" (click)=\"cambiarStatus(ticket)\"><b>Cambiar Status</b></ion-button>\n      <ion-button expand=\"block\" style=\"--background: #1ab394\" (click)=\"cambiarComentar(ticket)\"><b>Comentar</b></ion-button>\n      <ion-button expand=\"block\" style=\"--background: #f8ac59\" (click)=\"agregarFalla(ticket)\"><b>Agregar Falla</b></ion-button>\n    </ion-col>\n  </ion-row>\n\n  <ion-row>\n    <ion-col size=\"6\">\n      <ion-item-divider style=\"background-color: #f0f0f0;\">\n        <ion-label>Sede: </ion-label>\n      </ion-item-divider>\n      <div class=\"margin\"><ion-label style=\"font-size: 17px;\">{{ticket.sede}}</ion-label></div>\n    </ion-col>\n    <ion-col size=\"6\">\n      <ion-item-divider style=\"background-color: #f0f0f0;\">\n        <ion-label>Área: </ion-label>\n      </ion-item-divider>\n      <div class=\"margin\"><ion-label style=\"font-size: 17px;\">{{ticket.area}}</ion-label></div>\n    </ion-col>\n  </ion-row>\n  <ion-row>\n    <ion-col size=\"6\">\n      <ion-item-divider style=\"background-color: #f0f0f0;\">\n        <ion-label>Categoría: </ion-label>\n      </ion-item-divider>\n      <div class=\"margin\"><ion-label style=\"font-size: 17px;\">{{ticket.categoria}}</ion-label></div>\n    </ion-col>\n    <ion-col size=\"6\">\n      <ion-item-divider style=\"background-color: #f0f0f0;\">\n        <ion-label>Prioridad: </ion-label>\n      </ion-item-divider>\n      <div class=\"margin\"><ion-label style=\"font-size: 17px;\">{{ticket.prioridad}}</ion-label></div>\n    </ion-col>\n  </ion-row>\n  <ion-item-divider style=\"background-color: #f0f0f0;\">\n    <ion-label>Tiempo en espera o Hold on: </ion-label>\n  </ion-item-divider>\n  <div class=\"margin\"><ion-label style=\"font-size: 17px;\">{{ticket.espera}}</ion-label></div>\n  <ion-row>\n    <ion-col size=\"6\">\n      <ion-item-divider style=\"background-color: #f0f0f0;\">\n        <ion-label>Sector: </ion-label>\n      </ion-item-divider>\n      <div class=\"margin\"><ion-label style=\"font-size: 17px;\">{{ticket.sector}}</ion-label></div>\n    </ion-col>\n    <ion-col size=\"6\">\n      <ion-item-divider style=\"background-color: #f0f0f0;\">\n        <ion-label>Nivel: </ion-label>\n      </ion-item-divider>\n      <div class=\"margin\"><ion-label style=\"font-size: 17px;\">{{ticket.nivel}}</ion-label></div>\n    </ion-col>\n  </ion-row>\n  <ion-item-divider style=\"background-color: #f0f0f0;\">\n    <ion-label>Incidente: </ion-label>\n  </ion-item-divider>\n  <div class=\"margin\"><ion-label style=\"font-size: 17px;\">{{ticket.incidente}}</ion-label></div>\n  <ion-item-divider style=\"background-color: #f0f0f0;\">\n    <ion-label>Descripción: </ion-label>\n  </ion-item-divider>\n  <div class=\"margin\"><ion-label style=\"font-size: 17px;\">{{ticket.descripcion}}</ion-label></div>\n  <ion-item-divider style=\"background-color: #f0f0f0;\">\n    <ion-label>Archivos por status: </ion-label>\n  </ion-item-divider>\n  <ion-slides pager=\"true\">\n    <ion-slide *ngFor=\"let item of ticket.fotos\">\n      <ion-card style=\"background-color: #f0f0f0;\" (click)=\"verpdf(item.foto)\">\n        <ion-row>\n          <ion-col size=\"4\">\n            <ion-badge class=\"badge\">Fecha: </ion-badge>\n          </ion-col>\n          <ion-col size=\"8\">\n            <ion-label>{{item.fecha_reg}}</ion-label>\n          </ion-col>\n        </ion-row>\n      </ion-card>\n    </ion-slide>\n  </ion-slides>\n  <ion-item-divider style=\"background-color: #f0f0f0;\">\n    <ion-label>Archivos por comentarios: </ion-label>\n  </ion-item-divider>\n  <ion-slides pager=\"true\">\n    <ion-slide *ngFor=\"let item of ticket.comentarios\">\n      <ion-card style=\"background-color: #f0f0f0; width: 90%;\" (click)=\"verpdf(ticket.archivo)\">\n\n          <ion-row>\n            <ion-col size=\"3\">\n              <ion-badge class=\"badge\">Comentario :</ion-badge>\n            </ion-col>\n            <ion-col size=\"9\">\n              <ion-text>\n                <h6>{{item.comentario}}</h6>\n              </ion-text>\n            </ion-col>\n          </ion-row>\n          <ion-row>\n            <ion-col size=\"3\">\n              <ion-badge class=\"badge\">Fecha/ Hora :</ion-badge>\n            </ion-col>\n            <ion-col size=\"9\">\n              <ion-text>\n                <h6>{{item.fecha_reg}}</h6>\n              </ion-text>\n            </ion-col>\n          </ion-row>\n      </ion-card>\n    </ion-slide>\n  </ion-slides>\n  <ion-item-divider style=\"background-color: #f0f0f0;\">\n    <ion-label>Usuarios asignados: </ion-label>\n  </ion-item-divider>\n  <ion-slides pager=\"true\">\n    <ion-slide *ngFor=\"let item of ticket.asignacion\">\n      <ion-card style=\"background-color: #f0f0f0; width: 90%;\" >\n        <ion-card-content>\n          <ion-row>\n            <ion-col size=\"2.8\">\n              <ion-badge class=\"badge\">Nombre :</ion-badge>\n            </ion-col>\n            <ion-col size=\"9.2\">\n              <ion-text>\n                <h6>{{item.nombre}}</h6>\n              </ion-text>\n            </ion-col>\n          </ion-row>\n        </ion-card-content>\n      </ion-card>\n    </ion-slide>\n  </ion-slides>\n  <ion-item-divider style=\"background-color: #f0f0f0;\">\n    <ion-label>Bitácora: </ion-label>\n  </ion-item-divider>\n  <ion-slides pager=\"true\">\n    <ion-slide *ngFor=\"let item of ticket.bitacora\">\n      <ion-card style=\"background-color: #f0f0f0; width: 90%;\" >\n        <ion-card-content>\n          <ion-row>\n            <ion-col size=\"3\">\n              <ion-badge class=\"badge\">Acción :</ion-badge>\n            </ion-col>\n            <ion-col size=\"9\">\n              <ion-text>\n                <h6>{{item.descripcion}}</h6>\n              </ion-text>\n            </ion-col>\n          </ion-row>\n          <ion-row>\n            <ion-col size=\"3.8\">\n              <ion-badge class=\"badge\">Fecha/Hora :</ion-badge>\n            </ion-col>\n            <ion-col size=\"8.2\">\n              <ion-text>\n                <h6>{{item.fecha_reg}}</h6>\n              </ion-text>\n            </ion-col>\n          </ion-row>\n          <ion-row>\n            <ion-col size=\"4.2\">\n              <ion-badge class=\"badge\">Observaciones :</ion-badge>\n            </ion-col>\n            <ion-col size=\"7.8\">\n              <ion-text>\n                <h6>{{item.observacion}}</h6>\n              </ion-text>\n            </ion-col>\n          </ion-row>\n          <ion-row>\n            <ion-col size=\"3.1\">\n              <ion-badge class=\"badge\">Usuario :</ion-badge>\n            </ion-col>\n            <ion-col size=\"8.9\">\n              <ion-text>\n                <h6>{{item.nombre}}</h6>\n              </ion-text>\n            </ion-col>\n          </ion-row>\n        </ion-card-content>\n      </ion-card>\n    </ion-slide>\n  </ion-slides>\n\n</ion-content>\n");
+
+/***/ }),
+
+/***/ 1201:
+/*!*******************************************************!*\
+  !*** ./src/app/agregar-falla/agregar-falla.page.scss ***!
+  \*******************************************************/
+/***/ ((module) => {
+
+module.exports = "ion-toolbar {\n  --background: #66615B;\n  --color: white;\n}\n\n.button-save {\n  --background: #4c4c4a;\n  color: white;\n  margin-top: 10%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFncmVnYXItZmFsbGEucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kscUJBQUE7RUFDQSxjQUFBO0FBQ0o7O0FBRUU7RUFDRSxxQkFBQTtFQUNBLFlBQUE7RUFDQSxlQUFBO0FBQ0oiLCJmaWxlIjoiYWdyZWdhci1mYWxsYS5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tdG9vbGJhciB7XHJcbiAgICAtLWJhY2tncm91bmQ6ICM2NjYxNUI7XHJcbiAgICAtLWNvbG9yOiB3aGl0ZTtcclxuICB9XHJcblxyXG4gIC5idXR0b24tc2F2ZXtcclxuICAgIC0tYmFja2dyb3VuZDogIzRjNGM0YTtcclxuICAgIGNvbG9yOiB3aGl0ZTtcclxuICAgIG1hcmdpbi10b3A6IDEwJTtcclxufSJdfQ== */";
+
+/***/ }),
+
+/***/ 7177:
+/*!*******************************************************!*\
+  !*** ./src/app/cambio-status/cambio-status.page.scss ***!
+  \*******************************************************/
+/***/ ((module) => {
+
+module.exports = "ion-toolbar {\n  --background: #66615B;\n  --color: white;\n}\n\n.button-save {\n  --background: #4c4c4a;\n  color: white;\n  margin-top: 10%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNhbWJpby1zdGF0dXMucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kscUJBQUE7RUFDQSxjQUFBO0FBQ0o7O0FBRUU7RUFDRSxxQkFBQTtFQUNBLFlBQUE7RUFDQSxlQUFBO0FBQ0oiLCJmaWxlIjoiY2FtYmlvLXN0YXR1cy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tdG9vbGJhciB7XHJcbiAgICAtLWJhY2tncm91bmQ6ICM2NjYxNUI7XHJcbiAgICAtLWNvbG9yOiB3aGl0ZTtcclxuICB9XHJcblxyXG4gIC5idXR0b24tc2F2ZXtcclxuICAgIC0tYmFja2dyb3VuZDogIzRjNGM0YTtcclxuICAgIGNvbG9yOiB3aGl0ZTtcclxuICAgIG1hcmdpbi10b3A6IDEwJTtcclxufSJdfQ== */";
+
+/***/ }),
+
+/***/ 572:
+/*!*************************************************!*\
+  !*** ./src/app/comentario/comentario.page.scss ***!
+  \*************************************************/
+/***/ ((module) => {
+
+module.exports = "ion-toolbar {\n  --background: #66615B;\n  --color: white;\n}\n\n.button-save {\n  --background: #4c4c4a;\n  color: white;\n  margin-top: 10%;\n}\n\n.file {\n  opacity: 0;\n  width: 0.1px;\n  height: 0.1px;\n  position: absolute;\n}\n\n.file-input label {\n  display: block;\n  position: relative;\n  width: 200px;\n  height: 50px;\n  border-radius: 25px;\n  background: linear-gradient(40deg, #4c4c4a, #000000);\n  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: #fff;\n  font-weight: bold;\n  cursor: pointer;\n  transition: transform 0.2s ease-out;\n}\n\n.file-name {\n  position: absolute;\n  bottom: -35px;\n  left: 10px;\n  font-size: 0.85rem;\n  color: #555;\n}\n\ninput:hover + label,\ninput:focus + label {\n  transform: scale(1.02);\n}\n\n/* Adding an outline to the label on focus */\n\ninput:focus + label {\n  outline: 1px solid #000;\n  outline: -webkit-focus-ring-color auto 2px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbWVudGFyaW8ucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kscUJBQUE7RUFDQSxjQUFBO0FBQ0o7O0FBRUU7RUFDRSxxQkFBQTtFQUNBLFlBQUE7RUFDQSxlQUFBO0FBQ0o7O0FBRUE7RUFDRSxVQUFBO0VBQ0EsWUFBQTtFQUNBLGFBQUE7RUFDQSxrQkFBQTtBQUNGOztBQUVBO0VBQ0UsY0FBQTtFQUNBLGtCQUFBO0VBQ0EsWUFBQTtFQUNBLFlBQUE7RUFDQSxtQkFBQTtFQUNBLG9EQUFBO0VBQ0Esd0NBQUE7RUFDQSxhQUFBO0VBQ0EsbUJBQUE7RUFDQSx1QkFBQTtFQUNBLFdBQUE7RUFDQSxpQkFBQTtFQUNBLGVBQUE7RUFDQSxtQ0FBQTtBQUNGOztBQUVBO0VBQ0Usa0JBQUE7RUFDQSxhQUFBO0VBQ0EsVUFBQTtFQUNBLGtCQUFBO0VBQ0EsV0FBQTtBQUNGOztBQUVBOztFQUVFLHNCQUFBO0FBQ0Y7O0FBRUEsNENBQUE7O0FBQ0E7RUFDRSx1QkFBQTtFQUNBLDBDQUFBO0FBQ0YiLCJmaWxlIjoiY29tZW50YXJpby5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tdG9vbGJhciB7XHJcbiAgICAtLWJhY2tncm91bmQ6ICM2NjYxNUI7XHJcbiAgICAtLWNvbG9yOiB3aGl0ZTtcclxuICB9XHJcblxyXG4gIC5idXR0b24tc2F2ZXtcclxuICAgIC0tYmFja2dyb3VuZDogIzRjNGM0YTtcclxuICAgIGNvbG9yOiB3aGl0ZTtcclxuICAgIG1hcmdpbi10b3A6IDEwJTtcclxufVxyXG5cclxuLmZpbGUge1xyXG4gIG9wYWNpdHk6IDA7XHJcbiAgd2lkdGg6IDAuMXB4O1xyXG4gIGhlaWdodDogMC4xcHg7XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG59XHJcblxyXG4uZmlsZS1pbnB1dCBsYWJlbCB7XHJcbiAgZGlzcGxheTogYmxvY2s7XHJcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gIHdpZHRoOiAyMDBweDtcclxuICBoZWlnaHQ6IDUwcHg7XHJcbiAgYm9yZGVyLXJhZGl1czogMjVweDtcclxuICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoNDBkZWcsIzRjNGM0YSwjMDAwMDAwKTtcclxuICBib3gtc2hhZG93OiAwIDRweCA3cHggcmdiYSgwLCAwLCAwLCAwLjQpO1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxuICBjb2xvcjogI2ZmZjtcclxuICBmb250LXdlaWdodDogYm9sZDtcclxuICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIC4ycyBlYXNlLW91dDtcclxufVxyXG5cclxuLmZpbGUtbmFtZSB7XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gIGJvdHRvbTogLTM1cHg7XHJcbiAgbGVmdDogMTBweDtcclxuICBmb250LXNpemU6IDAuODVyZW07XHJcbiAgY29sb3I6ICM1NTU7XHJcbn1cclxuXHJcbmlucHV0OmhvdmVyICsgbGFiZWwsXHJcbmlucHV0OmZvY3VzICsgbGFiZWwge1xyXG4gIHRyYW5zZm9ybTogc2NhbGUoMS4wMik7XHJcbn1cclxuXHJcbi8qIEFkZGluZyBhbiBvdXRsaW5lIHRvIHRoZSBsYWJlbCBvbiBmb2N1cyAqL1xyXG5pbnB1dDpmb2N1cyArIGxhYmVsIHtcclxuICBvdXRsaW5lOiAxcHggc29saWQgIzAwMDtcclxuICBvdXRsaW5lOiAtd2Via2l0LWZvY3VzLXJpbmctY29sb3IgYXV0byAycHg7XHJcbn0iXX0= */";
+
+/***/ }),
+
+/***/ 862:
+/*!*********************************************************!*\
+  !*** ./src/app/tramite-ticket/tramite-ticket.page.scss ***!
+  \*********************************************************/
+/***/ ((module) => {
+
+module.exports = ".margin {\n  margin-left: 21px;\n  margin-right: 4px;\n  margin-top: 4px;\n  margin-bottom: 4px;\n}\n\nion-slides {\n  --bullet-background: rgb(59, 59, 59);\n  --bullet-background-active: black;\n}\n\n.badge {\n  background-color: #4c4c4a;\n}\n\nion-toolbar {\n  --background: #66615B;\n  --color: white;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRyYW1pdGUtdGlja2V0LnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGlCQUFBO0VBQ0EsaUJBQUE7RUFDQSxlQUFBO0VBQ0Esa0JBQUE7QUFDSjs7QUFFQTtFQUNJLG9DQUFBO0VBQ0EsaUNBQUE7QUFDSjs7QUFFQTtFQUNJLHlCQUFBO0FBQ0o7O0FBRUU7RUFDRSxxQkFBQTtFQUNBLGNBQUE7QUFDSiIsImZpbGUiOiJ0cmFtaXRlLXRpY2tldC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubWFyZ2lue1xyXG4gICAgbWFyZ2luLWxlZnQ6IDIxcHg7XHJcbiAgICBtYXJnaW4tcmlnaHQ6IDRweDtcclxuICAgIG1hcmdpbi10b3A6IDRweDtcclxuICAgIG1hcmdpbi1ib3R0b206IDRweDtcclxufVxyXG5cclxuaW9uLXNsaWRlc3tcclxuICAgIC0tYnVsbGV0LWJhY2tncm91bmQ6IHJnYig1OSwgNTksIDU5KTtcclxuICAgIC0tYnVsbGV0LWJhY2tncm91bmQtYWN0aXZlOiBibGFjaztcclxufVxyXG5cclxuLmJhZGdle1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzRjNGM0YTtcclxuICB9XHJcblxyXG4gIGlvbi10b29sYmFyIHtcclxuICAgIC0tYmFja2dyb3VuZDogIzY2NjE1QjtcclxuICAgIC0tY29sb3I6IHdoaXRlO1xyXG4gIH0iXX0= */";
+
+/***/ })
+
+}]);
+//# sourceMappingURL=default-src_app_tramite-ticket_tramite-ticket_page_ts.js.map

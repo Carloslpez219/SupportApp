@@ -1,0 +1,160 @@
+<ion-header *ngIf="viewEntered" class="animate__animated animate__fadeInDown">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()" color="light">Atrás
+        <ion-icon slot="start" name="arrow-back-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Ticket</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="viewEntered" class="animate__animated animate__fadeInUp">
+
+      <ion-card style="background-color: #f0f0f0; margin-top: 15px; margin-bottom: 10px;">
+        <ion-card-subtitle class="ion-margin">Status actual:</ion-card-subtitle>
+        <h2 style="color: cornflowerblue" class="ion-margin">{{ticket.estatus}}</h2>
+      </ion-card>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-item-divider style="background-color: #f0f0f0;">
+        <ion-label>Sede: </ion-label>
+      </ion-item-divider>
+      <div class="margin"><ion-label style="font-size: 17px;">{{ticket.sede}}</ion-label></div>
+    </ion-col>
+    <ion-col size="6">
+      <ion-item-divider style="background-color: #f0f0f0;">
+        <ion-label>Área: </ion-label>
+      </ion-item-divider>
+      <div class="margin"><ion-label style="font-size: 17px;">{{ticket.area}}</ion-label></div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="6">
+      <ion-item-divider style="background-color: #f0f0f0;">
+        <ion-label>Categoría: </ion-label>
+      </ion-item-divider>
+      <div class="margin"><ion-label style="font-size: 17px;">{{ticket.categoria}}</ion-label></div>
+    </ion-col>
+    <ion-col size="6">
+      <ion-item-divider style="background-color: #f0f0f0;">
+        <ion-label>Prioridad: </ion-label>
+      </ion-item-divider>
+      <div class="margin"><ion-label style="font-size: 17px;">{{ticket.prioridad}}</ion-label></div>
+    </ion-col>
+  </ion-row>
+  <ion-item-divider style="background-color: #f0f0f0;">
+    <ion-label>Tiempo en espera o Hold on: </ion-label>
+  </ion-item-divider>
+  <div class="margin"><ion-label style="font-size: 17px;">{{ticket.espera}}</ion-label></div>
+  <ion-row>
+    <ion-col size="6">
+      <ion-item-divider style="background-color: #f0f0f0;">
+        <ion-label>Sector: </ion-label>
+      </ion-item-divider>
+      <div class="margin"><ion-label style="font-size: 17px;">{{ticket.sector}}</ion-label></div>
+    </ion-col>
+    <ion-col size="6">
+      <ion-item-divider style="background-color: #f0f0f0;">
+        <ion-label>Nivel: </ion-label>
+      </ion-item-divider>
+      <div class="margin"><ion-label style="font-size: 17px;">{{ticket.nivel}}</ion-label></div>
+    </ion-col>
+  </ion-row>
+  <ion-item-divider style="background-color: #f0f0f0;">
+    <ion-label>Incidente: </ion-label>
+  </ion-item-divider>
+  <div class="margin"><ion-label style="font-size: 17px;">{{ticket.incidente}}</ion-label></div>
+  <ion-item-divider style="background-color: #f0f0f0;">
+    <ion-label>Descripción: </ion-label>
+  </ion-item-divider>
+  <div class="margin"><ion-label style="font-size: 17px;">{{ticket.descripcion}}</ion-label></div>
+  <ion-item-divider style="background-color: #f0f0f0;">
+    <ion-label>Fotos: </ion-label>
+  </ion-item-divider>
+  <ion-slides pager="true">
+    <ion-slide *ngFor="let item of ticket.fotos">
+      <ion-card style="background-color: #f0f0f0;" >
+        <ion-img [src]="item.foto"></ion-img>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+  <ion-item-divider style="background-color: #f0f0f0;">
+    <ion-label>Usuarios asignados: </ion-label>
+  </ion-item-divider>
+  <ion-slides pager="true">
+    <ion-slide *ngFor="let item of ticket.asignacion">
+      <ion-card style="background-color: #f0f0f0; width: 90%;" >
+        <ion-card-content>
+          <ion-grid fixed>
+            <ion-row>
+              <ion-col size="3.5">
+                <ion-badge class="badge">Nombre :</ion-badge>
+              </ion-col>
+              <ion-col size="8.5">
+                <ion-text>
+                  <h3 class="descripcion">{{item.nombre}}</h3>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+  <ion-item-divider style="background-color: #f0f0f0;">
+    <ion-label>Bitácora: </ion-label>
+  </ion-item-divider>
+  <ion-slides pager="true">
+    <ion-slide *ngFor="let item of ticket.bitacora">
+      <ion-card style="background-color: #f0f0f0; width: 90%;" >
+        <ion-card-content>
+          <ion-grid fixed>
+            <ion-row>
+              <ion-col size="3">
+                <ion-badge class="badge">Acción :</ion-badge>
+              </ion-col>
+              <ion-col size="9">
+                <ion-text>
+                  <h3 class="descripcion">{{item.descripcion}}</h3>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="3.8">
+                <ion-badge class="badge">Fecha/Hora :</ion-badge>
+              </ion-col>
+              <ion-col size="8.2">
+                <ion-text>
+                  <h3 class="descripcion">{{item.fecha_reg}}</h3>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="4.2">
+                <ion-badge class="badge">Observaciones :</ion-badge>
+              </ion-col>
+              <ion-col size="7.8">
+                <ion-text>
+                  <h3 class="descripcion">{{item.observacion}}</h3>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="3.1">
+                <ion-badge class="badge">Usuario :</ion-badge>
+              </ion-col>
+              <ion-col size="8.9">
+                <ion-text>
+                  <h3 class="descripcion">{{item.nombre}}</h3>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>

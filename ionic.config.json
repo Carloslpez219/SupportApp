@@ -1,0 +1,8 @@
+{
+  "name": "Tickets Disatel",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}
