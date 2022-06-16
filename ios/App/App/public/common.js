@@ -204,7 +204,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "a": () => (/* binding */ attachComponent),
 /* harmony export */   "d": () => (/* binding */ detachComponent)
 /* harmony export */ });
-/* harmony import */ var D_FarasiSoftware_Support_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ 2783);
+/* harmony import */ var D_Farasi_Software_SupportApp_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ 2783);
 /* harmony import */ var _helpers_6e1e5b65_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers-6e1e5b65.js */ 7074);
 
 
@@ -214,7 +214,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const attachComponent = /*#__PURE__*/function () {
-  var _ref = (0,D_FarasiSoftware_Support_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (delegate, container, component, cssClasses, componentProps, inline) {
+  var _ref = (0,D_Farasi_Software_SupportApp_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (delegate, container, component, cssClasses, componentProps, inline) {
     if (delegate) {
       return delegate.attachViewToDom(container, component, componentProps, cssClasses);
     }
@@ -261,7 +261,7 @@ const CoreDelegate = () => {
   let Reference;
 
   const attachViewToDom = /*#__PURE__*/function () {
-    var _ref2 = (0,D_FarasiSoftware_Support_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (parentElement, userComponent, userComponentProps = {}, cssClasses = []) {
+    var _ref2 = (0,D_Farasi_Software_SupportApp_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (parentElement, userComponent, userComponentProps = {}, cssClasses = []) {
       BaseComponent = parentElement;
       /**
        * If passing in a component via the `component` props
@@ -950,7 +950,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "h": () => (/* binding */ hostContext),
 /* harmony export */   "o": () => (/* binding */ openURL)
 /* harmony export */ });
-/* harmony import */ var D_FarasiSoftware_Support_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ 2783);
+/* harmony import */ var D_Farasi_Software_SupportApp_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ 2783);
 
 
 /*!
@@ -989,7 +989,7 @@ const getClassMap = classes => {
 const SCHEME = /^[a-z][a-z0-9+\-.]*:/;
 
 const openURL = /*#__PURE__*/function () {
-  var _ref = (0,D_FarasiSoftware_Support_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (url, ev, direction, animation) {
+  var _ref = (0,D_Farasi_Software_SupportApp_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (url, ev, direction, animation) {
     if (url != null && url[0] !== '#' && !SCHEME.test(url)) {
       const router = document.querySelector('ion-router');
 
@@ -1014,6 +1014,158 @@ const openURL = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ 8404:
+/*!******************************************!*\
+  !*** ./src/app/Services/user.service.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "UserService": () => (/* binding */ UserService)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ 3981);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 8260);
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/storage */ 7897);
+
+
+
+
+
+const loginUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.loginUrl;
+const ayudaUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.ayudaUrl;
+const ajustesUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.ajustesUrl;
+const fotoPerfil = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.fotoPerfil;
+let UserService = class UserService {
+    constructor(http, storage) {
+        this.http = http;
+        this.storage = storage;
+        this.data = null;
+    }
+    login(usu, password) {
+        return new Promise(resolve => {
+            this.http.get(`${loginUrl}login&usu=${usu}&pass=${password}`).subscribe((resp) => {
+                console.log(`${loginUrl}login&usu=${usu}&pass=${password}`);
+                if (resp.status) {
+                    this.datosLocalStorage(resp.data);
+                    resolve(true);
+                }
+                else {
+                    this.data = null;
+                    this.storage.clear();
+                    resolve(false);
+                }
+            });
+        });
+    }
+    datosLocalStorage(data) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            this.storage.create();
+            this.data = data;
+            yield this.storage.set('datos', data);
+        });
+    }
+    contactAdmin(nombre, mail, subject, msj) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            this.datosUsuario = yield this.storage.get('datos');
+            console.log(`https://pruebas.disatel.app${ayudaUrl}contact&nombre=${nombre}
+                            &mail=${mail}&subject=${subject}&msj=${msj}`);
+            return this.http.get(`https://pruebas.disatel.app${ayudaUrl}contact&nombre=${nombre}
+                            &mail=${mail}&subject=${subject}&msj=${msj}`);
+        });
+    }
+    resetPassword(mail) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            this.datosUsuario = yield this.storage.get('datos');
+            console.log(`https://pruebas.disatel.app${ayudaUrl}password&mail=${mail}`);
+            return this.http.get(`https://pruebas.disatel.app${ayudaUrl}password&mail=${mail}`);
+        });
+    }
+    getPerfil() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            this.datosUsuario = yield this.storage.get('datos');
+            console.log(`https://pruebas.disatel.app${ajustesUrl}get_perfil&usuario=${this.datosUsuario.codigo}`);
+            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}get_perfil&usuario=${this.datosUsuario.codigo}`);
+        });
+    }
+    getFoto() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            this.datosUsuario = yield this.storage.get('datos');
+            console.log(`https://pruebas.disatel.app${ajustesUrl}get_foto&usuario=${this.datosUsuario.codigo}`);
+            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}get_foto&usuario=${this.datosUsuario.codigo}`);
+        });
+    }
+    editProfile(nombre, mail, telefono) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            this.datosUsuario = yield this.storage.get('datos');
+            console.log(`https://pruebas.disatel.app${ajustesUrl}set_perfil&usuario=${this.datosUsuario.codigo}
+                &nombre=${nombre}&mail=${mail}&telefono=${telefono}`);
+            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}set_perfil&usuario=${this.datosUsuario.codigo}
+                            &nombre=${nombre}&mail=${mail}&telefono=${telefono}`);
+        });
+    }
+    getPassword() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            this.datosUsuario = yield this.storage.get('datos');
+            console.log(`https://pruebas.disatel.app${ajustesUrl}get_pasword&usuario=${this.datosUsuario.codigo}`);
+            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}get_pasword&usuario=${this.datosUsuario.codigo}`);
+        });
+    }
+    setPassword(usu, password) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            this.datosUsuario = yield this.storage.get('datos');
+            console.log(`https://pruebas.disatel.app${ajustesUrl}set_pasword
+    &usuario=${this.datosUsuario.codigo}&usu=${usu}&pass=${password}`);
+            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}set_pasword
+    &usuario=${this.datosUsuario.codigo}&usu=${usu}&pass=${password}`);
+        });
+    }
+    changePhoto(userData) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            this.datosUsuario = yield this.storage.get('datos');
+            return this.http.post(`https://pruebas.disatel.app${fotoPerfil}`, userData);
+        });
+    }
+    //NOTIFICACIONES
+    registro(device, token, platform) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            console.log(device, token, platform);
+            this.datosUsuario = yield this.storage.get('datos');
+            // eslint-disable-next-line max-len
+            return this.http.get(`https://pruebas.disatel.app/ROOT/API/API_pushup_notification.php?request=register&user_id=${this.datosUsuario.codigo}&device_id=${device}&device_token=${token.value}&device_type=${platform}&certificate_type=1`);
+        });
+    }
+    unregister(device) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            this.datosUsuario = yield this.storage.get('datos');
+            // eslint-disable-next-line max-len
+            return this.http.get(`https://pruebas.disatel.app/ROOT/API/API_pushup_notification.php?request=unregister&user_id=${this.datosUsuario.codigo}&device_id=${device}`);
+        });
+    }
+    getNotficaciones() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            this.datosUsuario = yield this.storage.get('datos');
+            // eslint-disable-next-line max-len
+            return this.http.get(`https://pruebas.disatel.app/ROOT/API/API_pushup_notification.php?request=list&user_id=${this.datosUsuario.codigo}&page=0`);
+        });
+    }
+};
+UserService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient },
+    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_1__.Storage }
+];
+UserService = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Injectable)({
+        providedIn: 'root'
+    })
+], UserService);
+
+
+
+/***/ }),
+
 /***/ 5524:
 /*!*************************************************!*\
   !*** ./src/app/filtro-dash/filtro-dash.page.ts ***!
@@ -1025,7 +1177,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FiltroDashPage": () => (/* binding */ FiltroDashPage)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _D_FarasiSoftware_Support_node_modules_ngtools_webpack_src_loaders_direct_resource_js_filtro_dash_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./filtro-dash.page.html */ 4391);
+/* harmony import */ var _D_Farasi_Software_SupportApp_node_modules_ngtools_webpack_src_loaders_direct_resource_js_filtro_dash_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./filtro-dash.page.html */ 4391);
 /* harmony import */ var _filtro_dash_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./filtro-dash.page.scss */ 5820);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 4001);
 /* harmony import */ var _services_bpm_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/bpm.service */ 2152);
@@ -1123,7 +1275,7 @@ FiltroDashPage.ctorParameters = () => [
 FiltroDashPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'app-filtro-dash',
-        template: _D_FarasiSoftware_Support_node_modules_ngtools_webpack_src_loaders_direct_resource_js_filtro_dash_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _D_Farasi_Software_SupportApp_node_modules_ngtools_webpack_src_loaders_direct_resource_js_filtro_dash_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_filtro_dash_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], FiltroDashPage);
@@ -1246,6 +1398,29 @@ let UserService = class UserService {
             return this.http.post(`https://pruebas.disatel.app${fotoPerfil}`, userData);
         });
     }
+    //NOTIFICACIONES
+    registro(device, token, platform) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            console.log(device, token, platform);
+            this.datosUsuario = yield this.storage.get('datos');
+            // eslint-disable-next-line max-len
+            return this.http.get(`https://pruebas.disatel.app/ROOT/API/API_pushup_notification.php?request=register&user_id=${this.datosUsuario.codigo}&device_id=${device}&device_token=${token.value}&device_type=${platform}&certificate_type=1`);
+        });
+    }
+    unregister(device) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            this.datosUsuario = yield this.storage.get('datos');
+            // eslint-disable-next-line max-len
+            return this.http.get(`https://pruebas.disatel.app/ROOT/API/API_pushup_notification.php?request=unregister&user_id=${this.datosUsuario.codigo}&device_id=${device}`);
+        });
+    }
+    getNotficaciones() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            this.datosUsuario = yield this.storage.get('datos');
+            // eslint-disable-next-line max-len
+            return this.http.get(`https://pruebas.disatel.app/ROOT/API/API_pushup_notification.php?request=list&user_id=${this.datosUsuario.codigo}&page=0`);
+        });
+    }
 };
 UserService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient },
@@ -1271,7 +1446,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInDown\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button (click)=\"back()\" color=\"light\">Atrás\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"light\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>Filtros</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInUp\">\n\n  <br>\n  <ion-list>\n    <ion-item>\n      <ion-label>Sede</ion-label>\n      <ion-select (ionChange)=\"selectSede($event)\">\n        <ion-select-option *ngFor=\"let categoria of sedes\" value=\"{{categoria.codigo}}\">{{categoria.nombre}}</ion-select-option>\n      </ion-select>\n    </ion-item>\n    <ion-row>\n      <ion-col size=\"8\">\n        <ion-item>\n          <ion-icon slot=\"start\" name=\"calendar-outline\"></ion-icon>\n          <ion-label>{{desde}}</ion-label>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"4\">\n        <ion-button id=\"trigger-button\" expand=\"block\" >\n          Desde\n        </ion-button>\n      </ion-col>\n    </ion-row>\n    <ion-row>\n      <ion-col size=\"8\">\n        <ion-item>\n          <ion-icon slot=\"start\" name=\"calendar-outline\"></ion-icon>\n          <ion-label>{{hasta}}</ion-label>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"4\">\n        <ion-button id=\"trigger-button2\" expand=\"block\" >\n          Hasta\n        </ion-button>\n      </ion-col>\n    </ion-row>\n    <br>\n    <ion-row>\n      <ion-col size=\"3\"></ion-col>\n      <ion-col size=\"6\">\n        <ion-button expand=\"block\" class=\"button-save\" strong=\"true\" (click)=\"aceptar()\">Aceptar\n                  <ion-icon slot=\"start\" color=\"white\" name=\"save\"></ion-icon>\n        </ion-button>\n      </ion-col>\n      <ion-col size=\"3\"></ion-col>\n    </ion-row>\n  </ion-list>\n\n  <ion-modal [isOpen]=\"false\" [breakpoints]=\"[0.1, 0.7, 1]\" [initialBreakpoint]=\"0.7\" trigger=\"trigger-button\">\n    <ng-template>\n      <ion-header translucent>\n        <ion-toolbar>\n          <ion-title>Fecha</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n        <ion-card>\n          <ion-datetime min=\"2020-01-01\" (ionChange)=\"cambioFecha($event)\" presentation=\"date\"></ion-datetime>\n        </ion-card>\n        <ion-row>\n          <ion-col size=\"3\"></ion-col>\n          <ion-col size=\"6\">\n            <ion-button expand=\"block\" shape=\"round\" (click)=\"dismissModal()\">\n              Aceptar\n            </ion-button>\n          </ion-col>\n          <ion-col size=\"3\"></ion-col>\n        </ion-row>\n      </ion-content>\n    </ng-template>\n  </ion-modal>\n\n<ion-modal [isOpen]=\"false\" [breakpoints]=\"[0.1, 0.7, 1]\" [initialBreakpoint]=\"0.7\" trigger=\"trigger-button2\">\n  <ng-template>\n    <ion-header translucent>\n      <ion-toolbar>\n        <ion-title>Fecha</ion-title>\n      </ion-toolbar>\n    </ion-header>\n    <ion-content>\n      <ion-card>\n        <ion-datetime min=\"2020-01-01\" (ionChange)=\"cambioFecha2($event)\" presentation=\"date\"></ion-datetime>\n      </ion-card>\n      <ion-row>\n        <ion-col size=\"3\"></ion-col>\n        <ion-col size=\"6\">\n          <ion-button expand=\"block\" shape=\"round\" (click)=\"dismissModal()\">\n            Aceptar\n          </ion-button>\n        </ion-col>\n        <ion-col size=\"3\"></ion-col>\n      </ion-row>\n    </ion-content>\n  </ng-template>\n</ion-modal>\n\n</ion-content>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInDown\">\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button (click)=\"back()\" color=\"light\">Atrás\r\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"light\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>Filtros</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInUp\">\r\n\r\n  <br>\r\n  <ion-list>\r\n    <ion-item>\r\n      <ion-label>Sede</ion-label>\r\n      <ion-select (ionChange)=\"selectSede($event)\">\r\n        <ion-select-option *ngFor=\"let categoria of sedes\" value=\"{{categoria.codigo}}\">{{categoria.nombre}}</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <ion-row>\r\n      <ion-col size=\"8\">\r\n        <ion-item>\r\n          <ion-icon slot=\"start\" name=\"calendar-outline\"></ion-icon>\r\n          <ion-label>{{desde}}</ion-label>\r\n        </ion-item>\r\n      </ion-col>\r\n      <ion-col size=\"4\">\r\n        <ion-button id=\"trigger-button\" expand=\"block\" >\r\n          Desde\r\n        </ion-button>\r\n      </ion-col>\r\n    </ion-row>\r\n    <ion-row>\r\n      <ion-col size=\"8\">\r\n        <ion-item>\r\n          <ion-icon slot=\"start\" name=\"calendar-outline\"></ion-icon>\r\n          <ion-label>{{hasta}}</ion-label>\r\n        </ion-item>\r\n      </ion-col>\r\n      <ion-col size=\"4\">\r\n        <ion-button id=\"trigger-button2\" expand=\"block\" >\r\n          Hasta\r\n        </ion-button>\r\n      </ion-col>\r\n    </ion-row>\r\n    <br>\r\n    <ion-row>\r\n      <ion-col size=\"3\"></ion-col>\r\n      <ion-col size=\"6\">\r\n        <ion-button expand=\"block\" class=\"button-save\" strong=\"true\" (click)=\"aceptar()\">Aceptar\r\n                  <ion-icon slot=\"start\" color=\"white\" name=\"save\"></ion-icon>\r\n        </ion-button>\r\n      </ion-col>\r\n      <ion-col size=\"3\"></ion-col>\r\n    </ion-row>\r\n  </ion-list>\r\n\r\n  <ion-modal [isOpen]=\"false\" [breakpoints]=\"[0.1, 0.7, 1]\" [initialBreakpoint]=\"0.7\" trigger=\"trigger-button\">\r\n    <ng-template>\r\n      <ion-header translucent>\r\n        <ion-toolbar>\r\n          <ion-title>Fecha</ion-title>\r\n        </ion-toolbar>\r\n      </ion-header>\r\n      <ion-content>\r\n        <ion-card>\r\n          <ion-datetime min=\"2020-01-01\" (ionChange)=\"cambioFecha($event)\" presentation=\"date\"></ion-datetime>\r\n        </ion-card>\r\n        <ion-row>\r\n          <ion-col size=\"3\"></ion-col>\r\n          <ion-col size=\"6\">\r\n            <ion-button expand=\"block\" shape=\"round\" (click)=\"dismissModal()\">\r\n              Aceptar\r\n            </ion-button>\r\n          </ion-col>\r\n          <ion-col size=\"3\"></ion-col>\r\n        </ion-row>\r\n      </ion-content>\r\n    </ng-template>\r\n  </ion-modal>\r\n\r\n<ion-modal [isOpen]=\"false\" [breakpoints]=\"[0.1, 0.7, 1]\" [initialBreakpoint]=\"0.7\" trigger=\"trigger-button2\">\r\n  <ng-template>\r\n    <ion-header translucent>\r\n      <ion-toolbar>\r\n        <ion-title>Fecha</ion-title>\r\n      </ion-toolbar>\r\n    </ion-header>\r\n    <ion-content>\r\n      <ion-card>\r\n        <ion-datetime min=\"2020-01-01\" (ionChange)=\"cambioFecha2($event)\" presentation=\"date\"></ion-datetime>\r\n      </ion-card>\r\n      <ion-row>\r\n        <ion-col size=\"3\"></ion-col>\r\n        <ion-col size=\"6\">\r\n          <ion-button expand=\"block\" shape=\"round\" (click)=\"dismissModal()\">\r\n            Aceptar\r\n          </ion-button>\r\n        </ion-col>\r\n        <ion-col size=\"3\"></ion-col>\r\n      </ion-row>\r\n    </ion-content>\r\n  </ng-template>\r\n</ion-modal>\r\n\r\n</ion-content>");
 
 /***/ }),
 

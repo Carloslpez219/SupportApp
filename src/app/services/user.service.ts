@@ -94,4 +94,25 @@ export class UserService {
     return this.http.post<T>(`https://pruebas.disatel.app${fotoPerfil}`, userData);
   }
 
+  //NOTIFICACIONES
+
+  async registro<T>(device, token, platform){
+    console.log(device, token, platform);
+    this.datosUsuario = await this.storage.get('datos');
+    // eslint-disable-next-line max-len
+    return this.http.get<T>(`https://pruebas.disatel.app/ROOT/API/API_pushup_notification.php?request=register&user_id=${this.datosUsuario.codigo}&device_id=${device}&device_token=${token.value}&device_type=${platform}&certificate_type=1`);
+  }
+
+  async unregister<T>(device){
+    this.datosUsuario = await this.storage.get('datos');
+    // eslint-disable-next-line max-len
+    return this.http.get<T>(`https://pruebas.disatel.app/ROOT/API/API_pushup_notification.php?request=unregister&user_id=${this.datosUsuario.codigo}&device_id=${device}`);
+  }
+
+  async getNotficaciones<T>(){
+    this.datosUsuario = await this.storage.get('datos');
+    // eslint-disable-next-line max-len
+    return this.http.get<T>(`https://pruebas.disatel.app/ROOT/API/API_pushup_notification.php?request=list&user_id=${this.datosUsuario.codigo}&page=0`);
+  }
+
 }

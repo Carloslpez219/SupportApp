@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "325228986566",
+    "project_id": "ticketsdisatel",
+    "storage_bucket": "ticketsdisatel.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:325228986566:android:d739dab3e168c9ba1217c7",
+        "android_client_info": {
+          "package_name": "gt.tickets.disatel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "325228986566-8pq4ia6j6lk7iksh2ud8oemte03dccut.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfhKfdFpXvzsJZtmQ9FPaYzYVE2fUttHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "325228986566-8pq4ia6j6lk7iksh2ud8oemte03dccut.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

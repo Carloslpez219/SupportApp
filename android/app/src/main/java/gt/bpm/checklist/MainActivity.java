@@ -1,4 +1,4 @@
-package gt.bpm.checklist;
+package gt.tickets.disatel;
 
 import com.getcapacitor.BridgeActivity;
 

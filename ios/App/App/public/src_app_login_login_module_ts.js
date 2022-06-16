@@ -57,135 +57,6 @@ AlertService = (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__decorate)([
 
 /***/ }),
 
-/***/ 8404:
-/*!******************************************!*\
-  !*** ./src/app/Services/user.service.ts ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "UserService": () => (/* binding */ UserService)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ 3981);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 8260);
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/storage */ 7897);
-
-
-
-
-
-const loginUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.loginUrl;
-const ayudaUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.ayudaUrl;
-const ajustesUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.ajustesUrl;
-const fotoPerfil = src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.fotoPerfil;
-let UserService = class UserService {
-    constructor(http, storage) {
-        this.http = http;
-        this.storage = storage;
-        this.data = null;
-    }
-    login(usu, password) {
-        return new Promise(resolve => {
-            this.http.get(`${loginUrl}login&usu=${usu}&pass=${password}`).subscribe((resp) => {
-                console.log(`${loginUrl}login&usu=${usu}&pass=${password}`);
-                if (resp.status) {
-                    this.datosLocalStorage(resp.data);
-                    resolve(true);
-                }
-                else {
-                    this.data = null;
-                    this.storage.clear();
-                    resolve(false);
-                }
-            });
-        });
-    }
-    datosLocalStorage(data) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            this.storage.create();
-            this.data = data;
-            yield this.storage.set('datos', data);
-        });
-    }
-    contactAdmin(nombre, mail, subject, msj) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ayudaUrl}contact&nombre=${nombre}
-                            &mail=${mail}&subject=${subject}&msj=${msj}`);
-            return this.http.get(`https://pruebas.disatel.app${ayudaUrl}contact&nombre=${nombre}
-                            &mail=${mail}&subject=${subject}&msj=${msj}`);
-        });
-    }
-    resetPassword(mail) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ayudaUrl}password&mail=${mail}`);
-            return this.http.get(`https://pruebas.disatel.app${ayudaUrl}password&mail=${mail}`);
-        });
-    }
-    getPerfil() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ajustesUrl}get_perfil&usuario=${this.datosUsuario.codigo}`);
-            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}get_perfil&usuario=${this.datosUsuario.codigo}`);
-        });
-    }
-    getFoto() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ajustesUrl}get_foto&usuario=${this.datosUsuario.codigo}`);
-            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}get_foto&usuario=${this.datosUsuario.codigo}`);
-        });
-    }
-    editProfile(nombre, mail, telefono) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ajustesUrl}set_perfil&usuario=${this.datosUsuario.codigo}
-                &nombre=${nombre}&mail=${mail}&telefono=${telefono}`);
-            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}set_perfil&usuario=${this.datosUsuario.codigo}
-                            &nombre=${nombre}&mail=${mail}&telefono=${telefono}`);
-        });
-    }
-    getPassword() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ajustesUrl}get_pasword&usuario=${this.datosUsuario.codigo}`);
-            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}get_pasword&usuario=${this.datosUsuario.codigo}`);
-        });
-    }
-    setPassword(usu, password) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ajustesUrl}set_pasword
-    &usuario=${this.datosUsuario.codigo}&usu=${usu}&pass=${password}`);
-            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}set_pasword
-    &usuario=${this.datosUsuario.codigo}&usu=${usu}&pass=${password}`);
-        });
-    }
-    changePhoto(userData) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
-            this.datosUsuario = yield this.storage.get('datos');
-            return this.http.post(`https://pruebas.disatel.app${fotoPerfil}`, userData);
-        });
-    }
-};
-UserService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient },
-    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_1__.Storage }
-];
-UserService = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Injectable)({
-        providedIn: 'root'
-    })
-], UserService);
-
-
-
-/***/ }),
-
 /***/ 2359:
 /*!***********************************************!*\
   !*** ./src/app/login/login-routing.module.ts ***!
@@ -277,14 +148,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "LoginPage": () => (/* binding */ LoginPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _D_FarasiSoftware_Support_node_modules_ngtools_webpack_src_loaders_direct_resource_js_login_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./login.page.html */ 9403);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _D_Farasi_Software_SupportApp_node_modules_ngtools_webpack_src_loaders_direct_resource_js_login_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./login.page.html */ 9403);
 /* harmony import */ var _login_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./login.page.scss */ 6051);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ 8346);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 8346);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 8099);
 /* harmony import */ var _Services_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Services/user.service */ 8404);
 /* harmony import */ var _Services_alert_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Services/alert.service */ 6786);
+/* harmony import */ var _awesome_cordova_plugins_device_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @awesome-cordova-plugins/device/ngx */ 1614);
+/* harmony import */ var _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @capacitor/push-notifications */ 6727);
+
+
 
 
 
@@ -294,12 +169,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let LoginPage = class LoginPage {
-    constructor(popoverCtrl, navCtrl, userService, alertService, loadingController) {
+    constructor(popoverCtrl, navCtrl, userService, alertService, loadingController, device) {
         this.popoverCtrl = popoverCtrl;
         this.navCtrl = navCtrl;
         this.userService = userService;
         this.alertService = alertService;
         this.loadingController = loadingController;
+        this.device = device;
         this.sliderOpts = {
             allowSlidePrev: false,
             allowSlideNext: false
@@ -310,16 +186,25 @@ let LoginPage = class LoginPage {
     get password() { return this.loginForm.get('password'); }
     ngOnInit() { }
     createFormGroup() {
-        return new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormGroup({
-            nombre: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required]),
-            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required])
+        return new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormGroup({
+            nombre: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required]),
+            password: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required])
         });
     }
     login() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
             this.presentLoading();
             const valid = yield this.userService.login(this.loginForm.value.nombre, this.loginForm.value.password);
             if (valid) {
+                _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_5__.PushNotifications.requestPermissions().then((result) => (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
+                    if (result.receive === 'granted') {
+                        yield this.registro();
+                        _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_5__.PushNotifications.register();
+                    }
+                    else {
+                        // Show some error
+                    }
+                }));
                 yield this.loadingController.dismiss();
                 this.navCtrl.navigateRoot('/', { animated: true });
             }
@@ -332,25 +217,34 @@ let LoginPage = class LoginPage {
         });
     }
     presentLoading() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
             const loading = yield this.loadingController.create({
                 message: 'Cargando...'
             });
             yield loading.present();
         });
     }
+    registro() {
+        _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_5__.PushNotifications.addListener('registration', (token) => (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
+            console.log(token);
+            (yield this.userService.registro(this.device.uuid, token, this.device.platform)).subscribe(resp => {
+                console.log(resp);
+            });
+        }));
+    }
 };
 LoginPage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.PopoverController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.NavController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.PopoverController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.NavController },
     { type: _Services_user_service__WEBPACK_IMPORTED_MODULE_2__.UserService },
     { type: _Services_alert_service__WEBPACK_IMPORTED_MODULE_3__.AlertService },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.LoadingController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.LoadingController },
+    { type: _awesome_cordova_plugins_device_ngx__WEBPACK_IMPORTED_MODULE_4__.Device }
 ];
-LoginPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
+LoginPage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
         selector: 'app-login',
-        template: _D_FarasiSoftware_Support_node_modules_ngtools_webpack_src_loaders_direct_resource_js_login_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _D_Farasi_Software_SupportApp_node_modules_ngtools_webpack_src_loaders_direct_resource_js_login_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_login_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], LoginPage);
@@ -369,7 +263,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-content>\n  <div class=\"container\">\n    <div class=\"header\">\n    </div>\n    <ion-card class=\"body animate__animated animate__bounceInDown\">\n      <div class=\"img\">\n        <img src=\"../../../assets/img/logo.png\" class=\"animate__animated animate__bounce\">\n      </div>\n      <form (ngSubmit)=\"login()\" [formGroup]=\"loginForm\">\n        <ion-list>\n          <ion-item mode=\"md\">\n            <ion-icon slot=\"start\" name=\"person-circle-outline\"></ion-icon>\n            <ion-input placeholder=\"User\" type=\"name\" clearOnEdit=\"true\" clearInput formControlName=\"nombre\">\n            </ion-input>\n          </ion-item>\n          <div class=\"errors\" *ngIf=\"nombre.invalid && (nombre.dirty || nombre.touched)\">\n            <span *ngIf=\"nombre.errors.required\">\n              <ion-label class=\"error-container\">This field is required</ion-label>\n            </span>\n          </div>\n          <ion-item mode=\"md\">\n            <ion-icon slot=\"start\" name=\"lock-open\"></ion-icon>\n            <ion-input placeholder=\"Password\" type=\"password\" clearOnEdit=\"true\" clearInput formControlName=\"password\">\n            </ion-input>\n          </ion-item>\n          <div class=\"errors\" *ngIf=\"password.invalid && (password.dirty || password.touched)\">\n            <span *ngIf=\"password.errors.required\">\n              <ion-label class=\"error-container\">This field is required</ion-label>\n            </span>\n          </div>\n        </ion-list>\n        <ion-grid>\n          <ion-row>\n            <ion-col>\n              <ion-button expand=\"block\" class=\"button-1\" type=\"submit\" [disabled]=\"!loginForm.valid\">Login\n                <ion-icon slot=\"start\" color=\"white\" name=\"enter-outline\"></ion-icon>\n              </ion-button>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n      </form>\n    </ion-card>\n  </div>\n</ion-content>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-content>\r\n  <div class=\"container\">\r\n    <div class=\"header\">\r\n    </div>\r\n    <ion-card class=\"body animate__animated animate__bounceInDown\">\r\n      <div class=\"img\">\r\n        <img src=\"../../../assets/img/logo.png\" class=\"animate__animated animate__bounce\">\r\n      </div>\r\n      <form (ngSubmit)=\"login()\" [formGroup]=\"loginForm\">\r\n        <ion-list>\r\n          <ion-item mode=\"md\">\r\n            <ion-icon slot=\"start\" name=\"person-circle-outline\"></ion-icon>\r\n            <ion-input placeholder=\"User\" type=\"name\" clearOnEdit=\"true\" clearInput formControlName=\"nombre\">\r\n            </ion-input>\r\n          </ion-item>\r\n          <div class=\"errors\" *ngIf=\"nombre.invalid && (nombre.dirty || nombre.touched)\">\r\n            <span *ngIf=\"nombre.errors.required\">\r\n              <ion-label class=\"error-container\">This field is required</ion-label>\r\n            </span>\r\n          </div>\r\n          <ion-item mode=\"md\">\r\n            <ion-icon slot=\"start\" name=\"lock-open\"></ion-icon>\r\n            <ion-input placeholder=\"Password\" type=\"password\" clearOnEdit=\"true\" clearInput formControlName=\"password\">\r\n            </ion-input>\r\n          </ion-item>\r\n          <div class=\"errors\" *ngIf=\"password.invalid && (password.dirty || password.touched)\">\r\n            <span *ngIf=\"password.errors.required\">\r\n              <ion-label class=\"error-container\">This field is required</ion-label>\r\n            </span>\r\n          </div>\r\n        </ion-list>\r\n        <ion-grid>\r\n          <ion-row>\r\n            <ion-col>\r\n              <ion-button expand=\"block\" class=\"button-1\" type=\"submit\" [disabled]=\"!loginForm.valid\">Login\r\n                <ion-icon slot=\"start\" color=\"white\" name=\"enter-outline\"></ion-icon>\r\n              </ion-button>\r\n            </ion-col>\r\n          </ion-row>\r\n        </ion-grid>\r\n      </form>\r\n    </ion-card>\r\n  </div>\r\n</ion-content>");
 
 /***/ }),
 

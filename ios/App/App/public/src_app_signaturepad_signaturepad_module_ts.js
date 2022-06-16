@@ -673,7 +673,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "SignaturepadPage": () => (/* binding */ SignaturepadPage)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _D_FarasiSoftware_Support_node_modules_ngtools_webpack_src_loaders_direct_resource_js_signaturepad_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./signaturepad.page.html */ 8654);
+/* harmony import */ var _D_Farasi_Software_SupportApp_node_modules_ngtools_webpack_src_loaders_direct_resource_js_signaturepad_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./signaturepad.page.html */ 8654);
 /* harmony import */ var _signaturepad_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./signaturepad.page.scss */ 2309);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 4001);
 /* harmony import */ var signature_pad__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! signature_pad */ 9557);
@@ -716,7 +716,7 @@ SignaturepadPage.propDecorators = {
 SignaturepadPage = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
         selector: 'app-signaturepad',
-        template: _D_FarasiSoftware_Support_node_modules_ngtools_webpack_src_loaders_direct_resource_js_signaturepad_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _D_Farasi_Software_SupportApp_node_modules_ngtools_webpack_src_loaders_direct_resource_js_signaturepad_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_signaturepad_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], SignaturepadPage);
@@ -735,7 +735,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button (click)=\"back()\" color=\"primary\">Atrás\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"primary\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>Firma</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <br>\n  \n  <div class=\"ion-padding\">\n    <div class=\"signature-pad\">\n      <div class=\"signature-pad--body\">\n        <canvas #sPad width=\"400\" height=\"400\" style=\"touch-action: none;\"></canvas>\n      </div>\n    </div>\n  </div>\n\n  <ion-row>\n    <ion-col>\n      <ion-button style=\"--background: #3197f7; margin-left: 12px; margin-right: 12px;\" expand=\"block\" round strong (click)=\"save()\">Aceptar</ion-button>\n    </ion-col>\n    <ion-col>\n      <ion-button style=\"--background: #3197f7; margin-left: 12px; margin-right: 12px;\" expand=\"block\" round strong (click)=\"clear()\">Borrar</ion-button>\n    </ion-col>\n  </ion-row>\n\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button (click)=\"back()\" color=\"primary\">Atrás\r\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"primary\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>Firma</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n  <br>\r\n  \r\n  <div class=\"ion-padding\">\r\n    <div class=\"signature-pad\">\r\n      <div class=\"signature-pad--body\">\r\n        <canvas #sPad width=\"400\" height=\"400\" style=\"touch-action: none;\"></canvas>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <ion-row>\r\n    <ion-col>\r\n      <ion-button style=\"--background: #3197f7; margin-left: 12px; margin-right: 12px;\" expand=\"block\" round strong (click)=\"save()\">Aceptar</ion-button>\r\n    </ion-col>\r\n    <ion-col>\r\n      <ion-button style=\"--background: #3197f7; margin-left: 12px; margin-right: 12px;\" expand=\"block\" round strong (click)=\"clear()\">Borrar</ion-button>\r\n    </ion-col>\r\n  </ion-row>\r\n\r\n</ion-content>\r\n");
 
 /***/ }),
 

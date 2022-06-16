@@ -4,6 +4,14 @@ import { LoadingController, NavController, PopoverController} from '@ionic/angul
 import { UserService } from '../Services/user.service';
 import { AlertService } from '../Services/alert.service';
 
+import { Device } from '@awesome-cordova-plugins/device/ngx';
+import {
+  ActionPerformed,
+  PushNotificationSchema,
+  PushNotifications,
+  Token,
+} from '@capacitor/push-notifications';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -18,7 +26,7 @@ export class LoginPage implements OnInit {
   loginForm: FormGroup;
 
   constructor(private popoverCtrl: PopoverController, private navCtrl: NavController, private userService: UserService,
-              private alertService: AlertService, public loadingController: LoadingController) {
+              private alertService: AlertService, public loadingController: LoadingController, private device: Device) {
                 this.loginForm = this.createFormGroup();
               }
 
@@ -39,6 +47,14 @@ export class LoginPage implements OnInit {
     this.presentLoading();
       const valid = await this.userService.login(this.loginForm.value.nombre, this.loginForm.value.password);
       if(valid){
+        PushNotifications.requestPermissions().then(async result => {
+          if (result.receive === 'granted') {
+            await this.registro();
+            PushNotifications.register();
+          } else {
+            // Show some error
+          }
+        });
         await this.loadingController.dismiss();
         this.navCtrl.navigateRoot('/', { animated: true});
       }else{
@@ -54,6 +70,15 @@ export class LoginPage implements OnInit {
       message: 'Cargando...'
     });
     await loading.present();
+  }
+
+  registro(){
+    PushNotifications.addListener('registration', async (token: Token) => {
+      console.log(token);
+      (await this.userService.registro(this.device.uuid, token, this.device.platform)).subscribe(resp =>{
+        console.log(resp);
+      });
+    });
   }
 
 }

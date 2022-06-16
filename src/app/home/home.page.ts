@@ -8,6 +8,8 @@ import { TicketPage } from '../ticket/ticket.page';
 import { TramiteTicketPage } from '../tramite-ticket/tramite-ticket.page';
 import { FiltrosPage } from '../filtros/filtros.page';
 import { FiltroDashPage } from '../filtro-dash/filtro-dash.page';
+import { Device } from '@awesome-cordova-plugins/device/ngx';
+import { UserService } from '../Services/user.service';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -42,7 +44,7 @@ export class HomePage implements OnInit{
 
   constructor( private navController: NavController, private storage: Storage, private bpmService: BPMService,
                 private alertService: AlertService, private modalController: ModalController,
-                public loadingController: LoadingController) {}
+                public loadingController: LoadingController, private device: Device, private userService: UserService) {}
 
   ngOnInit() {
     this.getTicketsAsignados();
@@ -95,6 +97,7 @@ export class HomePage implements OnInit{
     }
 
   async logOut(){
+    this.userService.unregister(this.device.uuid);
     this.navController.navigateRoot('/login');
     this.storage.clear();
   }
@@ -274,7 +277,6 @@ export class HomePage implements OnInit{
   }
 
   async presentModalFiltrosDash(){
-    console.log("object");
     await this.presentLoading();
     const modal = await this.modalController.create({
       component: FiltroDashPage,

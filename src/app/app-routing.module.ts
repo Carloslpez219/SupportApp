@@ -69,7 +69,11 @@ const routes: Routes = [
   {
     path: 'filtro-dash',
     loadChildren: () => import('./filtro-dash/filtro-dash.module').then( m => m.FiltroDashPageModule)
+  },  {
+    path: 'notificaciones',
+    loadChildren: () => import('./notificaciones/notificaciones.module').then( m => m.NotificacionesPageModule)
   },
+
 ];
 
 @NgModule({
