@@ -5,6 +5,11 @@ const config: CapacitorConfig = {
   appName: 'Tickets Disatel',
   webDir: 'www',
   bundledWebRuntime: false,
+  plugins: {
+    PushNotifications: {
+        presentationOptions: ['badge', 'sound', 'alert']
+    }
+  },
   cordova: {
     preferences: {
       ScrollEnabled: 'false',

@@ -135,7 +135,7 @@ export class BPMService {
     fd.append('documento', file, file.name);
     this.datosUsuario = await this.storage.get('datos');
     console.log(`https://pruebas.disatel.app/ROOT/API/API_ticket_foto.php?&ticket=${codticket}&usuario=${this.datosUsuario.codigo}&status=${status}&comentario=${comentario}`, fd);
-    return this.http.post(`https://pruebas.disatel.app/ROOT/API/API_ticket_foto.php?&ticket=${codticket}&usuario=${this.datosUsuario.codigo}&status=${status}&comentario=${comentario}`, file);
+    return this.http.post(`https://pruebas.disatel.app/ROOT/API/API_ticket_foto.php?&ticket=${codticket}&usuario=${this.datosUsuario.codigo}&status=${status}&comentario=${comentario}`, fd);
   }
 
   /*

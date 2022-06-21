@@ -19,16 +19,14 @@ export class AppComponent {
     this.initializeApp();
   }
 
-  initializeApp() {
+  async initializeApp() {
     /* To make sure we provide the fastest app loading experience
        for our users, hide the splash screen automatically
        when the app is ready to be used:
 
         https://capacitor.ionicframework.com/docs/apis/splash-screen#hiding-the-splash-screen
     */
-    SplashScreen.hide();
-
-    PushNotifications.requestPermissions().then(result => {
+    await PushNotifications.requestPermissions().then(result => {
       if (result.receive === 'granted') {
         // Register with Apple / Google to receive push via APNS/FCM
         PushNotifications.register();
@@ -37,24 +35,21 @@ export class AppComponent {
       }
     });
 
-    PushNotifications.addListener('pushNotificationReceived',
+    await PushNotifications.addListener('pushNotificationReceived',
       async (notification: PushNotificationSchema) => {
-        console.log(notification);
-        this.showAlert('Notification', JSON.stringify(notification));
+        console.log('pushNotificationReceived: ' + notification);
+        this.showAlert(notification.title, notification.body);
       }
     );
 
-    // Method called when tapping on a notification
-    PushNotifications.addListener(
-      'pushNotificationActionPerformed',
-      async (notification: ActionPerformed) => {
-        console.log(notification);
-        const data = notification.notification.data;
-        console.log('Action performed: ' + JSON.stringify(notification.notification));
-        this.showAlert('Notification', JSON.stringify(notification.notification));
+     // Method called when tapping on a notification
+     await PushNotifications.addListener('pushNotificationActionPerformed', (notification: ActionPerformed) => {
         this.router.navigateByUrl('/');
+        this.showAlert(notification.notification.title, notification.notification.body);
       }
     );
+
+    await SplashScreen.hide();
 
   }
 

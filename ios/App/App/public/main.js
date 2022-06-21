@@ -87,6 +87,10 @@ const routes = [
         path: 'filtro-dash',
         loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_filtro-dash_filtro-dash_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./filtro-dash/filtro-dash.module */ 3571)).then(m => m.FiltroDashPageModule)
     },
+    {
+        path: 'notificaciones',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_notificaciones_notificaciones_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./notificaciones/notificaciones.module */ 3777)).then(m => m.NotificacionesPageModule)
+    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -154,17 +158,12 @@ let AppComponent = class AppComponent {
             }
         });
         _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_3__.PushNotifications.addListener('pushNotificationReceived', (notification) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            console.log(notification);
-            this.showAlert('Notification', JSON.stringify(notification));
+            console.log('Push received: ' + JSON.stringify(notification));
         }));
         // Method called when tapping on a notification
-        _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_3__.PushNotifications.addListener('pushNotificationActionPerformed', (notification) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            console.log(notification);
-            const data = notification.notification.data;
-            console.log('Action performed: ' + JSON.stringify(notification.notification));
-            this.showAlert('Notification', JSON.stringify(notification.notification));
-            this.router.navigateByUrl(`/`);
-        }));
+        _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_3__.PushNotifications.addListener('pushNotificationActionPerformed', (notification) => {
+            alert('Push action performed: ' + JSON.stringify(notification));
+        });
     }
     showAlert(header, message) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
