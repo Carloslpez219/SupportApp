@@ -1284,6 +1284,127 @@ FiltroDashPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
+/***/ 6777:
+/*!*****************************************!*\
+  !*** ./src/app/listado/listado.page.ts ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ListadoPage": () => (/* binding */ ListadoPage)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _D_Farasi_Software_SupportApp_node_modules_ngtools_webpack_src_loaders_direct_resource_js_listado_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./listado.page.html */ 9385);
+/* harmony import */ var _listado_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./listado.page.scss */ 7892);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var _services_bpm_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/bpm.service */ 2152);
+/* harmony import */ var _services_alert_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/alert.service */ 4571);
+/* harmony import */ var _mostrar_ticket_mostrar_ticket_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../mostrar-ticket/mostrar-ticket.page */ 3982);
+
+
+
+
+
+
+
+
+let ListadoPage = class ListadoPage {
+    constructor(modalController, loadingController, bpmService, alertService) {
+        this.modalController = modalController;
+        this.loadingController = loadingController;
+        this.bpmService = bpmService;
+        this.alertService = alertService;
+        this.viewEntered = false;
+    }
+    ngOnInit() {
+        console.log(this.listadoPorStatus);
+    }
+    ionViewDidEnter() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            this.listadoPorStatus.forEach(element => {
+                if (element.situacion === 'Vencido') {
+                    element.color = 'background: #FADBD8';
+                }
+                else if (element.situacion === 'Cerrado') {
+                    element.color = 'background: #D6DBDF';
+                }
+                else if (element.situacion === 'Cancelado') {
+                    element.color = 'background: #D6EAF8';
+                }
+                else {
+                    element.color = 'background: #D5F5E3';
+                }
+            });
+            this.viewEntered = true;
+            yield this.loadingController.dismiss();
+        });
+    }
+    ionViewWillLeave() {
+        this.viewEntered = false;
+    }
+    back() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            this.recharge = false;
+            this.modalController.dismiss(this.recharge);
+        });
+    }
+    presentLoading() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            const loading = yield this.loadingController.create({
+                message: 'Cargando...'
+            });
+            yield loading.present();
+        });
+    }
+    getTicket(codigo) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.presentLoading();
+            (yield this.bpmService.getTicket(codigo)).subscribe((resp) => {
+                if (resp.status) {
+                    const ticket = resp.data;
+                    this.presentModalTicket(ticket);
+                }
+                else {
+                    this.loadingController.dismiss();
+                    this.alertService.presentAlert('Ha ocurrido un error, intente de nuevo más tarde.');
+                }
+            });
+        });
+    }
+    presentModalTicket(ticket) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            const modal = yield this.modalController.create({
+                component: _mostrar_ticket_mostrar_ticket_page__WEBPACK_IMPORTED_MODULE_4__.MostrarTicketPage,
+                backdropDismiss: false,
+                componentProps: { ticket }
+            });
+            yield modal.present();
+        });
+    }
+};
+ListadoPage.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.ModalController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.LoadingController },
+    { type: _services_bpm_service__WEBPACK_IMPORTED_MODULE_2__.BPMService },
+    { type: _services_alert_service__WEBPACK_IMPORTED_MODULE_3__.AlertService }
+];
+ListadoPage.propDecorators = {
+    listadoPorStatus: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_7__.Input }]
+};
+ListadoPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
+        selector: 'app-listado',
+        template: _D_Farasi_Software_SupportApp_node_modules_ngtools_webpack_src_loaders_direct_resource_js_listado_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_listado_page_scss__WEBPACK_IMPORTED_MODULE_1__]
+    })
+], ListadoPage);
+
+
+
+/***/ }),
+
 /***/ 7524:
 /*!******************************************!*\
   !*** ./src/app/services/user.service.ts ***!
@@ -1450,6 +1571,20 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ 9385:
+/*!**********************************************************************************************************!*\
+  !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/listado/listado.page.html ***!
+  \**********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header *ngIf=\"viewEntered\" class=\"animate__animated animate__slideInUp\">\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button (click)=\"back()\" color=\"light\">Atrás\r\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"light\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>Tickets</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInUp\">\r\n\r\n<ion-card *ngFor=\"let item of listadoPorStatus\" [style]=\"item.color\" (click)=\"getTicket(item.codigo)\">\r\n  <ion-card-header>\r\n    <ion-card-subtitle>{{item.categoria}}</ion-card-subtitle>\r\n    <ion-card-title style=\"font-size: 22px;\">#{{item.codigo}} | {{item.incidente}}</ion-card-title>\r\n  </ion-card-header>\r\n  <ion-card-content>\r\n    <ion-grid fixed>\r\n      <ion-row>\r\n        <ion-col size=\"4.2\">\r\n          <ion-badge class=\"badge\">Fecha/ Hora :</ion-badge>\r\n        </ion-col>\r\n        <ion-col size=\"7.8\">\r\n          <ion-text>\r\n            <h3 class=\"descripcion\">{{item.fecha}}</h3>\r\n          </ion-text>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col size=\"3.5\">\r\n          <ion-badge class=\"badge\">Prioridad :</ion-badge>\r\n        </ion-col>\r\n        <ion-col size=\"8.5\">\r\n          <ion-text>\r\n            <h3 class=\"descripcion\">{{item.prioridad}}</h3>\r\n          </ion-text>\r\n        </ion-col>\r\n      </ion-row>\r\n      <ion-row>\r\n        <ion-col size=\"3.5\">\r\n          <ion-badge class=\"badge\">Situación :</ion-badge>\r\n        </ion-col>\r\n        <ion-col size=\"8.5\">\r\n          <ion-text>\r\n            <h3 class=\"descripcion\">{{item.situacion}}</h3>\r\n          </ion-text>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </ion-card-content>\r\n</ion-card>\r\n\r\n</ion-content>\r\n");
+
+/***/ }),
+
 /***/ 5820:
 /*!***************************************************!*\
   !*** ./src/app/filtro-dash/filtro-dash.page.scss ***!
@@ -1457,6 +1592,16 @@ __webpack_require__.r(__webpack_exports__);
 /***/ ((module) => {
 
 module.exports = "ion-toolbar {\n  --background: #66615B;\n  --color: white;\n}\n\n.button-save {\n  --background: #4c4c4a;\n  color: white;\n  margin-top: 10%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZpbHRyby1kYXNoLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLHFCQUFBO0VBQ0EsY0FBQTtBQUNKOztBQUVFO0VBQ0UscUJBQUE7RUFDQSxZQUFBO0VBQ0EsZUFBQTtBQUNKIiwiZmlsZSI6ImZpbHRyby1kYXNoLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi10b29sYmFyIHtcclxuICAgIC0tYmFja2dyb3VuZDogIzY2NjE1QjtcclxuICAgIC0tY29sb3I6IHdoaXRlO1xyXG4gIH1cclxuXHJcbiAgLmJ1dHRvbi1zYXZle1xyXG4gICAgLS1iYWNrZ3JvdW5kOiAjNGM0YzRhO1xyXG4gICAgY29sb3I6IHdoaXRlO1xyXG4gICAgbWFyZ2luLXRvcDogMTAlO1xyXG59Il19 */";
+
+/***/ }),
+
+/***/ 7892:
+/*!*******************************************!*\
+  !*** ./src/app/listado/listado.page.scss ***!
+  \*******************************************/
+/***/ ((module) => {
+
+module.exports = "ion-toolbar {\n  --background: #66615B;\n  --color: white;\n}\n\n.badge {\n  background-color: #4c4c4a;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxpc3RhZG8ucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kscUJBQUE7RUFDQSxjQUFBO0FBQ0o7O0FBRUE7RUFDSSx5QkFBQTtBQUNKIiwiZmlsZSI6Imxpc3RhZG8ucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLXRvb2xiYXIge1xyXG4gICAgLS1iYWNrZ3JvdW5kOiAjNjY2MTVCO1xyXG4gICAgLS1jb2xvcjogd2hpdGU7XHJcbiAgfVxyXG5cclxuLmJhZGdle1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzRjNGM0YTtcclxufSJdfQ== */";
 
 /***/ })
 

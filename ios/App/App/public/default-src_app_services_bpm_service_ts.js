@@ -1,61 +1,5 @@
 "use strict";
-(self["webpackChunkapp"] = self["webpackChunkapp"] || []).push([["default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"],{
-
-/***/ 4571:
-/*!*******************************************!*\
-  !*** ./src/app/services/alert.service.ts ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AlertService": () => (/* binding */ AlertService)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/angular */ 8099);
-
-
-
-let AlertService = class AlertService {
-    constructor(alertCtrl, toastController) {
-        this.alertCtrl = alertCtrl;
-        this.toastController = toastController;
-    }
-    presentAlert(message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, function* () {
-            const alert = yield this.alertCtrl.create({
-                message,
-                mode: 'md',
-                buttons: ['OK']
-            });
-            yield alert.present();
-        });
-    }
-    presentToast(message, color, duration) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, function* () {
-            const toast = yield this.toastController.create({
-                message,
-                duration,
-                color
-            });
-            toast.present();
-        });
-    }
-};
-AlertService.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_1__.AlertController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_1__.ToastController }
-];
-AlertService = (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
-        providedIn: 'root'
-    })
-], AlertService);
-
-
-
-/***/ }),
+(self["webpackChunkapp"] = self["webpackChunkapp"] || []).push([["default-src_app_services_bpm_service_ts"],{
 
 /***/ 2152:
 /*!*****************************************!*\
@@ -215,6 +159,13 @@ let BPMService = class BPMService {
             return this.http.get(`https://pruebas.disatel.app${ticket}agregar_falla&usuario=${this.datosUsuario.codigo}&codigo=${codTicket}&activo=${activo}&falla=${falla}&situacion=${situacion}&fecha=${fecha}&hora=${hora}&comentario=${comentario}`);
         });
     }
+    listadoPasosTicket(codTicket) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            this.datosUsuario = yield this.storage.get('datos');
+            console.log(`https://pruebas.disatel.app${ticket}listado_pasos_ticket&usuario=${this.datosUsuario.codigo}&ticket=${codTicket}`);
+            return this.http.get(`https://pruebas.disatel.app${ticket}listado_pasos_ticket&usuario=${this.datosUsuario.codigo}&ticket=${codTicket}`);
+        });
+    }
     post(codticket, status, file, comentario) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             const fd = new FormData();
@@ -222,7 +173,14 @@ let BPMService = class BPMService {
             fd.append('documento', file, file.name);
             this.datosUsuario = yield this.storage.get('datos');
             console.log(`https://pruebas.disatel.app/ROOT/API/API_ticket_foto.php?&ticket=${codticket}&usuario=${this.datosUsuario.codigo}&status=${status}&comentario=${comentario}`, fd);
-            return this.http.post(`https://pruebas.disatel.app/ROOT/API/API_ticket_foto.php?&ticket=${codticket}&usuario=${this.datosUsuario.codigo}&status=${status}&comentario=${comentario}`, file);
+            return this.http.post(`https://pruebas.disatel.app/ROOT/API/API_ticket_foto.php?&ticket=${codticket}&usuario=${this.datosUsuario.codigo}&status=${status}&comentario=${comentario}`, fd);
+        });
+    }
+    ejecutarPaso(codTicket, paso, incidente, ejecucion, observaciones) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            this.datosUsuario = yield this.storage.get('datos');
+            console.log(`https://pruebas.disatel.app${ticket}ejecutar_paso&ticket=${codTicket}&paso_codigo=${paso}&tipo_incidente=${incidente}&ejecucion=${ejecucion}&observaciones=${observaciones}&usuario=${this.datosUsuario.codigo}`);
+            return this.http.get(`https://pruebas.disatel.app${ticket}ejecutar_paso&ticket=${codTicket}&paso_codigo=${paso}&tipo_incidente=${incidente}&ejecucion=${ejecucion}&observaciones=${observaciones}&usuario=${this.datosUsuario.codigo}`);
         });
     }
 };
@@ -241,4 +199,4 @@ BPMService = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
 /***/ })
 
 }]);
-//# sourceMappingURL=default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts.js.map
+//# sourceMappingURL=default-src_app_services_bpm_service_ts.js.map

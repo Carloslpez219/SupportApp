@@ -44,8 +44,13 @@ export class AppComponent {
 
      // Method called when tapping on a notification
      await PushNotifications.addListener('pushNotificationActionPerformed', (notification: ActionPerformed) => {
-        this.router.navigateByUrl('/');
-        this.showAlert(notification.notification.title, notification.notification.body);
+        this.router.navigateByUrl('/').then( success =>{
+          if(success){
+            this.showAlert(notification.notification.title, notification.notification.body);
+          }else{
+            this.showAlert('Error', 'Ha ocurrido un error de ejecución.');
+          }
+        });
       }
     );
 

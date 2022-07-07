@@ -5,6 +5,8 @@ import { ComentarioPage } from '../comentario/comentario.page';
 import { AgregarFallaPage } from '../agregar-falla/agregar-falla.page';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AlertService } from '../services/alert.service';
+import { BPMService } from '../services/bpm.service';
+import { ObservacionesPage } from '../observaciones/observaciones.page';
 
 @Component({
   selector: 'app-tramite-ticket',
@@ -15,11 +17,17 @@ export class TramiteTicketPage implements OnInit {
 
   @Input() ticket;
   viewEntered = false;
+  pasos;
+  ejecucion;
 
   constructor( private loadingController: LoadingController, private modalController: ModalController, private sanitizer: DomSanitizer,
-              private alertService: AlertService){}
+              private alertService: AlertService, private bpmService: BPMService){}
 
-  ngOnInit() {
+  async ngOnInit() {
+    (await this.bpmService.listadoPasosTicket(this.ticket.codigo)).subscribe((resp: any)=>{
+      console.log(resp);
+      this.pasos = resp.data;
+    });
     console.log(this.ticket);
   }
 
@@ -107,6 +115,29 @@ export class TramiteTicketPage implements OnInit {
     }else{
       this.alertService.presentAlert('No hay archivo disponible.');
     }
+  }
+
+  async observacion(paso){
+    const ticket = await this.ticket;
+    const modal = await this.modalController.create({
+      component: ObservacionesPage,
+      backdropDismiss: false,
+      componentProps: { paso, ticket }
+    });
+    await modal.present();
+  }
+
+  async onChange(ev, paso){
+    if(paso.checked){
+      this.ejecucion = 1;
+    }else{
+      this.ejecucion = 0;
+    }
+    (await this.bpmService.ejecutarPaso(this.ticket.codigo, paso.paso_codigo, paso.tipo_incidente, this.ejecucion,
+      paso.observaciones)).subscribe(resp =>{
+                                    console.log(resp);
+                                  });
+    console.log(ev);
   }
 
 

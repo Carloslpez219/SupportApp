@@ -129,6 +129,12 @@ export class BPMService {
     return this.http.get<T>(`https://pruebas.disatel.app${ticket}agregar_falla&usuario=${this.datosUsuario.codigo}&codigo=${codTicket}&activo=${activo}&falla=${falla}&situacion=${situacion}&fecha=${fecha}&hora=${hora}&comentario=${comentario}`);
   }
 
+  async listadoPasosTicket<T>(codTicket){
+    this.datosUsuario = await this.storage.get('datos');
+    console.log(`https://pruebas.disatel.app${ticket}listado_pasos_ticket&usuario=${this.datosUsuario.codigo}&ticket=${codTicket}`);
+    return this.http.get<T>(`https://pruebas.disatel.app${ticket}listado_pasos_ticket&usuario=${this.datosUsuario.codigo}&ticket=${codTicket}`);
+  }
+
   async post<T>( codticket, status, file, comentario ){
     const fd = new FormData();
     console.log(file);
@@ -136,6 +142,12 @@ export class BPMService {
     this.datosUsuario = await this.storage.get('datos');
     console.log(`https://pruebas.disatel.app/ROOT/API/API_ticket_foto.php?&ticket=${codticket}&usuario=${this.datosUsuario.codigo}&status=${status}&comentario=${comentario}`, fd);
     return this.http.post(`https://pruebas.disatel.app/ROOT/API/API_ticket_foto.php?&ticket=${codticket}&usuario=${this.datosUsuario.codigo}&status=${status}&comentario=${comentario}`, fd);
+  }
+
+  async ejecutarPaso<T>(codTicket, paso, incidente, ejecucion, observaciones){
+    this.datosUsuario = await this.storage.get('datos');
+    console.log(`https://pruebas.disatel.app${ticket}ejecutar_paso&ticket=${codTicket}&paso_codigo=${paso}&tipo_incidente=${incidente}&ejecucion=${ejecucion}&observaciones=${observaciones}&usuario=${this.datosUsuario.codigo}`);
+    return this.http.get<T>(`https://pruebas.disatel.app${ticket}ejecutar_paso&ticket=${codTicket}&paso_codigo=${paso}&tipo_incidente=${incidente}&ejecucion=${ejecucion}&observaciones=${observaciones}&usuario=${this.datosUsuario.codigo}`);
   }
 
   /*

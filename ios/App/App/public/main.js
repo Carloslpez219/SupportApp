@@ -23,7 +23,7 @@ const routes = [
     {
         canActivate: [_guards_guard_guard__WEBPACK_IMPORTED_MODULE_0__.GuardGuard],
         path: '',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("default-src_app_tramite-ticket_tramite-ticket_page_ts"), __webpack_require__.e("default-src_app_listado_listado_page_ts"), __webpack_require__.e("default-src_app_ticket_ticket_page_ts"), __webpack_require__.e("default-src_app_filtros_filtros_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_home_home_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./home/home.module */ 8245)).then(m => m.HomePageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("default-src_app_mostrar-ticket_mostrar-ticket_page_ts"), __webpack_require__.e("default-src_app_tramite-ticket_tramite-ticket_page_ts"), __webpack_require__.e("default-src_app_ticket_ticket_page_ts"), __webpack_require__.e("default-src_app_filtros_filtros_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_home_home_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./home/home.module */ 8245)).then(m => m.HomePageModule)
     },
     {
         path: 'login',
@@ -45,51 +45,55 @@ const routes = [
     },
     {
         path: 'listado',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("default-src_app_listado_listado_page_ts"), __webpack_require__.e("src_app_listado_listado_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./listado/listado.module */ 5797)).then(m => m.ListadoPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("default-src_app_mostrar-ticket_mostrar-ticket_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_listado_listado_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./listado/listado.module */ 5797)).then(m => m.ListadoPageModule)
     },
     {
         path: 'ticket',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("default-src_app_ticket_ticket_page_ts"), __webpack_require__.e("src_app_ticket_ticket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./ticket/ticket.module */ 8415)).then(m => m.TicketPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("default-src_app_ticket_ticket_page_ts"), __webpack_require__.e("src_app_ticket_ticket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./ticket/ticket.module */ 8415)).then(m => m.TicketPageModule)
     },
     {
         path: 'tramite-ticket',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_tramite-ticket_tramite-ticket_page_ts"), __webpack_require__.e("src_app_tramite-ticket_tramite-ticket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./tramite-ticket/tramite-ticket.module */ 6396)).then(m => m.TramiteTicketPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_tramite-ticket_tramite-ticket_page_ts"), __webpack_require__.e("src_app_services_alert_service_ts-src_app_tramite-ticket_tramite-ticket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./tramite-ticket/tramite-ticket.module */ 6396)).then(m => m.TramiteTicketPageModule)
     },
     {
         path: 'nuevo',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_nuevo_nuevo_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./nuevo/nuevo.module */ 494)).then(m => m.NuevoPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_nuevo_nuevo_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./nuevo/nuevo.module */ 494)).then(m => m.NuevoPageModule)
     },
     {
         path: 'editar-ticket',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("src_app_editar-ticket_editar-ticket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./editar-ticket/editar-ticket.module */ 9624)).then(m => m.EditarTicketPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("src_app_editar-ticket_editar-ticket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./editar-ticket/editar-ticket.module */ 9624)).then(m => m.EditarTicketPageModule)
     },
     {
         path: 'mostrar-ticket',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("src_app_mostrar-ticket_mostrar-ticket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./mostrar-ticket/mostrar-ticket.module */ 3937)).then(m => m.MostrarTicketPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("default-src_app_mostrar-ticket_mostrar-ticket_page_ts"), __webpack_require__.e("src_app_mostrar-ticket_mostrar-ticket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./mostrar-ticket/mostrar-ticket.module */ 3937)).then(m => m.MostrarTicketPageModule)
     },
     {
         path: 'cambio-status',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_cambio-status_cambio-status_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./cambio-status/cambio-status.module */ 7533)).then(m => m.CambioStatusPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_cambio-status_cambio-status_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./cambio-status/cambio-status.module */ 7533)).then(m => m.CambioStatusPageModule)
     },
     {
         path: 'comentario',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_comentario_comentario_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./comentario/comentario.module */ 3739)).then(m => m.ComentarioPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_comentario_comentario_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./comentario/comentario.module */ 3739)).then(m => m.ComentarioPageModule)
     },
     {
         path: 'agregar-falla',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_agregar-falla_agregar-falla_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./agregar-falla/agregar-falla.module */ 3348)).then(m => m.AgregarFallaPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_agregar-falla_agregar-falla_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./agregar-falla/agregar-falla.module */ 3348)).then(m => m.AgregarFallaPageModule)
     },
     {
         path: 'filtros',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_filtros_filtros_page_ts"), __webpack_require__.e("src_app_filtros_filtros_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./filtros/filtros.module */ 5293)).then(m => m.FiltrosPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_filtros_filtros_page_ts"), __webpack_require__.e("src_app_filtros_filtros_module_ts-src_app_services_alert_service_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./filtros/filtros.module */ 5293)).then(m => m.FiltrosPageModule)
     },
     {
         path: 'filtro-dash',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_filtro-dash_filtro-dash_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./filtro-dash/filtro-dash.module */ 3571)).then(m => m.FiltroDashPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_filtro-dash_filtro-dash_module_ts-src_app_services_alert_service_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./filtro-dash/filtro-dash.module */ 3571)).then(m => m.FiltroDashPageModule)
     },
     {
         path: 'notificaciones',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_notificaciones_notificaciones_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./notificaciones/notificaciones.module */ 3777)).then(m => m.NotificacionesPageModule)
+    },
+    {
+        path: 'observaciones',
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_observaciones_observaciones_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./observaciones/observaciones.module */ 8297)).then(m => m.ObservacionesPageModule)
     },
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -141,28 +145,38 @@ let AppComponent = class AppComponent {
         this.initializeApp();
     }
     initializeApp() {
-        /* To make sure we provide the fastest app loading experience
-           for our users, hide the splash screen automatically
-           when the app is ready to be used:
-    
-            https://capacitor.ionicframework.com/docs/apis/splash-screen#hiding-the-splash-screen
-        */
-        _capacitor_splash_screen__WEBPACK_IMPORTED_MODULE_2__.SplashScreen.hide();
-        _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_3__.PushNotifications.requestPermissions().then(result => {
-            if (result.receive === 'granted') {
-                // Register with Apple / Google to receive push via APNS/FCM
-                _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_3__.PushNotifications.register();
-            }
-            else {
-                // Show some error
-            }
-        });
-        _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_3__.PushNotifications.addListener('pushNotificationReceived', (notification) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            console.log('Push received: ' + JSON.stringify(notification));
-        }));
-        // Method called when tapping on a notification
-        _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_3__.PushNotifications.addListener('pushNotificationActionPerformed', (notification) => {
-            alert('Push action performed: ' + JSON.stringify(notification));
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            /* To make sure we provide the fastest app loading experience
+               for our users, hide the splash screen automatically
+               when the app is ready to be used:
+        
+                https://capacitor.ionicframework.com/docs/apis/splash-screen#hiding-the-splash-screen
+            */
+            yield _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_3__.PushNotifications.requestPermissions().then(result => {
+                if (result.receive === 'granted') {
+                    // Register with Apple / Google to receive push via APNS/FCM
+                    _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_3__.PushNotifications.register();
+                }
+                else {
+                    // Show some error
+                }
+            });
+            yield _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_3__.PushNotifications.addListener('pushNotificationReceived', (notification) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+                console.log('pushNotificationReceived: ' + notification);
+                this.showAlert(notification.title, notification.body);
+            }));
+            // Method called when tapping on a notification
+            yield _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_3__.PushNotifications.addListener('pushNotificationActionPerformed', (notification) => {
+                this.router.navigateByUrl('/').then(success => {
+                    if (success) {
+                        this.showAlert(notification.notification.title, notification.notification.body);
+                    }
+                    else {
+                        this.showAlert('Error', 'Ha ocurrido un error de ejecución.');
+                    }
+                });
+            });
+            yield _capacitor_splash_screen__WEBPACK_IMPORTED_MODULE_2__.SplashScreen.hide();
         });
     }
     showAlert(header, message) {

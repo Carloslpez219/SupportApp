@@ -18,13 +18,13 @@
 
   <ion-row>
     <ion-col size="6">
-      <ion-item-divider style="background-color: #f0f0f0;">
+      <ion-item-divider style="background-color: #f0f0f0; border-radius: 10px;">
         <ion-label>Sede: </ion-label>
       </ion-item-divider>
       <div class="margin"><ion-label style="font-size: 17px;">{{ticket.sede}}</ion-label></div>
     </ion-col>
     <ion-col size="6">
-      <ion-item-divider style="background-color: #f0f0f0;">
+      <ion-item-divider style="background-color: #f0f0f0; border-radius: 10px;">
         <ion-label>Área: </ion-label>
       </ion-item-divider>
       <div class="margin"><ion-label style="font-size: 17px;">{{ticket.area}}</ion-label></div>
@@ -32,45 +32,45 @@
   </ion-row>
   <ion-row>
     <ion-col size="6">
-      <ion-item-divider style="background-color: #f0f0f0;">
+      <ion-item-divider style="background-color: #f0f0f0; border-radius: 10px;">
         <ion-label>Categoría: </ion-label>
       </ion-item-divider>
       <div class="margin"><ion-label style="font-size: 17px;">{{ticket.categoria}}</ion-label></div>
     </ion-col>
     <ion-col size="6">
-      <ion-item-divider style="background-color: #f0f0f0;">
+      <ion-item-divider style="background-color: #f0f0f0; border-radius: 10px;">
         <ion-label>Prioridad: </ion-label>
       </ion-item-divider>
       <div class="margin"><ion-label style="font-size: 17px;">{{ticket.prioridad}}</ion-label></div>
     </ion-col>
   </ion-row>
-  <ion-item-divider style="background-color: #f0f0f0;">
+  <ion-item-divider style="background-color: #f0f0f0; border-radius: 10px;">
     <ion-label>Tiempo en espera o Hold on: </ion-label>
   </ion-item-divider>
   <div class="margin"><ion-label style="font-size: 17px;">{{ticket.espera}}</ion-label></div>
   <ion-row>
     <ion-col size="6">
-      <ion-item-divider style="background-color: #f0f0f0;">
+      <ion-item-divider style="background-color: #f0f0f0; border-radius: 10px;">
         <ion-label>Sector: </ion-label>
       </ion-item-divider>
       <div class="margin"><ion-label style="font-size: 17px;">{{ticket.sector}}</ion-label></div>
     </ion-col>
     <ion-col size="6">
-      <ion-item-divider style="background-color: #f0f0f0;">
+      <ion-item-divider style="background-color: #f0f0f0; border-radius: 10px;">
         <ion-label>Nivel: </ion-label>
       </ion-item-divider>
       <div class="margin"><ion-label style="font-size: 17px;">{{ticket.nivel}}</ion-label></div>
     </ion-col>
   </ion-row>
-  <ion-item-divider style="background-color: #f0f0f0;">
+  <ion-item-divider style="background-color: #f0f0f0; border-radius: 10px;">
     <ion-label>Incidente: </ion-label>
   </ion-item-divider>
   <div class="margin"><ion-label style="font-size: 17px;">{{ticket.incidente}}</ion-label></div>
-  <ion-item-divider style="background-color: #f0f0f0;">
+  <ion-item-divider style="background-color: #f0f0f0; border-radius: 10px;">
     <ion-label>Descripción: </ion-label>
   </ion-item-divider>
   <div class="margin"><ion-label style="font-size: 17px;">{{ticket.descripcion}}</ion-label></div>
-  <ion-item-divider style="background-color: #f0f0f0;">
+  <ion-item-divider style="background-color: #f0f0f0; border-radius: 10px;" *ngIf="ticket.fotos.length !== 0">
     <ion-label>Fotos: </ion-label>
   </ion-item-divider>
   <ion-slides pager="true">
@@ -80,7 +80,7 @@
       </ion-card>
     </ion-slide>
   </ion-slides>
-  <ion-item-divider style="background-color: #f0f0f0;">
+  <ion-item-divider style="background-color: #f0f0f0; border-radius: 10px;" *ngIf="ticket.asignacion.length !== 0">
     <ion-label>Usuarios asignados: </ion-label>
   </ion-item-divider>
   <ion-slides pager="true">
@@ -94,7 +94,7 @@
               </ion-col>
               <ion-col size="8.5">
                 <ion-text>
-                  <h3 class="descripcion">{{item.nombre}}</h3>
+                  {{item.nombre}}
                 </ion-text>
               </ion-col>
             </ion-row>
@@ -103,7 +103,7 @@
       </ion-card>
     </ion-slide>
   </ion-slides>
-  <ion-item-divider style="background-color: #f0f0f0;">
+  <ion-item-divider style="background-color: #f0f0f0; border-radius: 10px;" *ngIf="ticket.bitacora.length !== 0">
     <ion-label>Bitácora: </ion-label>
   </ion-item-divider>
   <ion-slides pager="true">
@@ -117,7 +117,7 @@
               </ion-col>
               <ion-col size="9">
                 <ion-text>
-                  <h3 class="descripcion">{{item.descripcion}}</h3>
+                  {{item.descripcion}}
                 </ion-text>
               </ion-col>
             </ion-row>
@@ -127,7 +127,7 @@
               </ion-col>
               <ion-col size="8.2">
                 <ion-text>
-                  <h3 class="descripcion">{{item.fecha_reg}}</h3>
+                  {{item.fecha_reg}}
                 </ion-text>
               </ion-col>
             </ion-row>
@@ -137,7 +137,7 @@
               </ion-col>
               <ion-col size="7.8">
                 <ion-text>
-                  <h3 class="descripcion">{{item.observacion}}</h3>
+                  {{item.observacion}}
                 </ion-text>
               </ion-col>
             </ion-row>
@@ -147,7 +147,7 @@
               </ion-col>
               <ion-col size="8.9">
                 <ion-text>
-                  <h3 class="descripcion">{{item.nombre}}</h3>
+                  {{item.nombre}}
                 </ion-text>
               </ion-col>
             </ion-row>
