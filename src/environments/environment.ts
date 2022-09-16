@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  loginUrl: 'https://pruebas.disatel.app/ROOT/API/API_login.php?request=',
+  loginUrl: 'https://gt.disatel.app/ROOT/API/API_login.php?request=',
   ayudaUrl: '/ROOT/API/API_ayuda.php?request=',
   utilUrl: '/ROOT/API/API_util.php?request=',
   ajustesUrl: '/ROOT/API/API_ajustes.php?request=',

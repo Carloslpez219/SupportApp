@@ -26,7 +26,7 @@ export class AgregarFallaPage implements OnInit {
     private modalController: ModalController ) { }
 
   async ngOnInit() {
-    (await this.bpmService.getStatus()).subscribe((resp: any) =>{
+    (await this.bpmService.getStatus(this.ticket.codigo)).subscribe((resp: any) =>{
       console.log(resp);
       if(resp.status){
         this.activos = resp.data;

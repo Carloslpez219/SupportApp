@@ -38,6 +38,8 @@ export class HomePage implements OnInit{
   prioridad = '';
   ticketsAsignados;
   mostrar = false;
+  mostrarNoHayDatos = false;
+  mostrarNoHayDatosM = false;
   //Filtro Mis
   misTickets;
   mostrarM = false;
@@ -127,7 +129,7 @@ export class HomePage implements OnInit{
         this.presentModalListado(listadoPorStatus);
       }else{
         this.loadingController.dismiss();
-        this.alertService.presentAlert(resp.data.msg);
+        this.alertService.presentAlert(resp.message);
       }
     });
   }
@@ -144,6 +146,7 @@ export class HomePage implements OnInit{
   async segmentChanged(ev){
     if(ev.detail.value === 'mis tickets'){
       this.mostrarM = await false;
+      this.mostrarNoHayDatosM = await false;
       this.mis = true;
       this.asignados = false;
       this.dash = false;
@@ -156,6 +159,7 @@ export class HomePage implements OnInit{
       this.getConteoTickets();
     }else{
       this.mostrar = await false;
+      this.mostrarNoHayDatos = await false;
       this.mis = false;
       this.asignados = true;
       this.dash = false;
@@ -171,24 +175,32 @@ export class HomePage implements OnInit{
         this.ticketsAsignados = resp.data;
         setTimeout(async () => {
           this.mostrar = await true;
+          this.mostrarNoHayDatos = await false;
         }, 500);
       }else{
         this.alertService.presentAlert(resp.data.msg);
+        if ( resp.data.msg === 'No se encontraron tickets asignados.'){
+          this.mostrar = await true;
+          this.mostrarNoHayDatos = await true;
+        }
       }
     });
   }
 
   async getMisTickets(){
     // eslint-disable-next-line max-len
-    await (await this.bpmService.getMisTickets(this.status, this.finiC, this.ffinA, this.prioridad, this.incidentes, this.categoria)).subscribe((resp: any) =>{
+    await (await this.bpmService.getMisTickets(this.status, this.finiC, this.ffinA, this.prioridad, this.incidentes, this.categoria)).subscribe(async (resp: any) =>{
       if(resp.status){
         console.log(resp);
         this.misTickets = resp.data;
         setTimeout(async () => {
           this.mostrarM = await true;
+          this.mostrarNoHayDatosM = await false;
         }, 500);
       }else{
         this.alertService.presentAlert( resp.data.msg);
+        this.mostrarM = await true;
+        this.mostrarNoHayDatosM = await true;
       }
     });
   }

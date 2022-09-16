@@ -31,6 +31,23 @@ export class TramiteTicketPage implements OnInit {
     console.log(this.ticket);
   }
 
+  acordeon(){
+    let acc = document.getElementsByClassName('accordion');
+    let i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener('click', function() {
+        this.classList.toggle('active');
+        let panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        }
+      });
+    }
+  }
+
   async ionViewDidEnter() {
     setTimeout(async () => {
       this.viewEntered = await true;
@@ -77,6 +94,19 @@ export class TramiteTicketPage implements OnInit {
       componentProps: { ticket }
     });
     await modal.present();
+
+    const value: any = await modal.onDidDismiss();
+    console.log(value);
+    if (value.data){
+      this.viewEntered = await false;
+      this.ticket = await value.data;
+      setTimeout(() => {
+        this.viewEntered = true;
+        this.loadingController.dismiss();
+      }, 800);
+    }else{
+      this.loadingController.dismiss();
+    }
   }
 
   async agregarFalla(ticket){

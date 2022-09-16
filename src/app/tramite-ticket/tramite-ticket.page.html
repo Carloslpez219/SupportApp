@@ -12,13 +12,13 @@
 <ion-content *ngIf="viewEntered" class="animate__animated animate__fadeInUp">
 
   <ion-row>
-    <ion-col size="6">
+    <ion-col size="6.5">
       <ion-card style="background-color: #f0f0f0; margin-top: 15px; margin-bottom: 10px; height: 80%;">
         <ion-card-subtitle class="ion-margin">Status actual:</ion-card-subtitle>
         <h2 style="color: cornflowerblue" class="ion-margin">{{ticket.estatus}}</h2>
       </ion-card>
     </ion-col>
-    <ion-col size="6">
+    <ion-col size="5.5">
       <ion-button expand="block" style="--background: #2D383F" (click)="cambiarStatus(ticket)"><b>Cambiar Status</b></ion-button>
       <ion-button expand="block" style="--background: #1ab394" (click)="cambiarComentar(ticket)"><b>Comentar</b></ion-button>
       <ion-button expand="block" style="--background: #f8ac59" (click)="agregarFalla(ticket)"><b>Agregar Falla</b></ion-button>
@@ -79,20 +79,42 @@
     <ion-label>Descripción: </ion-label>
   </ion-item-divider>
   <div class="margin"><ion-label style="font-size: 17px;">{{ticket.descripcion}}</ion-label></div>
+
+
+  <ion-item-divider style="background-color: #f0f0f0; border-radius: 10px;">
+    <ion-label>Pasos a ejecutar: </ion-label>
+  </ion-item-divider>
+  <br>
+  <ion-list>
+    <ion-item *ngFor="let paso of pasos" [disabled]="paso.puede_contestar" >
+      <ion-label class="ion-text-wrap">{{paso.descripcion}}</ion-label>
+      <ion-checkbox slot="start" [(ngModel)]="paso.checked" (ionChange)="onChange($event, paso)"></ion-checkbox>
+      <ion-button (click)="observacion(paso)" expand="block" fill="clear" shape="round">
+        Comentar
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
   <ion-item-divider style="background-color: #f0f0f0; border-radius: 10px;" *ngIf="ticket.fotos.length !== 0">
     <ion-label>Archivos por status: </ion-label>
   </ion-item-divider>
+
   <ion-slides pager="true">
     <ion-slide *ngFor="let item of ticket.fotos">
-      <ion-card style="background-color: #f0f0f0;" (click)="verpdf(item.foto)">
-        <ion-row>
-          <ion-col size="4">
-            <ion-badge class="badge">Fecha: </ion-badge>
-          </ion-col>
-          <ion-col size="8">
-            <ion-label>{{item.fecha_reg}}</ion-label>
-          </ion-col>
-        </ion-row>
+      <ion-card style="background-color: #f0f0f0; width: 90%;" (click)="verpdf(item.foto)">
+        <ion-card-content>
+          <ion-row>
+            <ion-col size="3">
+              <ion-badge class="badge">Fecha/ Hora :</ion-badge>
+            </ion-col>
+            <ion-col size="9">
+              <ion-text>
+                {{item.fecha_reg}}
+              </ion-text>
+            </ion-col>
+          </ion-row>
+            <img src="../../assets/img/PDF.png" style="height: 90px;"/>
+        </ion-card-content>
       </ion-card>
     </ion-slide>
   </ion-slides>
@@ -101,8 +123,8 @@
   </ion-item-divider>
   <ion-slides pager="true">
     <ion-slide *ngFor="let item of ticket.comentarios">
-      <ion-card style="background-color: #f0f0f0; width: 90%;" (click)="verpdf(ticket.archivo)">
-
+      <ion-card style="background-color: #f0f0f0; width: 90%;" (click)="verpdf(item.archivo)">
+        <ion-card-content>
           <ion-row>
             <ion-col size="3">
               <ion-badge class="badge">Comentario :</ion-badge>
@@ -123,93 +145,77 @@
               </ion-text>
             </ion-col>
           </ion-row>
-      </ion-card>
-    </ion-slide>
-  </ion-slides>
-  <ion-item-divider style="background-color: #f0f0f0; border-radius: 10px;" *ngIf="ticket.asignacion.length !== 0">
-    <ion-label>Usuarios asignados: </ion-label>
-  </ion-item-divider>
-  <ion-slides pager="true">
-    <ion-slide *ngFor="let item of ticket.asignacion">
-      <ion-card style="background-color: #f0f0f0; width: 90%;" >
-        <ion-card-content>
-          <ion-row>
-            <ion-col size="2.8">
-              <ion-badge class="badge">Nombre :</ion-badge>
-            </ion-col>
-            <ion-col size="9.2">
-              <ion-text>
-                {{item.nombre}}
-              </ion-text>
-            </ion-col>
-          </ion-row>
+          <img src="../../assets/img/PDF.png" style="height: 90px;"/>
         </ion-card-content>
       </ion-card>
     </ion-slide>
   </ion-slides>
-  <ion-item-divider style="background-color: #f0f0f0; border-radius: 10px;" *ngIf="ticket.bitacora.length !== 0">
-    <ion-label>Bitácora: </ion-label>
-  </ion-item-divider>
-  <ion-slides pager="true">
-    <ion-slide *ngFor="let item of ticket.bitacora">
-      <ion-card style="background-color: #f0f0f0; width: 90%;" >
-        <ion-card-content>
-          <ion-row>
-            <ion-col size="3">
-              <ion-badge class="badge">Acción :</ion-badge>
-            </ion-col>
-            <ion-col size="9">
-              <ion-text>
-                {{item.descripcion}}
-              </ion-text>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="3.8">
-              <ion-badge class="badge">Fecha/Hora :</ion-badge>
-            </ion-col>
-            <ion-col size="8.2">
-              <ion-text>
-                {{item.fecha_reg}}
-              </ion-text>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="4.2">
-              <ion-badge class="badge">Observaciones :</ion-badge>
-            </ion-col>
-            <ion-col size="7.8">
-              <ion-text>
-                {{item.observacion}}
-              </ion-text>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="3.1">
-              <ion-badge class="badge">Usuario :</ion-badge>
-            </ion-col>
-            <ion-col size="8.9">
-              <ion-text>
-                {{item.nombre}}
-              </ion-text>
-            </ion-col>
-          </ion-row>
-        </ion-card-content>
-      </ion-card>
-    </ion-slide>
-  </ion-slides>
-  <ion-item-divider style="background-color: #f0f0f0; border-radius: 10px;">
-    <ion-label>Pasos a ejecutar: </ion-label>
-  </ion-item-divider>
-  <br>
-  <ion-list>
-    <ion-item *ngFor="let paso of pasos" [disabled]="paso.puede_contestar" >
-      <ion-label class="ion-text-wrap">{{paso.descripcion}}</ion-label>
-      <ion-checkbox slot="start" [(ngModel)]="paso.checked" (ionChange)="onChange($event, paso)"></ion-checkbox>
-      <ion-button (click)="observacion(paso)" expand="block" fill="clear" shape="round">
-        Comentar
-      </ion-button>
-    </ion-item>
-  </ion-list>
 
+  <button class="accordion" (click)="acordeon()" *ngIf="ticket.asignacion.length !== 0"><ion-label style="background-color: #f0f0f0; border-radius: 10px; font-size: 17px; font-weight: bolder;">Usuarios asignados: </ion-label></button>
+  <div class="panel">
+
+        <ion-card style="background-color: #f0f0f0; width: 90%;" *ngFor="let item of ticket.asignacion">
+          <ion-card-content>
+            <ion-row>
+              <ion-col size="3.5">
+                <ion-badge class="badge">Nombre :</ion-badge>
+              </ion-col>
+              <ion-col size="8.5">
+                <ion-text>
+                  {{item.nombre}}
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+
+  </div>
+
+  <button class="accordion" (click)="acordeon()" *ngIf="ticket.asignacion.length !== 0"><ion-label style="background-color: #f0f0f0; border-radius: 10px; font-size: 17px; font-weight: bolder;">Bitácora: </ion-label></button>
+  <div class="panel">
+        <ion-card style="background-color: #f0f0f0; width: 90%;" *ngFor="let item of ticket.bitacora">
+          <ion-card-content>
+            <ion-row>
+              <ion-col size="3.2">
+                <ion-badge class="badge">Acción :</ion-badge>
+              </ion-col>
+              <ion-col size="8.8">
+                <ion-text>
+                  {{item.descripcion}}
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="4.2">
+                <ion-badge class="badge">Fecha/Hora :</ion-badge>
+              </ion-col>
+              <ion-col size="7.8">
+                <ion-text>
+                  {{item.fecha_reg}}
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="5.5">
+                <ion-badge class="badge">Observaciones :</ion-badge>
+              </ion-col>
+              <ion-col size="6.5">
+                <ion-text>
+                  {{item.observacion}}
+                </ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="3.5">
+                <ion-badge class="badge">Usuario :</ion-badge>
+              </ion-col>
+              <ion-col size="8.5">
+                <ion-text>
+                  {{item.nombre}}
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+  </div>
 </ion-content>

@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { BPMService } from '../services/bpm.service';
 import { AlertService } from '../services/alert.service';
+import { Storage } from '@ionic/storage-angular';
+import { Camera, CameraResultType } from '@capacitor/camera';
 
 @Component({
   selector: 'app-editar-ticket',
@@ -20,12 +22,12 @@ export class EditarTicketPage implements OnInit {
   prioridades;
   incidentes;
   //
-  sede;
-  sector;
-  area =  '1';
-  categoria;
-  prioridad;
-  incidente;
+  sede = '';
+  sector = '';
+  area =  '';
+  categoria = '';
+  prioridad = '';
+  incidente = '';
   descripcion = '';
   ticketNuevo: any;
   selectedFile;
@@ -38,9 +40,13 @@ export class EditarTicketPage implements OnInit {
   incidenteActual = '';
   areaActual = '';
   categoriaActual = '';
+  datosUsuario;
+  fileName;
+  mostrarFoto = false;
+  photo;
 
   constructor(private loadingController: LoadingController, private modalController: ModalController, private bpmService: BPMService,
-              private alertService: AlertService) { }
+              private alertService: AlertService, private storage: Storage) { }
 
   async ngOnInit() {
     (await this.bpmService.getSedes()).subscribe(async (resp: any) =>{
@@ -61,7 +67,7 @@ export class EditarTicketPage implements OnInit {
         this.alertService.presentAlert('Ha ocurrido un error en el servidor, intente de nuevo más tarde');
       }
     });
-    (await this.bpmService.getIncidentes()).subscribe(async (resp: any) =>{
+    (await this.bpmService.getIncidentes(this.categoria)).subscribe(async (resp: any) =>{
       console.log(resp);
       if(resp.status){
         this.incidentes = await resp.data;
@@ -88,7 +94,7 @@ export class EditarTicketPage implements OnInit {
         this.alertService.presentAlert('Ha ocurrido un error en el servidor, intente de nuevo más tarde');
       }
     });
-    (await this.bpmService.getAreas(this.sedeActual)).subscribe(async (resp: any) =>{
+    (await this.bpmService.getAreas(this.sedeActual, this.area)).subscribe(async (resp: any) =>{
       console.log(resp);
       if(resp.status){
         this.areas = await resp.data;
@@ -97,12 +103,11 @@ export class EditarTicketPage implements OnInit {
         this.alertService.presentAlert('Ha ocurrido un error en el servidor, intente de nuevo más tarde');
       }
     });
-    (await this.bpmService.getStatus()).subscribe(async (resp: any) =>{
+    (await this.bpmService.getStatus(this.ticket.codigo)).subscribe(async (resp: any) =>{
       console.log(resp);
       if(resp.status){
         this.status = await resp.data;
         this.estadoActual = await this.ticket.estatus_codigo;
-        console.log(this.estadoActual);
       }else{
         this.alertService.presentAlert('Ha ocurrido un error en el servidor, intente de nuevo más tarde');
       }
@@ -154,11 +159,12 @@ export class EditarTicketPage implements OnInit {
   }
 
   async editar(){
-    this.presentLoading();
-    if(this.sede === '' && this.sector === '' && this.area === '' && this.categoria === ''
-      && this.prioridad === '' && this.incidente === ''){
+    if(this.sedeActual === '' || this.sectorActual === '' || this.areaActual === '' || this.categoriaActual === ''
+      || this.prioridadActual === '' || this.incidenteActual === '' || this.descripcion === ''){
+        this.loadingController.dismiss();
         this.alertService.presentAlert('Debe de llenar todos los campos antes de actualizar el ticket.');
     }else{
+      this.presentLoading();
       (await this.bpmService.editar(this.ticket.codigo, this.descripcion, this.incidenteActual, this.prioridadActual, this.sedeActual,
                                     this.sectorActual, this.areaActual))
         .subscribe(async (resp: any) => {
@@ -184,6 +190,34 @@ export class EditarTicketPage implements OnInit {
 
   }
 
+  async takePicture(){
+
+    const image = await Camera.getPhoto({
+      quality: 70,
+      allowEditing: false,
+      resultType: CameraResultType.Base64
+    });
+
+    const imageUrl = await 'data:image/jpeg;base64,' + image.base64String;
+    this.photo = await imageUrl;
+    this.selectedFile = await this.dataURLtoFile(imageUrl, 'image');
+    this.datosUsuario = await this.storage.get('datos');
+    this.mostrarFoto = await true;
+  }
+
+  dataURLtoFile(dataurl, filename) {
+    // eslint-disable-next-line one-var
+    let arr = dataurl.split(','),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+    while (n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, {type: mime});
+}
+
   async presentLoading() {
     const loading = await this.loadingController.create({
       message: 'Cargando...'
@@ -191,13 +225,14 @@ export class EditarTicketPage implements OnInit {
     await loading.present();
   }
 
-  onFileSelected(ev){
-    console.log(ev);
-    this.selectedFile = ev.target.files[0];
-  }
+  async onFileSelected(event) {
+    this.datosUsuario = await this.storage.get('datos');
+    this.selectedFile = event.target.files[0];
+    this.fileName = this.selectedFile.name;
+}
 
   async post(){
-    (await this.bpmService.post(this.ticket.codigo, 1, this.selectedFile, this.descripcion)).subscribe((resp: any) =>{
+    (await this.bpmService.post(this.ticket.codigo, this.area, this.selectedFile, this.descripcion)).subscribe((resp: any) =>{
       console.log(resp);
     });
   }

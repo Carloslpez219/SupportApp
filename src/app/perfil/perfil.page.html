@@ -50,6 +50,9 @@
             <ion-avatar class="avatar">
               <img [src]="urlFoto">
             </ion-avatar>
+            <ion-button expand="block" fill="clear" shape="round" style="margin-top: 0px;" (click)="takePicture()">
+              Cambiar foto
+            </ion-button>
           </ion-col>
           <ion-col size="3">
           </ion-col>
@@ -91,6 +94,17 @@
           </ion-item>
           <div class="errors" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
             <span *ngIf="telefono.errors.required">
+              <ion-label class="error-container">Este campo es requerido</ion-label>
+            </span>
+          </div>
+          <small>DPI:*</small>
+          <ion-item mode="md">
+            <ion-icon slot="start" name="code-working"></ion-icon>
+            <ion-input placeholder="DPI" type="name" clearOnEdit="true" clearInput formControlName="dpi">
+            </ion-input>
+          </ion-item>
+          <div class="errors" *ngIf="dpi.invalid && (dpi.dirty || dpi.touched)">
+            <span *ngIf="dpi.errors.required">
               <ion-label class="error-container">Este campo es requerido</ion-label>
             </span>
           </div>

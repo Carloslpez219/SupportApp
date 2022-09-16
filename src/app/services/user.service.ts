@@ -43,55 +43,55 @@ export class UserService {
 
   async contactAdmin<T>(nombre, mail, subject, msj){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ayudaUrl}contact&nombre=${nombre}
+    console.log(`https://gt.disatel.app${ayudaUrl}contact&nombre=${nombre}
                             &mail=${mail}&subject=${subject}&msj=${msj}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ayudaUrl}contact&nombre=${nombre}
+    return this.http.get<T>(`https://gt.disatel.app${ayudaUrl}contact&nombre=${nombre}
                             &mail=${mail}&subject=${subject}&msj=${msj}`);
   }
 
   async resetPassword<T>(mail){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ayudaUrl}password&mail=${mail}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ayudaUrl}password&mail=${mail}`);
+    console.log(`https://gt.disatel.app${ayudaUrl}password&mail=${mail}`);
+    return this.http.get<T>(`https://gt.disatel.app${ayudaUrl}password&mail=${mail}`);
   }
 
   async getPerfil<T>(){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ajustesUrl}get_perfil&usuario=${this.datosUsuario.codigo}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ajustesUrl}get_perfil&usuario=${this.datosUsuario.codigo}`);
+    console.log(`https://gt.disatel.app${ajustesUrl}get_perfil&usuario=${this.datosUsuario.codigo}`);
+    return this.http.get<T>(`https://gt.disatel.app${ajustesUrl}get_perfil&usuario=${this.datosUsuario.codigo}`);
   }
 
   async getFoto<T>(){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ajustesUrl}get_foto&usuario=${this.datosUsuario.codigo}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ajustesUrl}get_foto&usuario=${this.datosUsuario.codigo}`);
+    console.log(`https://gt.disatel.app${ajustesUrl}get_foto&usuario=${this.datosUsuario.codigo}`);
+    return this.http.get<T>(`https://gt.disatel.app${ajustesUrl}get_foto&usuario=${this.datosUsuario.codigo}`);
   }
 
-  async editProfile<T>( nombre, mail, telefono){
+  async editProfile<T>( nombre, mail, telefono, dpi){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ajustesUrl}set_perfil&usuario=${this.datosUsuario.codigo}
-                &nombre=${nombre}&mail=${mail}&telefono=${telefono}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ajustesUrl}set_perfil&usuario=${this.datosUsuario.codigo}
-                            &nombre=${nombre}&mail=${mail}&telefono=${telefono}`);
+    console.log(`https://gt.disatel.app${ajustesUrl}set_perfil&usuario=${this.datosUsuario.codigo}
+                &nombre=${nombre}&mail=${mail}&telefono=${telefono}&dpi=${dpi}`);
+    return this.http.get<T>(`https://gt.disatel.app${ajustesUrl}set_perfil&usuario=${this.datosUsuario.codigo}
+                            &nombre=${nombre}&mail=${mail}&telefono=${telefono}&dpi=${dpi}`);
   }
 
   async getPassword<T>(){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ajustesUrl}get_pasword&usuario=${this.datosUsuario.codigo}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ajustesUrl}get_pasword&usuario=${this.datosUsuario.codigo}`);
+    console.log(`https://gt.disatel.app${ajustesUrl}get_pasword&usuario=${this.datosUsuario.codigo}`);
+    return this.http.get<T>(`https://gt.disatel.app${ajustesUrl}get_pasword&usuario=${this.datosUsuario.codigo}`);
   }
 
   async setPassword<T>( usu, password){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ajustesUrl}set_pasword
+    console.log(`https://gt.disatel.app${ajustesUrl}set_pasword
     &usuario=${this.datosUsuario.codigo}&usu=${usu}&pass=${password}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ajustesUrl}set_pasword
+    return this.http.get<T>(`https://gt.disatel.app${ajustesUrl}set_pasword
     &usuario=${this.datosUsuario.codigo}&usu=${usu}&pass=${password}`);
   }
 
   async changePhoto<T>(userData){
     this.datosUsuario = await this.storage.get('datos');
-    return this.http.post<T>(`https://pruebas.disatel.app${fotoPerfil}`, userData);
+    return this.http.post<T>(`https://gt.disatel.app${fotoPerfil}`, userData);
   }
 
   //NOTIFICACIONES
@@ -100,19 +100,19 @@ export class UserService {
     console.log(device, token, platform);
     this.datosUsuario = await this.storage.get('datos');
     // eslint-disable-next-line max-len
-    return this.http.get<T>(`https://pruebas.disatel.app/ROOT/API/API_pushup_notification.php?request=register&user_id=${this.datosUsuario.codigo}&device_id=${device}&device_token=${token.value}&device_type=${platform}&certificate_type=1`);
+    return this.http.get<T>(`https://gt.disatel.app/ROOT/API/API_pushup_notification.php?request=register&user_id=${this.datosUsuario.codigo}&device_id=${device}&device_token=${token.value}&device_type=${platform}&certificate_type=1`);
   }
 
   async unregister<T>(device){
     this.datosUsuario = await this.storage.get('datos');
     // eslint-disable-next-line max-len
-    return this.http.get<T>(`https://pruebas.disatel.app/ROOT/API/API_pushup_notification.php?request=unregister&user_id=${this.datosUsuario.codigo}&device_id=${device}`);
+    return this.http.get<T>(`https://gt.disatel.app/ROOT/API/API_pushup_notification.php?request=unregister&user_id=${this.datosUsuario.codigo}&device_id=${device}`);
   }
 
   async getNotficaciones<T>(){
     this.datosUsuario = await this.storage.get('datos');
     // eslint-disable-next-line max-len
-    return this.http.get<T>(`https://pruebas.disatel.app/ROOT/API/API_pushup_notification.php?request=list&user_id=${this.datosUsuario.codigo}&page=0`);
+    return this.http.get<T>(`https://gt.disatel.app/ROOT/API/API_pushup_notification.php?request=list&user_id=${this.datosUsuario.codigo}&page=0`);
   }
 
 }

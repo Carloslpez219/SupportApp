@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()" color="light">Atrás
+        <ion-icon slot="start" name="arrow-back-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Generar token</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<br>
+<br>
+  <ion-list>
+    <ion-list-header> Token: </ion-list-header>
+    <br>
+    <ion-item>
+      <ion-icon slot="end" name="code-working"></ion-icon>
+      <ion-label>Actualmente no tienes un token.</ion-label>
+    </ion-item>
+  </ion-list>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+  <ion-row>
+    <ion-col size="3.5"></ion-col>
+    <ion-col size="4">
+      <ion-button  style="--background: #c54f4d;" class="upload-btn" (click)="uid()">
+              Obtener UUID
+               <ion-icon slot="end" name="arrow-down" ></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="4"></ion-col>
+  </ion-row>
+
+</ion-content>

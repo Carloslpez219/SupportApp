@@ -1070,62 +1070,62 @@ let UserService = class UserService {
     contactAdmin(nombre, mail, subject, msj) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ayudaUrl}contact&nombre=${nombre}
+            console.log(`https://gt.disatel.app${ayudaUrl}contact&nombre=${nombre}
                             &mail=${mail}&subject=${subject}&msj=${msj}`);
-            return this.http.get(`https://pruebas.disatel.app${ayudaUrl}contact&nombre=${nombre}
+            return this.http.get(`https://gt.disatel.app${ayudaUrl}contact&nombre=${nombre}
                             &mail=${mail}&subject=${subject}&msj=${msj}`);
         });
     }
     resetPassword(mail) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ayudaUrl}password&mail=${mail}`);
-            return this.http.get(`https://pruebas.disatel.app${ayudaUrl}password&mail=${mail}`);
+            console.log(`https://gt.disatel.app${ayudaUrl}password&mail=${mail}`);
+            return this.http.get(`https://gt.disatel.app${ayudaUrl}password&mail=${mail}`);
         });
     }
     getPerfil() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ajustesUrl}get_perfil&usuario=${this.datosUsuario.codigo}`);
-            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}get_perfil&usuario=${this.datosUsuario.codigo}`);
+            console.log(`https://gt.disatel.app${ajustesUrl}get_perfil&usuario=${this.datosUsuario.codigo}`);
+            return this.http.get(`https://gt.disatel.app${ajustesUrl}get_perfil&usuario=${this.datosUsuario.codigo}`);
         });
     }
     getFoto() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ajustesUrl}get_foto&usuario=${this.datosUsuario.codigo}`);
-            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}get_foto&usuario=${this.datosUsuario.codigo}`);
+            console.log(`https://gt.disatel.app${ajustesUrl}get_foto&usuario=${this.datosUsuario.codigo}`);
+            return this.http.get(`https://gt.disatel.app${ajustesUrl}get_foto&usuario=${this.datosUsuario.codigo}`);
         });
     }
-    editProfile(nombre, mail, telefono) {
+    editProfile(nombre, mail, telefono, dpi) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ajustesUrl}set_perfil&usuario=${this.datosUsuario.codigo}
-                &nombre=${nombre}&mail=${mail}&telefono=${telefono}`);
-            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}set_perfil&usuario=${this.datosUsuario.codigo}
-                            &nombre=${nombre}&mail=${mail}&telefono=${telefono}`);
+            console.log(`https://gt.disatel.app${ajustesUrl}set_perfil&usuario=${this.datosUsuario.codigo}
+                &nombre=${nombre}&mail=${mail}&telefono=${telefono}&dpi=${dpi}`);
+            return this.http.get(`https://gt.disatel.app${ajustesUrl}set_perfil&usuario=${this.datosUsuario.codigo}
+                            &nombre=${nombre}&mail=${mail}&telefono=${telefono}&dpi=${dpi}`);
         });
     }
     getPassword() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ajustesUrl}get_pasword&usuario=${this.datosUsuario.codigo}`);
-            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}get_pasword&usuario=${this.datosUsuario.codigo}`);
+            console.log(`https://gt.disatel.app${ajustesUrl}get_pasword&usuario=${this.datosUsuario.codigo}`);
+            return this.http.get(`https://gt.disatel.app${ajustesUrl}get_pasword&usuario=${this.datosUsuario.codigo}`);
         });
     }
     setPassword(usu, password) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ajustesUrl}set_pasword
+            console.log(`https://gt.disatel.app${ajustesUrl}set_pasword
     &usuario=${this.datosUsuario.codigo}&usu=${usu}&pass=${password}`);
-            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}set_pasword
+            return this.http.get(`https://gt.disatel.app${ajustesUrl}set_pasword
     &usuario=${this.datosUsuario.codigo}&usu=${usu}&pass=${password}`);
         });
     }
     changePhoto(userData) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
-            return this.http.post(`https://pruebas.disatel.app${fotoPerfil}`, userData);
+            return this.http.post(`https://gt.disatel.app${fotoPerfil}`, userData);
         });
     }
     //NOTIFICACIONES
@@ -1134,21 +1134,21 @@ let UserService = class UserService {
             console.log(device, token, platform);
             this.datosUsuario = yield this.storage.get('datos');
             // eslint-disable-next-line max-len
-            return this.http.get(`https://pruebas.disatel.app/ROOT/API/API_pushup_notification.php?request=register&user_id=${this.datosUsuario.codigo}&device_id=${device}&device_token=${token.value}&device_type=${platform}&certificate_type=1`);
+            return this.http.get(`https://gt.disatel.app/ROOT/API/API_pushup_notification.php?request=register&user_id=${this.datosUsuario.codigo}&device_id=${device}&device_token=${token.value}&device_type=${platform}&certificate_type=1`);
         });
     }
     unregister(device) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
             // eslint-disable-next-line max-len
-            return this.http.get(`https://pruebas.disatel.app/ROOT/API/API_pushup_notification.php?request=unregister&user_id=${this.datosUsuario.codigo}&device_id=${device}`);
+            return this.http.get(`https://gt.disatel.app/ROOT/API/API_pushup_notification.php?request=unregister&user_id=${this.datosUsuario.codigo}&device_id=${device}`);
         });
     }
     getNotficaciones() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
             // eslint-disable-next-line max-len
-            return this.http.get(`https://pruebas.disatel.app/ROOT/API/API_pushup_notification.php?request=list&user_id=${this.datosUsuario.codigo}&page=0`);
+            return this.http.get(`https://gt.disatel.app/ROOT/API/API_pushup_notification.php?request=list&user_id=${this.datosUsuario.codigo}&page=0`);
         });
     }
 };
@@ -1197,9 +1197,16 @@ let FiltroDashPage = class FiltroDashPage {
         this.loadingController = loadingController;
         this.modalController = modalController;
         this.viewEntered = false;
-        this.desde = this.getDate();
+        this.desde = this.getFirstDay();
         this.hasta = this.getDate();
         this.sede = '';
+    }
+    getFirstDay() {
+        let todayDate;
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        todayDate = '01/01/' + yyyy;
+        return todayDate;
     }
     getDate() {
         let todayDate;
@@ -1220,7 +1227,7 @@ let FiltroDashPage = class FiltroDashPage {
     }
     ngOnInit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            (yield this.bpmService.getStatus()).subscribe((resp) => {
+            (yield this.bpmService.getSedes()).subscribe((resp) => {
                 console.log(resp);
                 if (resp.status) {
                     this.sedes = resp.data;
@@ -1461,62 +1468,62 @@ let UserService = class UserService {
     contactAdmin(nombre, mail, subject, msj) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ayudaUrl}contact&nombre=${nombre}
+            console.log(`https://gt.disatel.app${ayudaUrl}contact&nombre=${nombre}
                             &mail=${mail}&subject=${subject}&msj=${msj}`);
-            return this.http.get(`https://pruebas.disatel.app${ayudaUrl}contact&nombre=${nombre}
+            return this.http.get(`https://gt.disatel.app${ayudaUrl}contact&nombre=${nombre}
                             &mail=${mail}&subject=${subject}&msj=${msj}`);
         });
     }
     resetPassword(mail) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ayudaUrl}password&mail=${mail}`);
-            return this.http.get(`https://pruebas.disatel.app${ayudaUrl}password&mail=${mail}`);
+            console.log(`https://gt.disatel.app${ayudaUrl}password&mail=${mail}`);
+            return this.http.get(`https://gt.disatel.app${ayudaUrl}password&mail=${mail}`);
         });
     }
     getPerfil() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ajustesUrl}get_perfil&usuario=${this.datosUsuario.codigo}`);
-            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}get_perfil&usuario=${this.datosUsuario.codigo}`);
+            console.log(`https://gt.disatel.app${ajustesUrl}get_perfil&usuario=${this.datosUsuario.codigo}`);
+            return this.http.get(`https://gt.disatel.app${ajustesUrl}get_perfil&usuario=${this.datosUsuario.codigo}`);
         });
     }
     getFoto() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ajustesUrl}get_foto&usuario=${this.datosUsuario.codigo}`);
-            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}get_foto&usuario=${this.datosUsuario.codigo}`);
+            console.log(`https://gt.disatel.app${ajustesUrl}get_foto&usuario=${this.datosUsuario.codigo}`);
+            return this.http.get(`https://gt.disatel.app${ajustesUrl}get_foto&usuario=${this.datosUsuario.codigo}`);
         });
     }
-    editProfile(nombre, mail, telefono) {
+    editProfile(nombre, mail, telefono, dpi) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ajustesUrl}set_perfil&usuario=${this.datosUsuario.codigo}
-                &nombre=${nombre}&mail=${mail}&telefono=${telefono}`);
-            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}set_perfil&usuario=${this.datosUsuario.codigo}
-                            &nombre=${nombre}&mail=${mail}&telefono=${telefono}`);
+            console.log(`https://gt.disatel.app${ajustesUrl}set_perfil&usuario=${this.datosUsuario.codigo}
+                &nombre=${nombre}&mail=${mail}&telefono=${telefono}&dpi=${dpi}`);
+            return this.http.get(`https://gt.disatel.app${ajustesUrl}set_perfil&usuario=${this.datosUsuario.codigo}
+                            &nombre=${nombre}&mail=${mail}&telefono=${telefono}&dpi=${dpi}`);
         });
     }
     getPassword() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ajustesUrl}get_pasword&usuario=${this.datosUsuario.codigo}`);
-            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}get_pasword&usuario=${this.datosUsuario.codigo}`);
+            console.log(`https://gt.disatel.app${ajustesUrl}get_pasword&usuario=${this.datosUsuario.codigo}`);
+            return this.http.get(`https://gt.disatel.app${ajustesUrl}get_pasword&usuario=${this.datosUsuario.codigo}`);
         });
     }
     setPassword(usu, password) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
-            console.log(`https://pruebas.disatel.app${ajustesUrl}set_pasword
+            console.log(`https://gt.disatel.app${ajustesUrl}set_pasword
     &usuario=${this.datosUsuario.codigo}&usu=${usu}&pass=${password}`);
-            return this.http.get(`https://pruebas.disatel.app${ajustesUrl}set_pasword
+            return this.http.get(`https://gt.disatel.app${ajustesUrl}set_pasword
     &usuario=${this.datosUsuario.codigo}&usu=${usu}&pass=${password}`);
         });
     }
     changePhoto(userData) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
-            return this.http.post(`https://pruebas.disatel.app${fotoPerfil}`, userData);
+            return this.http.post(`https://gt.disatel.app${fotoPerfil}`, userData);
         });
     }
     //NOTIFICACIONES
@@ -1525,21 +1532,21 @@ let UserService = class UserService {
             console.log(device, token, platform);
             this.datosUsuario = yield this.storage.get('datos');
             // eslint-disable-next-line max-len
-            return this.http.get(`https://pruebas.disatel.app/ROOT/API/API_pushup_notification.php?request=register&user_id=${this.datosUsuario.codigo}&device_id=${device}&device_token=${token.value}&device_type=${platform}&certificate_type=1`);
+            return this.http.get(`https://gt.disatel.app/ROOT/API/API_pushup_notification.php?request=register&user_id=${this.datosUsuario.codigo}&device_id=${device}&device_token=${token.value}&device_type=${platform}&certificate_type=1`);
         });
     }
     unregister(device) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
             // eslint-disable-next-line max-len
-            return this.http.get(`https://pruebas.disatel.app/ROOT/API/API_pushup_notification.php?request=unregister&user_id=${this.datosUsuario.codigo}&device_id=${device}`);
+            return this.http.get(`https://gt.disatel.app/ROOT/API/API_pushup_notification.php?request=unregister&user_id=${this.datosUsuario.codigo}&device_id=${device}`);
         });
     }
     getNotficaciones() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
             // eslint-disable-next-line max-len
-            return this.http.get(`https://pruebas.disatel.app/ROOT/API/API_pushup_notification.php?request=list&user_id=${this.datosUsuario.codigo}&page=0`);
+            return this.http.get(`https://gt.disatel.app/ROOT/API/API_pushup_notification.php?request=list&user_id=${this.datosUsuario.codigo}&page=0`);
         });
     }
 };
@@ -1552,6 +1559,103 @@ UserService = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
         providedIn: 'root'
     })
 ], UserService);
+
+
+
+/***/ }),
+
+/***/ 6683:
+/*!*********************************!*\
+  !*** ./src/app/uid/uid.page.ts ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "UidPage": () => (/* binding */ UidPage)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _D_Farasi_Software_SupportApp_node_modules_ngtools_webpack_src_loaders_direct_resource_js_uid_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./uid.page.html */ 5930);
+/* harmony import */ var _uid_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./uid.page.scss */ 2535);
+/* harmony import */ var src_app_services_alert_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/alert.service */ 4571);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _awesome_cordova_plugins_device_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @awesome-cordova-plugins/device/ngx */ 1614);
+/* harmony import */ var _awesome_cordova_plugins_clipboard_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @awesome-cordova-plugins/clipboard/ngx */ 1659);
+/* harmony import */ var _awesome_cordova_plugins_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @awesome-cordova-plugins/social-sharing/ngx */ 900);
+
+
+
+
+
+
+
+
+
+let UidPage = class UidPage {
+    constructor(modalController, loadingController, device, clipboard, alertService, socialSharing) {
+        this.modalController = modalController;
+        this.loadingController = loadingController;
+        this.device = device;
+        this.clipboard = clipboard;
+        this.alertService = alertService;
+        this.socialSharing = socialSharing;
+        this.viewEntered = false;
+        this.mostrarUUID = false;
+        this.uuid = '';
+    }
+    ngOnInit() {
+        this.uuid = this.device.uuid;
+        setTimeout(() => {
+            console.log(this.uuid);
+            this.mostrarUUID = true;
+        }, 500);
+    }
+    ionViewDidEnter() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            this.viewEntered = true;
+            yield this.loadingController.dismiss();
+        });
+    }
+    ionViewWillLeave() {
+        this.viewEntered = false;
+    }
+    back() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            this.modalController.dismiss();
+        });
+    }
+    presentLoading() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            const loading = yield this.loadingController.create({
+                message: 'Cargando...'
+            });
+            yield loading.present();
+        });
+    }
+    copy() {
+        this.clipboard.copy(this.uuid);
+        this.alertService.presentToast('Código copiado en el portapapeles', 'dark', 2000);
+    }
+    whatsapp() {
+        this.socialSharing.shareViaWhatsApp('UUID compartido: ' + this.uuid);
+    }
+};
+UidPage.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.ModalController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.LoadingController },
+    { type: _awesome_cordova_plugins_device_ngx__WEBPACK_IMPORTED_MODULE_3__.Device },
+    { type: _awesome_cordova_plugins_clipboard_ngx__WEBPACK_IMPORTED_MODULE_4__.Clipboard },
+    { type: src_app_services_alert_service__WEBPACK_IMPORTED_MODULE_2__.AlertService },
+    { type: _awesome_cordova_plugins_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_5__.SocialSharing }
+];
+UidPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+        selector: 'app-uid',
+        template: _D_Farasi_Software_SupportApp_node_modules_ngtools_webpack_src_loaders_direct_resource_js_uid_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_uid_page_scss__WEBPACK_IMPORTED_MODULE_1__]
+    })
+], UidPage);
 
 
 
@@ -1585,6 +1689,20 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ 5930:
+/*!**************************************************************************************************!*\
+  !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/uid/uid.page.html ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInDown\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button (click)=\"back()\" color=\"light\">Atrás\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"light\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>UUID</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInUp\">\n\n  <br>\n  <br>\n  <ion-list>\n    <ion-list-header> UUID: </ion-list-header>\n    <br>\n    <ion-item *ngIf=\"mostrarUUID\">\n      <ion-icon slot=\"end\" name=\"clipboard-outline\" (click)=\"copy()\"></ion-icon>\n      <ion-label>{{uuid}}</ion-label>\n    </ion-item>\n  </ion-list>\n\n<br>\n<br>\n<br>\n\n<ion-row>\n  <ion-col size=\"2.8\"></ion-col>\n  <ion-col size=\"4\">\n    <ion-button  style=\"--background: #c54f4d;\" class=\"upload-btn\" (click)=\"whatsapp()\">\n            Enviar por whatsapp\n             <ion-icon slot=\"end\" name=\"logo-whatsapp\" ></ion-icon>\n    </ion-button>\n  </ion-col>\n  <ion-col size=\"4\"></ion-col>\n</ion-row>\n\n\n</ion-content>\n");
+
+/***/ }),
+
 /***/ 5820:
 /*!***************************************************!*\
   !*** ./src/app/filtro-dash/filtro-dash.page.scss ***!
@@ -1602,6 +1720,16 @@ module.exports = "ion-toolbar {\n  --background: #66615B;\n  --color: white;\n}\
 /***/ ((module) => {
 
 module.exports = "ion-toolbar {\n  --background: #66615B;\n  --color: white;\n}\n\n.badge {\n  background-color: #4c4c4a;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxpc3RhZG8ucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0kscUJBQUE7RUFDQSxjQUFBO0FBQ0o7O0FBRUE7RUFDSSx5QkFBQTtBQUNKIiwiZmlsZSI6Imxpc3RhZG8ucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLXRvb2xiYXIge1xyXG4gICAgLS1iYWNrZ3JvdW5kOiAjNjY2MTVCO1xyXG4gICAgLS1jb2xvcjogd2hpdGU7XHJcbiAgfVxyXG5cclxuLmJhZGdle1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzRjNGM0YTtcclxufSJdfQ== */";
+
+/***/ }),
+
+/***/ 2535:
+/*!***********************************!*\
+  !*** ./src/app/uid/uid.page.scss ***!
+  \***********************************/
+/***/ ((module) => {
+
+module.exports = "ion-toolbar {\n  --background: #66615B;\n  --color: white;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInVpZC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxxQkFBQTtFQUNBLGNBQUE7QUFDRiIsImZpbGUiOiJ1aWQucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLXRvb2xiYXIge1xyXG4gIC0tYmFja2dyb3VuZDogIzY2NjE1QjtcclxuICAtLWNvbG9yOiB3aGl0ZTtcclxufVxyXG5cclxuIl19 */";
 
 /***/ })
 

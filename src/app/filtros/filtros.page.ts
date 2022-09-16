@@ -21,11 +21,20 @@ export class FiltrosPage implements OnInit {
   categoria= '';
   prioridad= '';
   incidente= '';
-  desde = this.getDate();
+  desde = this.getFirstDay();
   hasta = this.getDate();
 
   constructor( private bpmService: BPMService, private alertService: AlertService, private loadingController: LoadingController,
     private modalController: ModalController) { }
+
+    getFirstDay(){
+      let todayDate;
+      const today = new Date();
+      const yyyy = today.getFullYear();
+
+      todayDate = '01/01/' + yyyy;
+      return todayDate;
+    }
 
     getDate(){
       let todayDate;
@@ -51,7 +60,7 @@ export class FiltrosPage implements OnInit {
 
 
   async ngOnInit() {
-    (await this.bpmService.getStatus()).subscribe((resp: any) =>{
+    (await this.bpmService.getStatus('')).subscribe((resp: any) =>{
       console.log(resp);
       if(resp.status){
         this.status = resp.data;
@@ -67,7 +76,7 @@ export class FiltrosPage implements OnInit {
         this.alertService.presentAlert('Ha ocurrido un error en el servidor, intente de nuevo más tarde');
       }
     });
-    (await this.bpmService.getIncidentes()).subscribe((resp: any) =>{
+    (await this.bpmService.getIncidentes(this.categoria)).subscribe((resp: any) =>{
       console.log(resp);
       if(resp.status){
         this.incidentes = resp.data;

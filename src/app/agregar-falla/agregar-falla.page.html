@@ -27,8 +27,9 @@
       <ion-textarea rows="4" placeholder="Comentario..." [(ngModel)]="descripcion">  </ion-textarea>
     </ion-item>
     <br>
+    <ion-label class="ion-padding">Fecha y Hora en la que ocurre la falla:</ion-label>
     <ion-datetime [value]="maxDate.toISOString()" min="2020-01-01" (ionChange)="cambioFechaHasta($event)" style="margin-left: 20px;
-    border-radius: 20px;"></ion-datetime>
+    border-radius: 20px; margin-top: 10px;"></ion-datetime>
   </ion-list>
 <br>
   <ion-row>

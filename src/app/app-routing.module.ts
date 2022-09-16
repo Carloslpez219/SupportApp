@@ -77,6 +77,14 @@ const routes: Routes = [
     path: 'observaciones',
     loadChildren: () => import('./observaciones/observaciones.module').then( m => m.ObservacionesPageModule)
   },
+  {
+    path: 'token',
+    loadChildren: () => import('./token/token.module').then( m => m.TokenPageModule)
+  },
+  {
+    path: 'uid',
+    loadChildren: () => import('./uid/uid.module').then( m => m.UidPageModule)
+  },
 
 ];
 

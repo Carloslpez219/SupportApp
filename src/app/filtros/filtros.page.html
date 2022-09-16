@@ -20,6 +20,12 @@
       </ion-select>
     </ion-item>
     <ion-item>
+      <ion-label>Prioridad</ion-label>
+      <ion-select (ionChange)="selectPrioridad($event)">
+        <ion-select-option *ngFor="let prioridad of prioridades" value="{{prioridad.codigo}}">{{prioridad.nombre}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
       <ion-label>Incidente</ion-label>
       <ion-select (ionChange)="selectIncidente($event)">
         <ion-select-option *ngFor="let incidente of incidentes" value="{{incidente.codigo}}">{{incidente.nombre}}</ion-select-option>
@@ -29,12 +35,6 @@
       <ion-label>Status</ion-label>
       <ion-select (ionChange)="selectStatus($event)">
         <ion-select-option *ngFor="let sede of status" value="{{sede.codigo}}">{{sede.nombre}}</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>Prioridad</ion-label>
-      <ion-select (ionChange)="selectPrioridad($event)">
-        <ion-select-option *ngFor="let prioridad of prioridades" value="{{prioridad.codigo}}">{{prioridad.nombre}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-row>

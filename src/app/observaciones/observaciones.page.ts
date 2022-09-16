@@ -1,5 +1,6 @@
+import { AlertService } from './../services/alert.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { BPMService } from '../services/bpm.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class ObservacionesPage implements OnInit {
   viewEntered;
   ejecucion;
 
-  constructor( private modalController: ModalController, private bpmService: BPMService) { }
+  constructor( private modalController: ModalController, private bpmService: BPMService, private alertService: AlertService) { }
 
   ngOnInit() {
   }
@@ -40,6 +41,8 @@ export class ObservacionesPage implements OnInit {
     (await this.bpmService.ejecutarPaso(this.ticket.codigo, this.paso.paso_codigo, this.paso.tipo_incidente, this.ejecucion,
       this.paso.observaciones)).subscribe(resp =>{
                                     console.log(resp);
+                                    this.alertService.presentToast('Comentario agregado satisfactoriamente', 'success', 2000);
+                                    this.modalController.dismiss();
                                   });
   }
 

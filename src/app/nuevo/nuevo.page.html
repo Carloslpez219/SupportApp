@@ -19,16 +19,14 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Área</ion-label>
-      <ion-select (ionChange)="selectArea($event)">
-        <ion-select-option *ngFor="let area of areas" value="{{area.codigo}}">{{area.nombre}}</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
       <ion-label>Incidente</ion-label>
       <ion-select (ionChange)="selectIncidente($event)">
         <ion-select-option *ngFor="let incidente of incidentes" value="{{incidente.codigo}}">{{incidente.nombre}}</ion-select-option>
       </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Prioridad</ion-label>
+      <ion-note slot="end" color="dark" *ngIf="MostrarPrioridad">{{nombre_prioridad}}</ion-note>
     </ion-item>
     <ion-item>
       <ion-label>Sede</ion-label>
@@ -37,16 +35,14 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Sector</ion-label>
-      <ion-select (ionChange)="selectSector($event)">
-        <ion-select-option *ngFor="let sector of sectores" value="{{sector.codigo}}">{{sector.nombre}}</ion-select-option>
+      <ion-label>Área</ion-label>
+      <ion-select (ionChange)="selectArea($event)">
+        <ion-select-option *ngFor="let area of areas" value="{{area.codigo}}">{{area.nombre}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Prioridad</ion-label>
-      <ion-select (ionChange)="selectPrioridad($event)">
-        <ion-select-option *ngFor="let prioridad of prioridades" value="{{prioridad.codigo}}">{{prioridad.nombre}}</ion-select-option>
-      </ion-select>
+      <ion-label>Sector</ion-label>
+      <ion-note slot="end" color="dark" *ngIf="mostrarSector">{{nombreSector}}</ion-note>
     </ion-item>
     <ion-item>
       <ion-label>Descripción :</ion-label>
@@ -54,20 +50,44 @@
     </ion-item>
   </ion-list>
 
-  <ion-row>
-    <ion-col size="2.7"></ion-col>
-    <ion-col size="6.6">
-      <div class="file-input">
-        <input type="file" id="file" class="file" (change)="onFileSelected($event)">
-        <label for="file">
-          Seleccionar archivo
-          <p class="file-name"></p>
-        </label>
-      </div>
+  <br>
+
+  <div *ngIf="mostrarFoto">
+    <img [src]="photo" class="imageDefault">
+</div>
+
+<ion-row>
+<ion-col size="3.5"></ion-col>
+<ion-col size="4">
+  <ion-button  style="--background: #c54f4d;" class="upload-btn"
+          (click)="takePicture()">
+          Subir imágen
+           <ion-icon slot="start" name="cloud-upload" ></ion-icon>
+  </ion-button>
+</ion-col>
+<ion-col size="4"></ion-col>
+</ion-row>
+
+<input type="file" class="file-input"
+(change)="onFileSelected($event)" #fileUpload>
+
+<div class="file-upload">
+<ion-row>
+    <ion-col size="3.5"></ion-col>
+    <ion-col size="4">
+      <ion-button mat-mini-fab style="--background: #c54f4d;" class="upload-btn"
+      (click)="fileUpload.click()">
+      Subir archivo
+       <ion-icon slot="start" name="cloud-upload" ></ion-icon>
+      </ion-button>
     </ion-col>
-    <ion-col size="2.7"></ion-col>
-  </ion-row>
-  
+    <ion-col size="4"></ion-col>
+</ion-row>
+<ion-text style="text-align: center;">
+<h6>{{fileName || "Aún no se ha subido ningún archivo."}}</h6>
+</ion-text>
+</div>
+
   <br>
   <ion-row>
     <ion-col size="3"></ion-col>

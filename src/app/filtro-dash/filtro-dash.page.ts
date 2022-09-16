@@ -11,13 +11,22 @@ import { LoadingController, ModalController } from '@ionic/angular';
 export class FiltroDashPage implements OnInit {
 
   viewEntered = false;
-  desde = this.getDate();
+  desde = this.getFirstDay();
   hasta = this.getDate();
   sede = '';
   sedes;
 
   constructor(private bpmService: BPMService, private alertService: AlertService, private loadingController: LoadingController,
               private modalController: ModalController) { }
+
+  getFirstDay(){
+    let todayDate;
+    const today = new Date();
+    const yyyy = today.getFullYear();
+
+    todayDate = '01/01/' + yyyy;
+    return todayDate;
+  }
 
   getDate(){
     let todayDate;
@@ -41,7 +50,7 @@ export class FiltroDashPage implements OnInit {
   }
 
   async ngOnInit() {
-    (await this.bpmService.getStatus()).subscribe((resp: any) =>{
+    (await this.bpmService.getSedes()).subscribe((resp: any) =>{
       console.log(resp);
       if(resp.status){
         this.sedes = resp.data;

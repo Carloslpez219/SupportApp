@@ -21,118 +21,118 @@ export class BPMService {
 
   async conteoTickets<T>(fini, ffin, sede){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ticket}conteo_ticket&usuario=${this.datosUsuario.codigo}&fini${fini}&ffin${ffin}&sede=${sede}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ticket}conteo_ticket&usuario=${this.datosUsuario.codigo}&fini${fini}&ffin${ffin}&sede=${sede}`);
+    console.log(`https://gt.disatel.app${ticket}conteo_ticket&usuario=${this.datosUsuario.codigo}&fini${fini}&ffin${ffin}&sede=${sede}`);
+    return this.http.get<T>(`https://gt.disatel.app${ticket}conteo_ticket&usuario=${this.datosUsuario.codigo}&fini${fini}&ffin${ffin}&sede=${sede}`);
   }
 
   async listadoTickets<T>(status, fini, ffin, sede){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ticket}listado_tickets_status&usuario=${this.datosUsuario.codigo}&status=${status}&fini${fini}&ffin${ffin}&sede=${sede}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ticket}listado_tickets_status&usuario=${this.datosUsuario.codigo}&status=${status}&fini${fini}&ffin${ffin}&sede=${sede}`);
+    console.log(`https://gt.disatel.app${ticket}listado_tickets_status&usuario=${this.datosUsuario.codigo}&status=${status}&fini${fini}&ffin${ffin}&sede=${sede}`);
+    return this.http.get<T>(`https://gt.disatel.app${ticket}listado_tickets_status&usuario=${this.datosUsuario.codigo}&status=${status}&fini${fini}&ffin${ffin}&sede=${sede}`);
   }
 
   async getTicket<T>(codigo){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ticket}ticket&codigo=${codigo}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ticket}ticket&codigo=${codigo}`);
+    console.log(`https://gt.disatel.app${ticket}ticket&codigo=${codigo}`);
+    return this.http.get<T>(`https://gt.disatel.app${ticket}ticket&codigo=${codigo}`);
   }
 
   async getTicketsAsignados<T>(status, fini, ffin, prioridad, incidente, categoria){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ticket}asignados&usuario=${this.datosUsuario.codigo}&categoria=${categoria}&incidente=${incidente}&prioridad=${prioridad}&status=${status}&fini=${fini}&ffin=${ffin}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ticket}asignados&usuario=${this.datosUsuario.codigo}&categoria=${categoria}&incidente=${incidente}&prioridad=${prioridad}&status=${status}&fini=${fini}&ffin=${ffin}`);
+    console.log(`https://gt.disatel.app${ticket}asignados&usuario=${this.datosUsuario.codigo}&categoria=${categoria}&incidente=${incidente}&prioridad=${prioridad}&status=${status}&fini=${fini}&ffin=${ffin}`);
+    return this.http.get<T>(`https://gt.disatel.app${ticket}asignados&usuario=${this.datosUsuario.codigo}&categoria=${categoria}&incidente=${incidente}&prioridad=${prioridad}&status=${status}&fini=${fini}&ffin=${ffin}`);
   }
 
   async getMisTickets<T>(status, fini, ffin, prioridad, incidente, categoria){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ticket}mis_tickets&usuario=${this.datosUsuario.codigo}&categoria=${categoria}&incidente=${incidente}&prioridad=${prioridad}&status=${status}&fini=${fini}&ffin=${ffin}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ticket}mis_tickets&usuario=${this.datosUsuario.codigo}&categoria=${categoria}&incidente=${incidente}&prioridad=${prioridad}&status=${status}&fini=${fini}&ffin=${ffin}`);
+    console.log(`https://gt.disatel.app${ticket}mis_tickets&usuario=${this.datosUsuario.codigo}&categoria=${categoria}&incidente=${incidente}&prioridad=${prioridad}&status=${status}&fini=${fini}&ffin=${ffin}`);
+    return this.http.get<T>(`https://gt.disatel.app${ticket}mis_tickets&usuario=${this.datosUsuario.codigo}&categoria=${categoria}&incidente=${incidente}&prioridad=${prioridad}&status=${status}&fini=${fini}&ffin=${ffin}`);
   }
 
   async getSedes<T>(){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${util}lista_sedes&usuario=${this.datosUsuario.codigo}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${util}lista_sedes&usuario=${this.datosUsuario.codigo}`);
+    console.log(`https://gt.disatel.app${util}lista_sedes&usuario=${this.datosUsuario.codigo}`);
+    return this.http.get<T>(`https://gt.disatel.app${util}lista_sedes&usuario=${this.datosUsuario.codigo}`);
   }
 
   async getSectores<T>(){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${util}lista_sector`);
-    return this.http.get<T>(`https://pruebas.disatel.app${util}lista_sector`);
+    console.log(`https://gt.disatel.app${util}lista_sector`);
+    return this.http.get<T>(`https://gt.disatel.app${util}lista_sector`);
   }
 
-  async getAreas<T>(sede){
+  async getAreas<T>(sede, area){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${util}lista_areas&usuario=${this.datosUsuario.codigo}&sede=${sede}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${util}lista_areas&usuario=${this.datosUsuario.codigo}&sede=${sede}`);
+    console.log(`https://gt.disatel.app${util}lista_areas&usuario=${this.datosUsuario.codigo}&sede=${sede}&area=${area}`);
+    return this.http.get<T>(`https://gt.disatel.app${util}lista_areas&usuario=${this.datosUsuario.codigo}&sede=${sede}&area=${area}`);
   }
 
   async getCategorias<T>(){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${util}lista_categorias_hd`);
-    return this.http.get<T>(`https://pruebas.disatel.app${util}lista_categorias_hd`);
+    console.log(`https://gt.disatel.app${util}lista_categorias_hd`);
+    return this.http.get<T>(`https://gt.disatel.app${util}lista_categorias_hd`);
   }
 
   async getPrioridades<T>(){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${util}lista_prioridad_hd`);
-    return this.http.get<T>(`https://pruebas.disatel.app${util}lista_prioridad_hd`);
+    console.log(`https://gt.disatel.app${util}lista_prioridad_hd`);
+    return this.http.get<T>(`https://gt.disatel.app${util}lista_prioridad_hd`);
   }
 
-  async getIncidentes<T>(){
+  async getIncidentes<T>(categoria){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${util}lista_incidentes_hd`);
-    return this.http.get<T>(`https://pruebas.disatel.app${util}lista_incidentes_hd`);
+    console.log(`https://gt.disatel.app${util}lista_incidentes_hd&&categoria=${categoria}`);
+    return this.http.get<T>(`https://gt.disatel.app${util}lista_incidentes_hd&categoria=${categoria}`);
   }
 
   async guardarTicket<T>(descripcion, incidente, prioridad, sede, sector, area){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ticket}grabar_ticket&usuario=${this.datosUsuario.codigo}&descripcion=${descripcion}&incidente=${incidente}&prioridad=${prioridad}&sede=${sede}&sector=${sector}&area=${area}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ticket}grabar_ticket&usuario=${this.datosUsuario.codigo}&descripcion=${descripcion}&incidente=${incidente}&prioridad=${prioridad}&sede=${sede}&sector=${sector}&area=${area}`);
+    console.log(`https://gt.disatel.app${ticket}grabar_ticket&usuario=${this.datosUsuario.codigo}&descripcion=${descripcion}&incidente=${incidente}&prioridad=${prioridad}&sede=${sede}&sector=${sector}&area=${area}`);
+    return this.http.get<T>(`https://gt.disatel.app${ticket}grabar_ticket&usuario=${this.datosUsuario.codigo}&descripcion=${descripcion}&incidente=${incidente}&prioridad=${prioridad}&sede=${sede}&sector=${sector}&area=${area}`);
   }
 
-  async getStatus<T>(){
+  async getStatus<T>(codigo){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${util}lista_status_hd&usuario=${this.datosUsuario.codigo}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${util}lista_status_hd&usuario=${this.datosUsuario.codigo}`);
+    console.log(`https://gt.disatel.app${util}lista_status_hd&usuario=${this.datosUsuario.codigo}&ticket=${codigo}`);
+    return this.http.get<T>(`https://gt.disatel.app${util}lista_status_hd&usuario=${this.datosUsuario.codigo}&ticket=${codigo}`);
   }
 
   async getActivos<T>(){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${util}lista_activos&usuario=${this.datosUsuario.codigo}&sede&sector&area=&combo=1`);
-    return this.http.get<T>(`https://pruebas.disatel.app${util}lista_activos&usuario=${this.datosUsuario.codigo}&sede&sector&area=&combo=1`);
+    console.log(`https://gt.disatel.app${util}lista_activos&usuario=${this.datosUsuario.codigo}&sede&sector&area=&combo=1`);
+    return this.http.get<T>(`https://gt.disatel.app${util}lista_activos&usuario=${this.datosUsuario.codigo}&sede&sector&area=&combo=1`);
   }
 
   /////////////////////////////////////////////////
 
   async comentar<T>(comentario, codTicket){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ticket}comentario&usuario=${this.datosUsuario.codigo}&codigo=${codTicket}&comment=${comentario}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ticket}comentario&usuario=${this.datosUsuario.codigo}&codigo=${codTicket}&comment=${comentario}`);
+    console.log(`https://gt.disatel.app${ticket}comentario&usuario=${this.datosUsuario.codigo}&codigo=${codTicket}&comment=${comentario}`);
+    return this.http.get<T>(`https://gt.disatel.app${ticket}comentario&usuario=${this.datosUsuario.codigo}&codigo=${codTicket}&comment=${comentario}`);
   }
 
   async editar<T>(codTicket, descripcion, incidente, prioridad, sede, sector, area){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ticket}modificar_ticket&usuario=${this.datosUsuario.codigo}&codigo=${codTicket}&descripcion=${descripcion}&incidente=${incidente}&prioridad=${prioridad}&sede=${sede}&sector=${sector}&area=${area}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ticket}modificar_ticket&usuario=${this.datosUsuario.codigo}&codigo=${codTicket}&descripcion=${descripcion}&incidente=${incidente}&prioridad=${prioridad}&sede=${sede}&sector=${sector}&area=${area}`);
+    console.log(`https://gt.disatel.app${ticket}modificar_ticket&usuario=${this.datosUsuario.codigo}&codigo=${codTicket}&descripcion=${descripcion}&incidente=${incidente}&prioridad=${prioridad}&sede=${sede}&sector=${sector}&area=${area}`);
+    return this.http.get<T>(`https://gt.disatel.app${ticket}modificar_ticket&usuario=${this.datosUsuario.codigo}&codigo=${codTicket}&descripcion=${descripcion}&incidente=${incidente}&prioridad=${prioridad}&sede=${sede}&sector=${sector}&area=${area}`);
   }
 
   async cambiarStatus<T>(comentario, codTicket, status){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ticket}cambiar_status&usuario=${this.datosUsuario.codigo}&codigo=${codTicket}&status=${status}&observacion=${comentario}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ticket}cambiar_status&usuario=${this.datosUsuario.codigo}&codigo=${codTicket}&status=${status}&observacion=${comentario}`);
+    console.log(`https://gt.disatel.app${ticket}cambiar_status&usuario=${this.datosUsuario.codigo}&codigo=${codTicket}&status=${status}&observacion=${comentario}`);
+    return this.http.get<T>(`https://gt.disatel.app${ticket}cambiar_status&usuario=${this.datosUsuario.codigo}&codigo=${codTicket}&status=${status}&observacion=${comentario}`);
   }
 
   async agregarFalla<T>(codTicket, activo, falla, situacion, fecha, hora, comentario){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ticket}agregar_falla&usuario=${this.datosUsuario.codigo}&codigo=${codTicket}&activo=${activo}&falla=${falla}&situacion=${situacion}&fecha=${fecha}&hora=${hora}&comentario=${comentario}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ticket}agregar_falla&usuario=${this.datosUsuario.codigo}&codigo=${codTicket}&activo=${activo}&falla=${falla}&situacion=${situacion}&fecha=${fecha}&hora=${hora}&comentario=${comentario}`);
+    console.log(`https://gt.disatel.app${ticket}agregar_falla&usuario=${this.datosUsuario.codigo}&codigo=${codTicket}&activo=${activo}&falla=${falla}&situacion=${situacion}&fecha=${fecha}&hora=${hora}&comentario=${comentario}`);
+    return this.http.get<T>(`https://gt.disatel.app${ticket}agregar_falla&usuario=${this.datosUsuario.codigo}&codigo=${codTicket}&activo=${activo}&falla=${falla}&situacion=${situacion}&fecha=${fecha}&hora=${hora}&comentario=${comentario}`);
   }
 
   async listadoPasosTicket<T>(codTicket){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ticket}listado_pasos_ticket&usuario=${this.datosUsuario.codigo}&ticket=${codTicket}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ticket}listado_pasos_ticket&usuario=${this.datosUsuario.codigo}&ticket=${codTicket}`);
+    console.log(`https://gt.disatel.app${ticket}listado_pasos_ticket&usuario=${this.datosUsuario.codigo}&ticket=${codTicket}`);
+    return this.http.get<T>(`https://gt.disatel.app${ticket}listado_pasos_ticket&usuario=${this.datosUsuario.codigo}&ticket=${codTicket}`);
   }
 
   async post<T>( codticket, status, file, comentario ){
@@ -140,14 +140,14 @@ export class BPMService {
     console.log(file);
     fd.append('documento', file, file.name);
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app/ROOT/API/API_ticket_foto.php?&ticket=${codticket}&usuario=${this.datosUsuario.codigo}&status=${status}&comentario=${comentario}`, fd);
-    return this.http.post(`https://pruebas.disatel.app/ROOT/API/API_ticket_foto.php?&ticket=${codticket}&usuario=${this.datosUsuario.codigo}&status=${status}&comentario=${comentario}`, fd);
+    console.log(`https://gt.disatel.app/ROOT/API/API_ticket_foto.php?&ticket=${codticket}&usuario=${this.datosUsuario.codigo}&status=${status}&comentario=${comentario}`, fd);
+    return this.http.post(`https://gt.disatel.app/ROOT/API/API_ticket_foto.php?&ticket=${codticket}&usuario=${this.datosUsuario.codigo}&status=${status}&comentario=${comentario}`, fd);
   }
 
   async ejecutarPaso<T>(codTicket, paso, incidente, ejecucion, observaciones){
     this.datosUsuario = await this.storage.get('datos');
-    console.log(`https://pruebas.disatel.app${ticket}ejecutar_paso&ticket=${codTicket}&paso_codigo=${paso}&tipo_incidente=${incidente}&ejecucion=${ejecucion}&observaciones=${observaciones}&usuario=${this.datosUsuario.codigo}`);
-    return this.http.get<T>(`https://pruebas.disatel.app${ticket}ejecutar_paso&ticket=${codTicket}&paso_codigo=${paso}&tipo_incidente=${incidente}&ejecucion=${ejecucion}&observaciones=${observaciones}&usuario=${this.datosUsuario.codigo}`);
+    console.log(`https://gt.disatel.app${ticket}ejecutar_paso&ticket=${codTicket}&paso_codigo=${paso}&tipo_incidente=${incidente}&ejecucion=${ejecucion}&observaciones=${observaciones}&usuario=${this.datosUsuario.codigo}`);
+    return this.http.get<T>(`https://gt.disatel.app${ticket}ejecutar_paso&ticket=${codTicket}&paso_codigo=${paso}&tipo_incidente=${incidente}&ejecucion=${ejecucion}&observaciones=${observaciones}&usuario=${this.datosUsuario.codigo}`);
   }
 
   /*

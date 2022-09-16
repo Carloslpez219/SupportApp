@@ -22,8 +22,8 @@ export class CambioStatusPage implements OnInit {
     private modalController: ModalController) { }
 
   async ngOnInit() {
-    console.log(this.ticket); 
-    (await this.bpmService.getStatus()).subscribe(async (resp: any) =>{
+    console.log(this.ticket);
+    (await this.bpmService.getStatus(this.ticket.codigo)).subscribe(async (resp: any) =>{
       console.log(resp);
       if(resp.status){
         this.status = await resp.data;

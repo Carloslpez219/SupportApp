@@ -23,7 +23,7 @@ const routes = [
     {
         canActivate: [_guards_guard_guard__WEBPACK_IMPORTED_MODULE_0__.GuardGuard],
         path: '',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("default-src_app_mostrar-ticket_mostrar-ticket_page_ts"), __webpack_require__.e("default-src_app_tramite-ticket_tramite-ticket_page_ts"), __webpack_require__.e("default-src_app_ticket_ticket_page_ts"), __webpack_require__.e("default-src_app_filtros_filtros_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_home_home_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./home/home.module */ 8245)).then(m => m.HomePageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("default-src_app_mostrar-ticket_mostrar-ticket_page_ts"), __webpack_require__.e("default-src_app_tramite-ticket_tramite-ticket_page_ts"), __webpack_require__.e("default-src_app_ticket_ticket_page_ts"), __webpack_require__.e("default-src_app_filtros_filtros_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_home_home_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./home/home.module */ 8245)).then(m => m.HomePageModule)
     },
     {
         path: 'login',
@@ -45,47 +45,47 @@ const routes = [
     },
     {
         path: 'listado',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("default-src_app_mostrar-ticket_mostrar-ticket_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_listado_listado_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./listado/listado.module */ 5797)).then(m => m.ListadoPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("default-src_app_mostrar-ticket_mostrar-ticket_page_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_listado_listado_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./listado/listado.module */ 5797)).then(m => m.ListadoPageModule)
     },
     {
         path: 'ticket',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("default-src_app_ticket_ticket_page_ts"), __webpack_require__.e("src_app_ticket_ticket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./ticket/ticket.module */ 8415)).then(m => m.TicketPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("default-src_app_ticket_ticket_page_ts"), __webpack_require__.e("src_app_ticket_ticket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./ticket/ticket.module */ 8415)).then(m => m.TicketPageModule)
     },
     {
         path: 'tramite-ticket',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_tramite-ticket_tramite-ticket_page_ts"), __webpack_require__.e("src_app_services_alert_service_ts-src_app_tramite-ticket_tramite-ticket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./tramite-ticket/tramite-ticket.module */ 6396)).then(m => m.TramiteTicketPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_tramite-ticket_tramite-ticket_page_ts"), __webpack_require__.e("node_modules_capacitor_camera_dist_esm_index_js-src_app_tramite-ticket_tramite-ticket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./tramite-ticket/tramite-ticket.module */ 6396)).then(m => m.TramiteTicketPageModule)
     },
     {
         path: 'nuevo',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_nuevo_nuevo_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./nuevo/nuevo.module */ 494)).then(m => m.NuevoPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_nuevo_nuevo_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./nuevo/nuevo.module */ 494)).then(m => m.NuevoPageModule)
     },
     {
         path: 'editar-ticket',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("src_app_editar-ticket_editar-ticket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./editar-ticket/editar-ticket.module */ 9624)).then(m => m.EditarTicketPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("src_app_editar-ticket_editar-ticket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./editar-ticket/editar-ticket.module */ 9624)).then(m => m.EditarTicketPageModule)
     },
     {
         path: 'mostrar-ticket',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("default-src_app_mostrar-ticket_mostrar-ticket_page_ts"), __webpack_require__.e("src_app_mostrar-ticket_mostrar-ticket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./mostrar-ticket/mostrar-ticket.module */ 3937)).then(m => m.MostrarTicketPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_editar-ticket_editar-ticket_page_ts"), __webpack_require__.e("default-src_app_mostrar-ticket_mostrar-ticket_page_ts"), __webpack_require__.e("src_app_mostrar-ticket_mostrar-ticket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./mostrar-ticket/mostrar-ticket.module */ 3937)).then(m => m.MostrarTicketPageModule)
     },
     {
         path: 'cambio-status',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_cambio-status_cambio-status_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./cambio-status/cambio-status.module */ 7533)).then(m => m.CambioStatusPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_cambio-status_cambio-status_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./cambio-status/cambio-status.module */ 7533)).then(m => m.CambioStatusPageModule)
     },
     {
         path: 'comentario',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_comentario_comentario_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./comentario/comentario.module */ 3739)).then(m => m.ComentarioPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_comentario_comentario_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./comentario/comentario.module */ 3739)).then(m => m.ComentarioPageModule)
     },
     {
         path: 'agregar-falla',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_agregar-falla_agregar-falla_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./agregar-falla/agregar-falla.module */ 3348)).then(m => m.AgregarFallaPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_agregar-falla_agregar-falla_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./agregar-falla/agregar-falla.module */ 3348)).then(m => m.AgregarFallaPageModule)
     },
     {
         path: 'filtros',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_filtros_filtros_page_ts"), __webpack_require__.e("src_app_filtros_filtros_module_ts-src_app_services_alert_service_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./filtros/filtros.module */ 5293)).then(m => m.FiltrosPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_filtros_filtros_page_ts"), __webpack_require__.e("src_app_filtros_filtros_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./filtros/filtros.module */ 5293)).then(m => m.FiltrosPageModule)
     },
     {
         path: 'filtro-dash',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_filtro-dash_filtro-dash_module_ts-src_app_services_alert_service_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./filtro-dash/filtro-dash.module */ 3571)).then(m => m.FiltroDashPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("common"), __webpack_require__.e("src_app_filtro-dash_filtro-dash_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./filtro-dash/filtro-dash.module */ 3571)).then(m => m.FiltroDashPageModule)
     },
     {
         path: 'notificaciones',
@@ -93,7 +93,15 @@ const routes = [
     },
     {
         path: 'observaciones',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_observaciones_observaciones_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./observaciones/observaciones.module */ 8297)).then(m => m.ObservacionesPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("src_app_observaciones_observaciones_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./observaciones/observaciones.module */ 8297)).then(m => m.ObservacionesPageModule)
+    },
+    {
+        path: 'token',
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_services_alert_service_ts-src_app_token_token_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./token/token.module */ 927)).then(m => m.TokenPageModule)
+    },
+    {
+        path: 'uid',
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_services_alert_service_ts-src_app_uid_uid_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./uid/uid.module */ 6241)).then(m => m.UidPageModule)
     },
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -218,17 +226,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppModule": () => (/* binding */ AppModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/platform-browser */ 6219);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/router */ 3252);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ 8346);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common/http */ 3981);
-/* harmony import */ var _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/storage-angular */ 2688);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/platform-browser */ 6219);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/router */ 3252);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ 8346);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/common/http */ 3981);
+/* harmony import */ var _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/storage-angular */ 2688);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 8099);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component */ 2050);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-routing.module */ 3696);
 /* harmony import */ var _awesome_cordova_plugins_device_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @awesome-cordova-plugins/device/ngx */ 1614);
+/* harmony import */ var _awesome_cordova_plugins_clipboard_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @awesome-cordova-plugins/clipboard/ngx */ 1659);
+/* harmony import */ var _awesome_cordova_plugins_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @awesome-cordova-plugins/social-sharing/ngx */ 900);
+
+
 
 
 
@@ -242,13 +254,13 @@ __webpack_require__.r(__webpack_exports__);
 
 let AppModule = class AppModule {
 };
-AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.NgModule)({
+AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.NgModule)({
         declarations: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent],
         entryComponents: [],
-        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__.BrowserModule, _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.IonicModule.forRoot({ backButtonText: 'atrás', mode: 'ios' }), _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormsModule,
-            _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_8__.IonicStorageModule.forRoot(), _angular_common_http__WEBPACK_IMPORTED_MODULE_9__.HttpClientModule],
-        providers: [{ provide: _angular_router__WEBPACK_IMPORTED_MODULE_10__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.IonicRouteStrategy }, _awesome_cordova_plugins_device_ngx__WEBPACK_IMPORTED_MODULE_2__.Device],
+        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__.BrowserModule, _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.IonicModule.forRoot({ backButtonText: 'atrás', mode: 'ios' }), _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule, _angular_forms__WEBPACK_IMPORTED_MODULE_9__.FormsModule,
+            _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_10__.IonicStorageModule.forRoot(), _angular_common_http__WEBPACK_IMPORTED_MODULE_11__.HttpClientModule],
+        providers: [{ provide: _angular_router__WEBPACK_IMPORTED_MODULE_12__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.IonicRouteStrategy }, _awesome_cordova_plugins_device_ngx__WEBPACK_IMPORTED_MODULE_2__.Device, _awesome_cordova_plugins_clipboard_ngx__WEBPACK_IMPORTED_MODULE_3__.Clipboard, _awesome_cordova_plugins_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_4__.SocialSharing],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_0__.AppComponent],
     })
 ], AppModule);
@@ -325,7 +337,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    loginUrl: 'https://pruebas.disatel.app/ROOT/API/API_login.php?request=',
+    loginUrl: 'https://gt.disatel.app/ROOT/API/API_login.php?request=',
     ayudaUrl: '/ROOT/API/API_ayuda.php?request=',
     utilUrl: '/ROOT/API/API_util.php?request=',
     ajustesUrl: '/ROOT/API/API_ajustes.php?request=',

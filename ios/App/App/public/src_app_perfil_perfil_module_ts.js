@@ -1,6 +1,73 @@
 "use strict";
 (self["webpackChunkapp"] = self["webpackChunkapp"] || []).push([["src_app_perfil_perfil_module_ts"],{
 
+/***/ 559:
+/*!****************************************************************!*\
+  !*** ./node_modules/@capacitor/camera/dist/esm/definitions.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CameraSource": () => (/* binding */ CameraSource),
+/* harmony export */   "CameraDirection": () => (/* binding */ CameraDirection),
+/* harmony export */   "CameraResultType": () => (/* binding */ CameraResultType)
+/* harmony export */ });
+var CameraSource;
+(function (CameraSource) {
+    /**
+     * Prompts the user to select either the photo album or take a photo.
+     */
+    CameraSource["Prompt"] = "PROMPT";
+    /**
+     * Take a new photo using the camera.
+     */
+    CameraSource["Camera"] = "CAMERA";
+    /**
+     * Pick an existing photo fron the gallery or photo album.
+     */
+    CameraSource["Photos"] = "PHOTOS";
+})(CameraSource || (CameraSource = {}));
+var CameraDirection;
+(function (CameraDirection) {
+    CameraDirection["Rear"] = "REAR";
+    CameraDirection["Front"] = "FRONT";
+})(CameraDirection || (CameraDirection = {}));
+var CameraResultType;
+(function (CameraResultType) {
+    CameraResultType["Uri"] = "uri";
+    CameraResultType["Base64"] = "base64";
+    CameraResultType["DataUrl"] = "dataUrl";
+})(CameraResultType || (CameraResultType = {}));
+
+
+/***/ }),
+
+/***/ 3201:
+/*!**********************************************************!*\
+  !*** ./node_modules/@capacitor/camera/dist/esm/index.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CameraDirection": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.CameraDirection),
+/* harmony export */   "CameraResultType": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.CameraResultType),
+/* harmony export */   "CameraSource": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.CameraSource),
+/* harmony export */   "Camera": () => (/* binding */ Camera)
+/* harmony export */ });
+/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @capacitor/core */ 2960);
+/* harmony import */ var _definitions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./definitions */ 559);
+
+const Camera = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('Camera', {
+    web: () => __webpack_require__.e(/*! import() */ "node_modules_capacitor_camera_dist_esm_web_js").then(__webpack_require__.bind(__webpack_require__, /*! ./web */ 1482)).then(m => new m.CameraWeb()),
+});
+
+
+
+
+/***/ }),
+
 /***/ 3590:
 /*!*************************************************!*\
   !*** ./src/app/perfil/perfil-routing.module.ts ***!
@@ -92,15 +159,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "PerfilPage": () => (/* binding */ PerfilPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 8806);
 /* harmony import */ var _D_Farasi_Software_SupportApp_node_modules_ngtools_webpack_src_loaders_direct_resource_js_perfil_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./perfil.page.html */ 7988);
 /* harmony import */ var _perfil_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./perfil.page.scss */ 6655);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 4001);
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/storage */ 7897);
 /* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/user.service */ 7524);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 8346);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ 8346);
 /* harmony import */ var _services_alert_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/alert.service */ 4571);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var _capacitor_camera__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @capacitor/camera */ 3201);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ 3981);
+
+
 
 
 
@@ -111,9 +182,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let PerfilPage = class PerfilPage {
-    constructor(userService, alertService, navCtrl, loadingController, storage) {
+    constructor(userService, alertService, http, navCtrl, loadingController, storage) {
         this.userService = userService;
         this.alertService = alertService;
+        this.http = http;
         this.navCtrl = navCtrl;
         this.loadingController = loadingController;
         this.storage = storage;
@@ -127,29 +199,32 @@ let PerfilPage = class PerfilPage {
     get nombre() { return this.profileForm.get('nombre'); }
     get mail() { return this.profileForm.get('mail'); }
     get telefono() { return this.profileForm.get('telefono'); }
+    get dpi() { return this.profileForm.get('dpi'); }
     ngOnInit() {
     }
     ionViewWillEnter() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             this.getData();
             this.datosUsuario = yield this.storage.get('datos');
         });
     }
     createFormGroup() {
-        return new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormGroup({
-            nombre: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required]),
-            mail: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.pattern(this.pattern)]),
-            telefono: new _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__.Validators.required])
+        return new _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormGroup({
+            nombre: new _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.required]),
+            mail: new _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.pattern(this.pattern)]),
+            telefono: new _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.required]),
+            dpi: new _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_7__.Validators.required])
         });
     }
     defaultValue(perfilData) {
         this.profileForm.controls.nombre.setValue(perfilData.nombre);
         this.profileForm.controls.mail.setValue(perfilData.mail);
         this.profileForm.controls.telefono.setValue(perfilData.telefono);
+        this.profileForm.controls.dpi.setValue(perfilData.dpi);
     }
     getData() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            (yield this.userService.getPerfil()).subscribe((resp) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            (yield this.userService.getPerfil()).subscribe((resp) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
                 if (resp.status) {
                     this.perfilData = resp.data;
                     this.defaultValue(this.perfilData);
@@ -166,28 +241,68 @@ let PerfilPage = class PerfilPage {
         this.profileForm.reset();
     }
     editProfile() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            this.presentLoading();
-            yield (yield this.userService.editProfile(this.profileForm.value.nombre, this.profileForm.value.mail, this.profileForm.value.telefono)).
-                subscribe((resp) => {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.presentLoading();
+            yield (yield this.userService.editProfile(this.profileForm.value.nombre, this.profileForm.value.mail, this.profileForm.value.telefono, this.profileForm.value.dpi)).
+                subscribe((resp) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
                 if (resp.status) {
                     this.mostrarData = false;
                     this.alertService.presentToast('Registro actualizado!', 'success', 3000);
                     this.getData();
-                    this.loadingController.dismiss();
+                    yield this.loadingController.dismiss();
                 }
                 else {
                     this.alertService.presentToast('Ha ocurrido un error, intenta más tarde', 'danger', 3000);
-                    this.loadingController.dismiss();
+                    yield this.loadingController.dismiss();
                 }
-            });
+            }));
         });
+    }
+    takePicture() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            const image = yield _capacitor_camera__WEBPACK_IMPORTED_MODULE_5__.Camera.getPhoto({
+                quality: 70,
+                allowEditing: false,
+                resultType: _capacitor_camera__WEBPACK_IMPORTED_MODULE_5__.CameraResultType.Base64,
+                promptLabelHeader: 'Seleccionar método',
+                promptLabelPhoto: 'Galería',
+                promptLabelPicture: 'Tomar fotografía',
+                presentationStyle: 'popover'
+            });
+            const imageUrl = (yield 'data:image/jpeg;base64,') + image.base64String;
+            this.photo = yield imageUrl;
+            this.selectedFile = yield this.dataURLtoFile(imageUrl, 'image');
+            this.datosUsuario = yield this.storage.get('datos');
+            yield this.post();
+        });
+    }
+    post() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            if (this.selectedFile) {
+                console.log(this.selectedFile);
+                const formData = new FormData();
+                formData.append('imagen', this.selectedFile);
+                // eslint-disable-next-line max-len
+                const upload$ = this.http.post(`https://gt.disatel.app/ROOT/API/upload_foto_perfil.html&usuario=${this.datosUsuario.codigo}`, formData);
+                upload$.subscribe(resp => {
+                    console.log(resp);
+                });
+            }
+        });
+    }
+    dataURLtoFile(dataurl, filename) {
+        // eslint-disable-next-line one-var
+        let arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1], bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, { type: mime });
     }
     back() {
         this.navCtrl.back({ animated: true });
     }
     presentLoading() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             const loading = yield this.loadingController.create({
                 message: 'Cargando...'
             });
@@ -198,12 +313,13 @@ let PerfilPage = class PerfilPage {
 PerfilPage.ctorParameters = () => [
     { type: _services_user_service__WEBPACK_IMPORTED_MODULE_3__.UserService },
     { type: _services_alert_service__WEBPACK_IMPORTED_MODULE_4__.AlertService },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.NavController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.LoadingController },
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_8__.HttpClient },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.NavController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__.LoadingController },
     { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_2__.Storage }
 ];
-PerfilPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+PerfilPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.Component)({
         selector: 'app-perfil',
         template: _D_Farasi_Software_SupportApp_node_modules_ngtools_webpack_src_loaders_direct_resource_js_perfil_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_perfil_page_scss__WEBPACK_IMPORTED_MODULE_1__]
@@ -280,7 +396,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button (click)=\"back()\" color=\"light\">Atrás\r\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"light\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>Perfil</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-card *ngIf=\"!mostrarData\">\r\n    <ion-card-header>\r\n      <ion-skeleton-text animated class=\"skeleton-img\"></ion-skeleton-text>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <ion-skeleton-text animated class=\"avatar\"></ion-skeleton-text>\r\n      <ion-skeleton-text animated class=\"container-skeleton\" style=\"width: 60%\"></ion-skeleton-text>\r\n      <br>\r\n      <div *ngFor=\"let item of items\" class=\"margin-bottom\">\r\n        <ion-skeleton-text animated style=\"width: 15%\" class=\"margin\"></ion-skeleton-text>\r\n        <ion-skeleton-text animated style=\"width: 90%\" class=\"item-skeleton\"></ion-skeleton-text>\r\n      </div>\r\n      <br>\r\n      <ion-grid class=\"margin-top-menos\">\r\n        <ion-row>\r\n          <ion-col size=\"6\">\r\n            <ion-skeleton-text animated style=\"width: 90%\" class=\"button-skeleton\"></ion-skeleton-text>\r\n          </ion-col>\r\n          <ion-col size=\"6\">\r\n            <ion-skeleton-text animated style=\"width: 90%\" class=\"button-skeleton\"></ion-skeleton-text>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n      <br>\r\n    </ion-card-content>\r\n  </ion-card>\r\n\r\n\r\n  <ion-card *ngIf=\"mostrarData\" class=\"animated-card animate__animated animate__fadeIn\">\r\n    <ion-card-header>\r\n      <ion-img src=\"../../assets/img/bg-contact.jpg\" style=\"border-radius: 10px;\" class=\"img  animate__animated animate__fadeIn\"></ion-img>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <ion-grid>\r\n        <ion-row>\r\n          <ion-col size=\"3\"></ion-col>\r\n          <ion-col size=\"6\">\r\n            <ion-avatar class=\"avatar\">\r\n              <img [src]=\"urlFoto\">\r\n            </ion-avatar>\r\n          </ion-col>\r\n          <ion-col size=\"3\">\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n      <ion-card-title class=\"container\">{{perfilData?.nombre}}</ion-card-title>\r\n      <form (ngSubmit)=\"editProfile()\" [formGroup]=\"profileForm\">\r\n        <ion-list>\r\n          <small>Nombre:*</small>\r\n          <ion-item mode=\"md\">\r\n            <ion-icon slot=\"start\" name=\"person-circle-outline\"></ion-icon>\r\n            <ion-input placeholder=\"User\" type=\"name\" clearOnEdit=\"true\" clearInput formControlName=\"nombre\">\r\n            </ion-input>\r\n          </ion-item>\r\n          <div class=\"errors\" *ngIf=\"nombre.invalid && (nombre.dirty || nombre.touched)\">\r\n            <span *ngIf=\"nombre.errors.required\">\r\n              <ion-label class=\"error-container\">Este campo es requerido</ion-label>\r\n            </span>\r\n          </div>\r\n          <small>E-mail:*</small>\r\n          <ion-item mode=\"md\">\r\n            <ion-icon slot=\"start\" name=\"mail-open-outline\"></ion-icon>\r\n            <ion-input placeholder=\"Mail\" type=\"name\" clearOnEdit=\"true\" clearInput formControlName=\"mail\">\r\n            </ion-input>\r\n          </ion-item>\r\n          <div class=\"errors\" *ngIf=\"mail.invalid && (mail.dirty || mail.touched)\">\r\n            <span *ngIf=\"mail.errors.required\">\r\n              <ion-label class=\"error-container\">Este campo es requerido</ion-label>\r\n            </span>\r\n            <span *ngIf=\"(mail.dirty || mail.touched) && mail.invalid && mail.errors.pattern\">\r\n              <ion-label class=\"error-container\">Enter an email valid</ion-label>\r\n            </span>\r\n          </div>\r\n          <small>Telefono:*</small>\r\n          <ion-item mode=\"md\">\r\n            <ion-icon slot=\"start\" name=\"call-sharp\"></ion-icon>\r\n            <ion-input placeholder=\"telefono\" type=\"name\" clearOnEdit=\"true\" clearInput formControlName=\"telefono\">\r\n            </ion-input>\r\n          </ion-item>\r\n          <div class=\"errors\" *ngIf=\"telefono.invalid && (telefono.dirty || telefono.touched)\">\r\n            <span *ngIf=\"telefono.errors.required\">\r\n              <ion-label class=\"error-container\">Este campo es requerido</ion-label>\r\n            </span>\r\n          </div>\r\n        </ion-list>\r\n        <ion-grid>\r\n          <br>\r\n          <ion-row>\r\n            <ion-col size=\"6\">\r\n              <ion-button expand=\"block\" class=\"button-clean\" fill=\"outline\" color=\"dark\" (click)=\"clean()\"\r\n                strong=\"true\">Limpiar\r\n                <ion-icon slot=\"start\" color=\"black\" name=\"close-circle-outline\"></ion-icon>\r\n              </ion-button>\r\n            </ion-col>\r\n            <ion-col size=\"6\">\r\n              <ion-button expand=\"block\" class=\"button-save\" type=\"submit\" [disabled]=\"!profileForm.valid\"\r\n                strong=\"true\">Guardar\r\n                <ion-icon slot=\"start\" color=\"white\" name=\"save\"></ion-icon>\r\n              </ion-button>\r\n            </ion-col>\r\n          </ion-row>\r\n        </ion-grid>\r\n      </form>\r\n    </ion-card-content>\r\n  </ion-card>\r\n</ion-content>");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button (click)=\"back()\" color=\"light\">Atrás\r\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"light\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>Perfil</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-card *ngIf=\"!mostrarData\">\r\n    <ion-card-header>\r\n      <ion-skeleton-text animated class=\"skeleton-img\"></ion-skeleton-text>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <ion-skeleton-text animated class=\"avatar\"></ion-skeleton-text>\r\n      <ion-skeleton-text animated class=\"container-skeleton\" style=\"width: 60%\"></ion-skeleton-text>\r\n      <br>\r\n      <div *ngFor=\"let item of items\" class=\"margin-bottom\">\r\n        <ion-skeleton-text animated style=\"width: 15%\" class=\"margin\"></ion-skeleton-text>\r\n        <ion-skeleton-text animated style=\"width: 90%\" class=\"item-skeleton\"></ion-skeleton-text>\r\n      </div>\r\n      <br>\r\n      <ion-grid class=\"margin-top-menos\">\r\n        <ion-row>\r\n          <ion-col size=\"6\">\r\n            <ion-skeleton-text animated style=\"width: 90%\" class=\"button-skeleton\"></ion-skeleton-text>\r\n          </ion-col>\r\n          <ion-col size=\"6\">\r\n            <ion-skeleton-text animated style=\"width: 90%\" class=\"button-skeleton\"></ion-skeleton-text>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n      <br>\r\n    </ion-card-content>\r\n  </ion-card>\r\n\r\n\r\n  <ion-card *ngIf=\"mostrarData\" class=\"animated-card animate__animated animate__fadeIn\">\r\n    <ion-card-header>\r\n      <ion-img src=\"../../assets/img/bg-contact.jpg\" style=\"border-radius: 10px;\" class=\"img  animate__animated animate__fadeIn\"></ion-img>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <ion-grid>\r\n        <ion-row>\r\n          <ion-col size=\"3\"></ion-col>\r\n          <ion-col size=\"6\">\r\n            <ion-avatar class=\"avatar\">\r\n              <img [src]=\"urlFoto\">\r\n            </ion-avatar>\r\n            <ion-button expand=\"block\" fill=\"clear\" shape=\"round\" style=\"margin-top: 0px;\" (click)=\"takePicture()\">\r\n              Cambiar foto\r\n            </ion-button>\r\n          </ion-col>\r\n          <ion-col size=\"3\">\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n      <ion-card-title class=\"container\">{{perfilData?.nombre}}</ion-card-title>\r\n      <form (ngSubmit)=\"editProfile()\" [formGroup]=\"profileForm\">\r\n        <ion-list>\r\n          <small>Nombre:*</small>\r\n          <ion-item mode=\"md\">\r\n            <ion-icon slot=\"start\" name=\"person-circle-outline\"></ion-icon>\r\n            <ion-input placeholder=\"User\" type=\"name\" clearOnEdit=\"true\" clearInput formControlName=\"nombre\">\r\n            </ion-input>\r\n          </ion-item>\r\n          <div class=\"errors\" *ngIf=\"nombre.invalid && (nombre.dirty || nombre.touched)\">\r\n            <span *ngIf=\"nombre.errors.required\">\r\n              <ion-label class=\"error-container\">Este campo es requerido</ion-label>\r\n            </span>\r\n          </div>\r\n          <small>E-mail:*</small>\r\n          <ion-item mode=\"md\">\r\n            <ion-icon slot=\"start\" name=\"mail-open-outline\"></ion-icon>\r\n            <ion-input placeholder=\"Mail\" type=\"name\" clearOnEdit=\"true\" clearInput formControlName=\"mail\">\r\n            </ion-input>\r\n          </ion-item>\r\n          <div class=\"errors\" *ngIf=\"mail.invalid && (mail.dirty || mail.touched)\">\r\n            <span *ngIf=\"mail.errors.required\">\r\n              <ion-label class=\"error-container\">Este campo es requerido</ion-label>\r\n            </span>\r\n            <span *ngIf=\"(mail.dirty || mail.touched) && mail.invalid && mail.errors.pattern\">\r\n              <ion-label class=\"error-container\">Enter an email valid</ion-label>\r\n            </span>\r\n          </div>\r\n          <small>Telefono:*</small>\r\n          <ion-item mode=\"md\">\r\n            <ion-icon slot=\"start\" name=\"call-sharp\"></ion-icon>\r\n            <ion-input placeholder=\"telefono\" type=\"name\" clearOnEdit=\"true\" clearInput formControlName=\"telefono\">\r\n            </ion-input>\r\n          </ion-item>\r\n          <div class=\"errors\" *ngIf=\"telefono.invalid && (telefono.dirty || telefono.touched)\">\r\n            <span *ngIf=\"telefono.errors.required\">\r\n              <ion-label class=\"error-container\">Este campo es requerido</ion-label>\r\n            </span>\r\n          </div>\r\n          <small>DPI:*</small>\r\n          <ion-item mode=\"md\">\r\n            <ion-icon slot=\"start\" name=\"code-working\"></ion-icon>\r\n            <ion-input placeholder=\"DPI\" type=\"name\" clearOnEdit=\"true\" clearInput formControlName=\"dpi\">\r\n            </ion-input>\r\n          </ion-item>\r\n          <div class=\"errors\" *ngIf=\"dpi.invalid && (dpi.dirty || dpi.touched)\">\r\n            <span *ngIf=\"dpi.errors.required\">\r\n              <ion-label class=\"error-container\">Este campo es requerido</ion-label>\r\n            </span>\r\n          </div>\r\n        </ion-list>\r\n        <ion-grid>\r\n          <br>\r\n          <ion-row>\r\n            <ion-col size=\"6\">\r\n              <ion-button expand=\"block\" class=\"button-clean\" fill=\"outline\" color=\"dark\" (click)=\"clean()\"\r\n                strong=\"true\">Limpiar\r\n                <ion-icon slot=\"start\" color=\"black\" name=\"close-circle-outline\"></ion-icon>\r\n              </ion-button>\r\n            </ion-col>\r\n            <ion-col size=\"6\">\r\n              <ion-button expand=\"block\" class=\"button-save\" type=\"submit\" [disabled]=\"!profileForm.valid\"\r\n                strong=\"true\">Guardar\r\n                <ion-icon slot=\"start\" color=\"white\" name=\"save\"></ion-icon>\r\n              </ion-button>\r\n            </ion-col>\r\n          </ion-row>\r\n        </ion-grid>\r\n      </form>\r\n    </ion-card-content>\r\n  </ion-card>\r\n</ion-content>\r\n");
 
 /***/ }),
 

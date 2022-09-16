@@ -118,7 +118,7 @@ let AgregarFallaPage = class AgregarFallaPage {
     }
     ngOnInit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            (yield this.bpmService.getStatus()).subscribe((resp) => {
+            (yield this.bpmService.getStatus(this.ticket.codigo)).subscribe((resp) => {
                 console.log(resp);
                 if (resp.status) {
                     this.activos = resp.data;
@@ -213,62 +213,6 @@ AgregarFallaPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
-/***/ 4571:
-/*!*******************************************!*\
-  !*** ./src/app/services/alert.service.ts ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AlertService": () => (/* binding */ AlertService)
-/* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ 8806);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ionic/angular */ 8099);
-
-
-
-let AlertService = class AlertService {
-    constructor(alertCtrl, toastController) {
-        this.alertCtrl = alertCtrl;
-        this.toastController = toastController;
-    }
-    presentAlert(message) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, function* () {
-            const alert = yield this.alertCtrl.create({
-                message,
-                mode: 'md',
-                buttons: ['OK']
-            });
-            yield alert.present();
-        });
-    }
-    presentToast(message, color, duration) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__awaiter)(this, void 0, void 0, function* () {
-            const toast = yield this.toastController.create({
-                message,
-                duration,
-                color
-            });
-            toast.present();
-        });
-    }
-};
-AlertService.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_1__.AlertController },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_1__.ToastController }
-];
-AlertService = (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.Injectable)({
-        providedIn: 'root'
-    })
-], AlertService);
-
-
-
-/***/ }),
-
 /***/ 9830:
 /*!**********************************************************************************************************************!*\
   !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/agregar-falla/agregar-falla.page.html ***!
@@ -279,7 +223,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInDown\">\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button (click)=\"back()\" color=\"light\">Atrás\r\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"light\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>Agregar falla</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInUp\">\r\n<br>\r\n  <ion-list>\r\n    <ion-item>\r\n      <ion-label>Activo</ion-label>\r\n      <ion-select (ionChange)=\"selectCategoria($event)\">\r\n        <ion-select-option *ngFor=\"let activo of activos\" value=\"{{activo.codigo}}\">{{activo.nombre}}</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>Falla :</ion-label>\r\n      <ion-textarea rows=\"4\" placeholder=\"Falla...\" [(ngModel)]=\"falla\">  </ion-textarea>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>Comentario :</ion-label>\r\n      <ion-textarea rows=\"4\" placeholder=\"Comentario...\" [(ngModel)]=\"descripcion\">  </ion-textarea>\r\n    </ion-item>\r\n    <br>\r\n    <ion-datetime [value]=\"maxDate.toISOString()\" min=\"2020-01-01\" (ionChange)=\"cambioFechaHasta($event)\" style=\"margin-left: 20px;\r\n    border-radius: 20px;\"></ion-datetime>\r\n  </ion-list>\r\n<br>\r\n  <ion-row>\r\n    <ion-col size=\"3\"></ion-col>\r\n    <ion-col size=\"6\">\r\n      <ion-button expand=\"block\" class=\"button-save\" strong=\"true\" (click)=\"agregarFalla()\">Guardar\r\n                <ion-icon slot=\"start\" color=\"white\" name=\"save\"></ion-icon>\r\n      </ion-button>\r\n    </ion-col>\r\n    <ion-col size=\"3\"></ion-col>\r\n  </ion-row>\r\n\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInDown\">\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button (click)=\"back()\" color=\"light\">Atrás\r\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"light\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>Agregar falla</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInUp\">\r\n<br>\r\n  <ion-list>\r\n    <ion-item>\r\n      <ion-label>Activo</ion-label>\r\n      <ion-select (ionChange)=\"selectCategoria($event)\">\r\n        <ion-select-option *ngFor=\"let activo of activos\" value=\"{{activo.codigo}}\">{{activo.nombre}}</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>Falla :</ion-label>\r\n      <ion-textarea rows=\"4\" placeholder=\"Falla...\" [(ngModel)]=\"falla\">  </ion-textarea>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>Comentario :</ion-label>\r\n      <ion-textarea rows=\"4\" placeholder=\"Comentario...\" [(ngModel)]=\"descripcion\">  </ion-textarea>\r\n    </ion-item>\r\n    <br>\r\n    <ion-label class=\"ion-padding\">Fecha y Hora en la que ocurre la falla:</ion-label>\r\n    <ion-datetime [value]=\"maxDate.toISOString()\" min=\"2020-01-01\" (ionChange)=\"cambioFechaHasta($event)\" style=\"margin-left: 20px;\r\n    border-radius: 20px; margin-top: 10px;\"></ion-datetime>\r\n  </ion-list>\r\n<br>\r\n  <ion-row>\r\n    <ion-col size=\"3\"></ion-col>\r\n    <ion-col size=\"6\">\r\n      <ion-button expand=\"block\" class=\"button-save\" strong=\"true\" (click)=\"agregarFalla()\">Guardar\r\n                <ion-icon slot=\"start\" color=\"white\" name=\"save\"></ion-icon>\r\n      </ion-button>\r\n    </ion-col>\r\n    <ion-col size=\"3\"></ion-col>\r\n  </ion-row>\r\n\r\n</ion-content>\r\n");
 
 /***/ }),
 

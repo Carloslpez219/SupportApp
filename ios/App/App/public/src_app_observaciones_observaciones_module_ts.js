@@ -90,12 +90,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ObservacionesPage": () => (/* binding */ ObservacionesPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 8806);
 /* harmony import */ var _D_Farasi_Software_SupportApp_node_modules_ngtools_webpack_src_loaders_direct_resource_js_observaciones_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./observaciones.page.html */ 9111);
 /* harmony import */ var _observaciones_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./observaciones.page.scss */ 959);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 8099);
-/* harmony import */ var _services_bpm_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/bpm.service */ 2152);
+/* harmony import */ var _services_alert_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../services/alert.service */ 4571);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var _services_bpm_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/bpm.service */ 2152);
+
 
 
 
@@ -103,9 +105,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ObservacionesPage = class ObservacionesPage {
-    constructor(modalController, bpmService) {
+    constructor(modalController, bpmService, alertService) {
         this.modalController = modalController;
         this.bpmService = bpmService;
+        this.alertService = alertService;
     }
     ngOnInit() {
     }
@@ -116,12 +119,12 @@ let ObservacionesPage = class ObservacionesPage {
         this.viewEntered = false;
     }
     back() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             this.modalController.dismiss();
         });
     }
     method() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             if (this.paso.checked) {
                 this.ejecucion = 1;
             }
@@ -130,20 +133,23 @@ let ObservacionesPage = class ObservacionesPage {
             }
             (yield this.bpmService.ejecutarPaso(this.ticket.codigo, this.paso.paso_codigo, this.paso.tipo_incidente, this.ejecucion, this.paso.observaciones)).subscribe(resp => {
                 console.log(resp);
+                this.alertService.presentToast('Comentario agregado satisfactoriamente', 'success', 2000);
+                this.modalController.dismiss();
             });
         });
     }
 };
 ObservacionesPage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.ModalController },
-    { type: _services_bpm_service__WEBPACK_IMPORTED_MODULE_2__.BPMService }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.ModalController },
+    { type: _services_bpm_service__WEBPACK_IMPORTED_MODULE_3__.BPMService },
+    { type: _services_alert_service__WEBPACK_IMPORTED_MODULE_2__.AlertService }
 ];
 ObservacionesPage.propDecorators = {
-    paso: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_5__.Input }],
-    ticket: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_5__.Input }]
+    paso: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input }],
+    ticket: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_6__.Input }]
 };
-ObservacionesPage = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+ObservacionesPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'app-observaciones',
         template: _D_Farasi_Software_SupportApp_node_modules_ngtools_webpack_src_loaders_direct_resource_js_observaciones_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_observaciones_page_scss__WEBPACK_IMPORTED_MODULE_1__]
@@ -164,7 +170,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header *ngIf=\"viewEntered\" class=\"animate__animated animate__bounceInDown\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button (click)=\"back()\" color=\"light\">Atrás\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"light\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>Observaciones</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content *ngIf=\"viewEntered\" class=\"animate__animated animate__bounceInDown\">\n  <br>\n  <br>\n  <br>\n\n  <ion-label class=\"ion-padding\">Comentario: </ion-label>\n  <br>\n  <br>\n\n    <ion-item mode=\"md\">\n      <ion-textarea rows=\"10\" placeholder=\"Observaciones...\" clearOnEdit=\"true\" clearInput [(ngModel)]=\"paso.observaciones\"></ion-textarea>\n      <ion-icon name=\"chatbox-ellipses-outline\" slot=\"start\"></ion-icon>\n    </ion-item>\n\n  <ion-grid>\n    <br>\n    <ion-row>\n      <ion-col size=\"3\">\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-button expand=\"block\" class=\"button-save\" (click)=\"method()\"\n          strong=\"true\">Aceptar\n          <ion-icon slot=\"start\" color=\"white\" name=\"chatbox-ellipses-outline\"></ion-icon>\n        </ion-button>\n      </ion-col>\n      <ion-col size=\"3\">\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInDown\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button (click)=\"back()\" color=\"light\">Atrás\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"light\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>Observaciones</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInUp\">\n  <br>\n  <br>\n  <br>\n\n  <ion-label class=\"ion-padding\">Comentario: </ion-label>\n  <br>\n  <br>\n\n    <ion-item mode=\"md\">\n      <ion-textarea rows=\"10\" placeholder=\"Observaciones...\" clearOnEdit=\"true\" clearInput [(ngModel)]=\"paso.observaciones\"></ion-textarea>\n      <ion-icon name=\"chatbox-ellipses-outline\" slot=\"start\"></ion-icon>\n    </ion-item>\n\n  <ion-grid>\n    <br>\n    <ion-row>\n      <ion-col size=\"3\">\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-button expand=\"block\" class=\"button-save\" (click)=\"method()\"\n          strong=\"true\">Aceptar\n          <ion-icon slot=\"start\" color=\"white\" name=\"chatbox-ellipses-outline\"></ion-icon>\n        </ion-button>\n      </ion-col>\n      <ion-col size=\"3\">\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n");
 
 /***/ }),
 
