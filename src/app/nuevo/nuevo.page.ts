@@ -1,5 +1,6 @@
+import { SerchebleSelectPage } from './../sercheble-select/sercheble-select.page';
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController } from '@ionic/angular';
+import { NavController, LoadingController, ModalController } from '@ionic/angular';
 import { BPMService } from '../services/bpm.service';
 import { AlertService } from '../services/alert.service';
 import { Storage } from '@ionic/storage-angular';
@@ -39,9 +40,10 @@ export class NuevoPage implements OnInit {
   fileName;
   mostrarFoto = false;
   photo;
+  categoriafound = '';
 
   constructor(private navCtrl: NavController, private bpmService: BPMService, private alertService: AlertService,
-              private loadingController: LoadingController, private storage: Storage) { }
+              private loadingController: LoadingController, private storage: Storage, private modalController: ModalController) { }
 
   async ngOnInit() {
     (await this.bpmService.getSedes()).subscribe((resp: any) =>{
@@ -79,13 +81,34 @@ export class NuevoPage implements OnInit {
     this.navCtrl.back({animated: true});
   }
 
-  async selectCategoria(ev){
-    this.categoria = ev.detail.value;
+  async selectCategoria(){
+
+    this.presentLoading();
+    const data = this.categorias;
+    const modal = await this.modalController.create({
+      component: SerchebleSelectPage,
+      backdropDismiss: false,
+      componentProps: { data }
+    });
+    await modal.present();
+
+    const value: any = await modal.onDidDismiss();
+    if (value.data){
+      console.log(value);
+      this.categoria = value.data;
+      this.categorias.forEach(element => {
+        if(element.codigo === this.categoria){
+          this.categoriafound = element.nombre;
+        }
+      });
+    }
+
     (await this.bpmService.getIncidentes(this.categoria)).subscribe((resp: any) =>{
       if(resp.status){
+        console.log(resp);
         this.incidentes = resp.data;
       }else{
-        this.alertService.presentAlert('Ha ocurrido un error en el servidor, intente de nuevo más tarde');
+        this.alertService.presentAlert(resp.message);
       }
     });
   }

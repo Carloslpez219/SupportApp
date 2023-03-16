@@ -1,3 +1,4 @@
+import { SerchebleSelectPage } from './../sercheble-select/sercheble-select.page';
 import { Component, Input, OnInit } from '@angular/core';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { BPMService } from '../services/bpm.service';
@@ -44,6 +45,8 @@ export class EditarTicketPage implements OnInit {
   fileName;
   mostrarFoto = false;
   photo;
+  categoriafound = '';
+  incidenteFound = '';
 
   constructor(private loadingController: LoadingController, private modalController: ModalController, private bpmService: BPMService,
               private alertService: AlertService, private storage: Storage) { }
@@ -62,6 +65,11 @@ export class EditarTicketPage implements OnInit {
       console.log(resp);
       if(resp.status){
         this.categorias = await resp.data;
+        await this.categorias.forEach(element => {
+          if(element.codigo === this.ticket.categoria_codigo){
+            this.categoriafound = element.nombre;
+          }
+        });
         this.categoriaActual = await this.ticket.categoria_codigo;
       }else{
         this.alertService.presentAlert('Ha ocurrido un error en el servidor, intente de nuevo más tarde');
@@ -71,6 +79,11 @@ export class EditarTicketPage implements OnInit {
       console.log(resp);
       if(resp.status){
         this.incidentes = await resp.data;
+        await this.incidentes.forEach(element => {
+          if(element.codigo === this.ticket.incidente_codigo){
+            this.incidenteFound = element.nombre;
+          }
+        });
         this.incidenteActual = await this.ticket.incidente_codigo;
       }else{
         this.alertService.presentAlert('Ha ocurrido un error en el servidor, intente de nuevo más tarde');
@@ -112,6 +125,7 @@ export class EditarTicketPage implements OnInit {
         this.alertService.presentAlert('Ha ocurrido un error en el servidor, intente de nuevo más tarde');
       }
     });
+    this.descripcion = this.ticket.descripcion;
   }
 
   async ionViewDidEnter() {
@@ -129,8 +143,26 @@ export class EditarTicketPage implements OnInit {
     this.modalController.dismiss();
   }
 
-  selectCategoria(ev){
-    this.categoriaActual = ev.detail.value;
+  async selectCategoria(){
+    this.presentLoading();
+    const data = this.categorias;
+    const modal = await this.modalController.create({
+      component: SerchebleSelectPage,
+      backdropDismiss: false,
+      componentProps: { data }
+    });
+    await modal.present();
+
+    const value: any = await modal.onDidDismiss();
+    if (value.data){
+      console.log(value);
+      this.categoriaActual = value.data;
+      this.categorias.forEach(element => {
+        if(element.codigo === this.categoriaActual){
+          this.categoriafound = element.nombre;
+        }
+      });
+    }
   }
 
   selectArea(ev){
@@ -138,8 +170,26 @@ export class EditarTicketPage implements OnInit {
     this.areaActual = ev.detail.value;
   }
 
-  selectIncidente(ev){
-    this.incidenteActual = ev.detail.value;
+  async selectIncidente(){
+    this.presentLoading();
+    const data = this.incidentes;
+    const modal = await this.modalController.create({
+      component: SerchebleSelectPage,
+      backdropDismiss: false,
+      componentProps: { data }
+    });
+    await modal.present();
+
+    const value: any = await modal.onDidDismiss();
+    if (value.data){
+      console.log(value);
+      this.incidenteActual = value.data;
+      this.incidentes.forEach(element => {
+        if(element.codigo === this.incidenteActual){
+          this.incidenteFound = element.nombre;
+        }
+      });
+    }
   }
 
   selectSede(ev){

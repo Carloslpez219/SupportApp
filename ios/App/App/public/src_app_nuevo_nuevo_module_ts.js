@@ -157,15 +157,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "NuevoPage": () => (/* binding */ NuevoPage)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 8806);
 /* harmony import */ var _D_Farasi_Software_SupportApp_node_modules_ngtools_webpack_src_loaders_direct_resource_js_nuevo_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./nuevo.page.html */ 5551);
 /* harmony import */ var _nuevo_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./nuevo.page.scss */ 8250);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 4001);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 8099);
-/* harmony import */ var _services_bpm_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/bpm.service */ 2152);
-/* harmony import */ var _services_alert_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/alert.service */ 4571);
-/* harmony import */ var _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/storage-angular */ 7897);
-/* harmony import */ var _capacitor_camera__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @capacitor/camera */ 3201);
+/* harmony import */ var _sercheble_select_sercheble_select_page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../sercheble-select/sercheble-select.page */ 4252);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 4001);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var _services_bpm_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/bpm.service */ 2152);
+/* harmony import */ var _services_alert_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/alert.service */ 4571);
+/* harmony import */ var _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/storage-angular */ 7897);
+/* harmony import */ var _capacitor_camera__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @capacitor/camera */ 3201);
+
 
 
 
@@ -176,12 +178,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let NuevoPage = class NuevoPage {
-    constructor(navCtrl, bpmService, alertService, loadingController, storage) {
+    constructor(navCtrl, bpmService, alertService, loadingController, storage, modalController) {
         this.navCtrl = navCtrl;
         this.bpmService = bpmService;
         this.alertService = alertService;
         this.loadingController = loadingController;
         this.storage = storage;
+        this.modalController = modalController;
         // eslint-disable-next-line @typescript-eslint/naming-convention
         this.MostrarPrioridad = false;
         this.mostrarSector = false;
@@ -193,9 +196,10 @@ let NuevoPage = class NuevoPage {
         this.descripcion = '';
         this.ticketCodigo = '';
         this.mostrarFoto = false;
+        this.categoriafound = '';
     }
     ngOnInit() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             (yield this.bpmService.getSedes()).subscribe((resp) => {
                 if (resp.status) {
                     this.sedes = resp.data;
@@ -212,7 +216,7 @@ let NuevoPage = class NuevoPage {
                     this.alertService.presentAlert('Ha ocurrido un error en el servidor, intente de nuevo más tarde');
                 }
             });
-            (yield this.bpmService.getIncidentes(this.categoria)).subscribe((resp) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            (yield this.bpmService.getIncidentes(this.categoria)).subscribe((resp) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
                 if (resp.status) {
                     this.incidentes = yield resp.data;
                 }
@@ -234,23 +238,41 @@ let NuevoPage = class NuevoPage {
     back() {
         this.navCtrl.back({ animated: true });
     }
-    selectCategoria(ev) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            this.categoria = ev.detail.value;
+    selectCategoria() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            this.presentLoading();
+            const data = this.categorias;
+            const modal = yield this.modalController.create({
+                component: _sercheble_select_sercheble_select_page__WEBPACK_IMPORTED_MODULE_2__.SerchebleSelectPage,
+                backdropDismiss: false,
+                componentProps: { data }
+            });
+            yield modal.present();
+            const value = yield modal.onDidDismiss();
+            if (value.data) {
+                console.log(value);
+                this.categoria = value.data;
+                this.categorias.forEach(element => {
+                    if (element.codigo === this.categoria) {
+                        this.categoriafound = element.nombre;
+                    }
+                });
+            }
             (yield this.bpmService.getIncidentes(this.categoria)).subscribe((resp) => {
                 if (resp.status) {
+                    console.log(resp);
                     this.incidentes = resp.data;
                 }
                 else {
-                    this.alertService.presentAlert('Ha ocurrido un error en el servidor, intente de nuevo más tarde');
+                    this.alertService.presentAlert(resp.message);
                 }
             });
         });
     }
     selectArea(ev) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             this.area = yield ev.detail.value;
-            (yield this.bpmService.getAreas(this.sede, this.area)).subscribe((resp) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            (yield this.bpmService.getAreas(this.sede, this.area)).subscribe((resp) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
                 console.log(resp);
                 if (resp.status) {
                     this.codigoSector = yield resp.data[0].codigo_sector;
@@ -274,7 +296,7 @@ let NuevoPage = class NuevoPage {
         this.MostrarPrioridad = true;
     }
     selectSede(ev) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             this.sede = ev.detail.value;
             (yield this.bpmService.getAreas(this.sede, this.area)).subscribe((resp) => {
                 console.log(resp);
@@ -288,7 +310,7 @@ let NuevoPage = class NuevoPage {
         });
     }
     presentLoading() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             const loading = yield this.loadingController.create({
                 message: 'Cargando...'
             });
@@ -296,10 +318,10 @@ let NuevoPage = class NuevoPage {
         });
     }
     guardarTicket() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             this.presentLoading();
             (yield this.bpmService.guardarTicket(this.descripcion, this.incidente, this.codigo_prioridad, this.sede, this.codigoSector, this.area))
-                .subscribe((resp) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                .subscribe((resp) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
                 console.log(resp);
                 if (resp.status) {
                     this.ticketCodigo = yield resp.data.ticket_codigo;
@@ -316,18 +338,18 @@ let NuevoPage = class NuevoPage {
         });
     }
     onFileSelected(event) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             this.datosUsuario = yield this.storage.get('datos');
             this.selectedFile = event.target.files[0];
             this.fileName = this.selectedFile.name;
         });
     }
     takePicture() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            const image = yield _capacitor_camera__WEBPACK_IMPORTED_MODULE_4__.Camera.getPhoto({
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            const image = yield _capacitor_camera__WEBPACK_IMPORTED_MODULE_5__.Camera.getPhoto({
                 quality: 70,
                 allowEditing: false,
-                resultType: _capacitor_camera__WEBPACK_IMPORTED_MODULE_4__.CameraResultType.Base64
+                resultType: _capacitor_camera__WEBPACK_IMPORTED_MODULE_5__.CameraResultType.Base64
             });
             const imageUrl = (yield 'data:image/jpeg;base64,') + image.base64String;
             this.photo = yield imageUrl;
@@ -337,7 +359,7 @@ let NuevoPage = class NuevoPage {
         });
     }
     post() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             (yield this.bpmService.post(this.ticketCodigo, this.area, this.selectedFile, this.descripcion)).subscribe((resp) => {
                 console.log(resp);
             });
@@ -353,19 +375,94 @@ let NuevoPage = class NuevoPage {
     }
 };
 NuevoPage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.NavController },
-    { type: _services_bpm_service__WEBPACK_IMPORTED_MODULE_2__.BPMService },
-    { type: _services_alert_service__WEBPACK_IMPORTED_MODULE_3__.AlertService },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.LoadingController },
-    { type: _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_7__.Storage }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.NavController },
+    { type: _services_bpm_service__WEBPACK_IMPORTED_MODULE_3__.BPMService },
+    { type: _services_alert_service__WEBPACK_IMPORTED_MODULE_4__.AlertService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.LoadingController },
+    { type: _ionic_storage_angular__WEBPACK_IMPORTED_MODULE_8__.Storage },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.ModalController }
 ];
-NuevoPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+NuevoPage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
         selector: 'app-nuevo',
         template: _D_Farasi_Software_SupportApp_node_modules_ngtools_webpack_src_loaders_direct_resource_js_nuevo_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_nuevo_page_scss__WEBPACK_IMPORTED_MODULE_1__]
     })
 ], NuevoPage);
+
+
+
+/***/ }),
+
+/***/ 4252:
+/*!***********************************************************!*\
+  !*** ./src/app/sercheble-select/sercheble-select.page.ts ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SerchebleSelectPage": () => (/* binding */ SerchebleSelectPage)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 8806);
+/* harmony import */ var _D_Farasi_Software_SupportApp_node_modules_ngtools_webpack_src_loaders_direct_resource_js_sercheble_select_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./sercheble-select.page.html */ 2922);
+/* harmony import */ var _sercheble_select_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sercheble-select.page.scss */ 8406);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ 8099);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 4001);
+
+
+
+
+
+let SerchebleSelectPage = class SerchebleSelectPage {
+    constructor(loadingController, modalController) {
+        this.loadingController = loadingController;
+        this.modalController = modalController;
+        this.viewEntered = false;
+        this.itemTextField = '';
+        this.filtered = [];
+    }
+    ngOnInit() {
+        this.filtered = this.data;
+    }
+    ionViewDidEnter() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            setTimeout(() => (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+                this.viewEntered = yield true;
+                yield this.loadingController.dismiss();
+            }), 800);
+        });
+    }
+    ionViewWillLeave() {
+        this.viewEntered = false;
+    }
+    back() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__awaiter)(this, void 0, void 0, function* () {
+            this.modalController.dismiss();
+        });
+    }
+    onSearchChange(event) {
+        const filter = event.detail.value.toLocaleLowerCase();
+        this.filtered = this.data.filter(item => item.nombre.toLowerCase().indexOf(filter) >= 0);
+    }
+    check(ev) {
+        this.modalController.dismiss(ev.detail.value);
+    }
+};
+SerchebleSelectPage.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.LoadingController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__.ModalController }
+];
+SerchebleSelectPage.propDecorators = {
+    data: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_4__.Input }]
+};
+SerchebleSelectPage = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
+        selector: 'app-sercheble-select',
+        template: _D_Farasi_Software_SupportApp_node_modules_ngtools_webpack_src_loaders_direct_resource_js_sercheble_select_page_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        styles: [_sercheble_select_page_scss__WEBPACK_IMPORTED_MODULE_1__]
+    })
+], SerchebleSelectPage);
 
 
 
@@ -381,7 +478,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button (click)=\"back()\" color=\"light\">Atrás\r\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"light\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>Nuevo Ticket</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <br>\r\n  <ion-list>\r\n    <ion-item>\r\n      <ion-label>Categoría</ion-label>\r\n      <ion-select (ionChange)=\"selectCategoria($event)\">\r\n        <ion-select-option *ngFor=\"let categoria of categorias\" value=\"{{categoria.codigo}}\">{{categoria.nombre}}</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>Incidente</ion-label>\r\n      <ion-select (ionChange)=\"selectIncidente($event)\">\r\n        <ion-select-option *ngFor=\"let incidente of incidentes\" value=\"{{incidente.codigo}}\">{{incidente.nombre}}</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>Prioridad</ion-label>\r\n      <ion-note slot=\"end\" color=\"dark\" *ngIf=\"MostrarPrioridad\">{{nombre_prioridad}}</ion-note>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>Sede</ion-label>\r\n      <ion-select (ionChange)=\"selectSede($event)\">\r\n        <ion-select-option *ngFor=\"let sede of sedes\" value=\"{{sede.codigo}}\">{{sede.nombre}}</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>Área</ion-label>\r\n      <ion-select (ionChange)=\"selectArea($event)\">\r\n        <ion-select-option *ngFor=\"let area of areas\" value=\"{{area.codigo}}\">{{area.nombre}}</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>Sector</ion-label>\r\n      <ion-note slot=\"end\" color=\"dark\" *ngIf=\"mostrarSector\">{{nombreSector}}</ion-note>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>Descripción :</ion-label>\r\n      <ion-textarea rows=\"4\" placeholder=\"Descripción...\" [(ngModel)]=\"descripcion\">  </ion-textarea>\r\n    </ion-item>\r\n  </ion-list>\r\n\r\n  <br>\r\n\r\n  <div *ngIf=\"mostrarFoto\">\r\n    <img [src]=\"photo\" class=\"imageDefault\">\r\n</div>\r\n\r\n<ion-row>\r\n<ion-col size=\"3.5\"></ion-col>\r\n<ion-col size=\"4\">\r\n  <ion-button  style=\"--background: #c54f4d;\" class=\"upload-btn\"\r\n          (click)=\"takePicture()\">\r\n          Subir imágen\r\n           <ion-icon slot=\"start\" name=\"cloud-upload\" ></ion-icon>\r\n  </ion-button>\r\n</ion-col>\r\n<ion-col size=\"4\"></ion-col>\r\n</ion-row>\r\n\r\n<input type=\"file\" class=\"file-input\"\r\n(change)=\"onFileSelected($event)\" #fileUpload>\r\n\r\n<div class=\"file-upload\">\r\n<ion-row>\r\n    <ion-col size=\"3.5\"></ion-col>\r\n    <ion-col size=\"4\">\r\n      <ion-button mat-mini-fab style=\"--background: #c54f4d;\" class=\"upload-btn\"\r\n      (click)=\"fileUpload.click()\">\r\n      Subir archivo\r\n       <ion-icon slot=\"start\" name=\"cloud-upload\" ></ion-icon>\r\n      </ion-button>\r\n    </ion-col>\r\n    <ion-col size=\"4\"></ion-col>\r\n</ion-row>\r\n<ion-text style=\"text-align: center;\">\r\n<h6>{{fileName || \"Aún no se ha subido ningún archivo.\"}}</h6>\r\n</ion-text>\r\n</div>\r\n\r\n  <br>\r\n  <ion-row>\r\n    <ion-col size=\"3\"></ion-col>\r\n    <ion-col size=\"6\">\r\n      <ion-button expand=\"block\" class=\"button-save\" strong=\"true\" (click)=\"guardarTicket()\">Grabar\r\n                <ion-icon slot=\"start\" color=\"white\" name=\"save\"></ion-icon>\r\n      </ion-button>\r\n    </ion-col>\r\n    <ion-col size=\"3\"></ion-col>\r\n  </ion-row>\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button (click)=\"back()\" color=\"light\">Atrás\r\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"light\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>Nuevo Ticket</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <br>\r\n  <ion-list>\r\n    <ion-item>\r\n      <ion-label>Categoría</ion-label>\r\n      {{categoriafound}}\r\n      <button ion-button icon-only (click)=\"selectCategoria()\"  fill=\"clear\">\r\n        <ion-icon name=\"caret-down\" color=\"grey\"></ion-icon>\r\n      </button>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>Incidente</ion-label>\r\n      <ion-select (ionChange)=\"selectIncidente($event)\">\r\n        <ion-select-option *ngFor=\"let incidente of incidentes\" value=\"{{incidente.codigo}}\">{{incidente.nombre}}</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>Prioridad</ion-label>\r\n      <ion-note slot=\"end\" color=\"dark\" *ngIf=\"MostrarPrioridad\">{{nombre_prioridad}}</ion-note>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>Sede</ion-label>\r\n      <ion-select (ionChange)=\"selectSede($event)\">\r\n        <ion-select-option *ngFor=\"let sede of sedes\" value=\"{{sede.codigo}}\">{{sede.nombre}}</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>Área</ion-label>\r\n      <ion-select (ionChange)=\"selectArea($event)\">\r\n        <ion-select-option *ngFor=\"let area of areas\" value=\"{{area.codigo}}\">{{area.nombre}}</ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>Sector</ion-label>\r\n      <ion-note slot=\"end\" color=\"dark\" *ngIf=\"mostrarSector\">{{nombreSector}}</ion-note>\r\n    </ion-item>\r\n    <ion-item>\r\n      <ion-label>Descripción :</ion-label>\r\n      <ion-textarea rows=\"4\" placeholder=\"Descripción...\" [(ngModel)]=\"descripcion\">  </ion-textarea>\r\n    </ion-item>\r\n  </ion-list>\r\n\r\n  <br>\r\n\r\n  <div *ngIf=\"mostrarFoto\">\r\n    <img [src]=\"photo\" class=\"imageDefault\">\r\n</div>\r\n\r\n<ion-row>\r\n<ion-col size=\"3.5\"></ion-col>\r\n<ion-col size=\"4\">\r\n  <ion-button  style=\"--background: #c54f4d;\" class=\"upload-btn\"\r\n          (click)=\"takePicture()\">\r\n          Subir imágen\r\n           <ion-icon slot=\"start\" name=\"cloud-upload\" ></ion-icon>\r\n  </ion-button>\r\n</ion-col>\r\n<ion-col size=\"4\"></ion-col>\r\n</ion-row>\r\n\r\n<input type=\"file\" class=\"file-input\"\r\n(change)=\"onFileSelected($event)\" #fileUpload>\r\n\r\n<div class=\"file-upload\">\r\n<ion-row>\r\n    <ion-col size=\"3.5\"></ion-col>\r\n    <ion-col size=\"4\">\r\n      <ion-button mat-mini-fab style=\"--background: #c54f4d;\" class=\"upload-btn\"\r\n      (click)=\"fileUpload.click()\">\r\n      Subir archivo\r\n       <ion-icon slot=\"start\" name=\"cloud-upload\" ></ion-icon>\r\n      </ion-button>\r\n    </ion-col>\r\n    <ion-col size=\"4\"></ion-col>\r\n</ion-row>\r\n<ion-text style=\"text-align: center;\">\r\n<h6>{{fileName || \"Aún no se ha subido ningún archivo.\"}}</h6>\r\n</ion-text>\r\n</div>\r\n\r\n  <br>\r\n  <ion-row>\r\n    <ion-col size=\"3\"></ion-col>\r\n    <ion-col size=\"6\">\r\n      <ion-button expand=\"block\" class=\"button-save\" strong=\"true\" (click)=\"guardarTicket()\">Grabar\r\n                <ion-icon slot=\"start\" color=\"white\" name=\"save\"></ion-icon>\r\n      </ion-button>\r\n    </ion-col>\r\n    <ion-col size=\"3\"></ion-col>\r\n  </ion-row>\r\n</ion-content>\r\n");
+
+/***/ }),
+
+/***/ 2922:
+/*!****************************************************************************************************************************!*\
+  !*** ./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/sercheble-select/sercheble-select.page.html ***!
+  \****************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInDown\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-button (click)=\"back()\" color=\"light\">Atrás\n        <ion-icon slot=\"start\" name=\"arrow-back-outline\" color=\"light\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>Selección</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content *ngIf=\"viewEntered\" class=\"animate__animated animate__fadeInUp\">\n\n\n  <ion-searchbar (ionChange)=\"onSearchChange($event)\" animated=\"true\"  show-clear-button=\"focus\" placeholder=\"Filtrar\"></ion-searchbar>\n\n<br>\n\n  <ion-item *ngFor=\"let item of filtered\">\n    <ion-label>{{item.nombre}}</ion-label>\n    <ion-checkbox slot=\"end\" (ionChange)=\"check($event)\" value=\"{{item.codigo}}\"></ion-checkbox>\n  </ion-item>\n</ion-content>\n");
 
 /***/ }),
 
@@ -392,6 +503,16 @@ __webpack_require__.r(__webpack_exports__);
 /***/ ((module) => {
 
 module.exports = ".button-save {\n  --background: #4c4c4a;\n  color: white;\n  margin-top: 10%;\n}\n\nion-toolbar {\n  --background: #66615B;\n  --color: white;\n}\n\n.file-input {\n  display: none;\n}\n\n.imageDefault {\n  height: 65%;\n  width: 65%;\n  display: block;\n  margin: auto;\n  border-radius: 15px 15px 15px 15px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm51ZXZvLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLHFCQUFBO0VBQ0EsWUFBQTtFQUNBLGVBQUE7QUFDSjs7QUFFQTtFQUNJLHFCQUFBO0VBQ0EsY0FBQTtBQUNKOztBQUVFO0VBQ0UsYUFBQTtBQUNKOztBQUVFO0VBQ0UsV0FBQTtFQUNBLFVBQUE7RUFDQSxjQUFBO0VBQ0EsWUFBQTtFQUNBLGtDQUFBO0FBQ0oiLCJmaWxlIjoibnVldm8ucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmJ1dHRvbi1zYXZle1xyXG4gICAgLS1iYWNrZ3JvdW5kOiAjNGM0YzRhO1xyXG4gICAgY29sb3I6IHdoaXRlO1xyXG4gICAgbWFyZ2luLXRvcDogMTAlO1xyXG59XHJcblxyXG5pb24tdG9vbGJhciB7XHJcbiAgICAtLWJhY2tncm91bmQ6ICM2NjYxNUI7XHJcbiAgICAtLWNvbG9yOiB3aGl0ZTtcclxuICB9XHJcblxyXG4gIC5maWxlLWlucHV0IHtcclxuICAgIGRpc3BsYXk6IG5vbmU7XHJcbiAgfVxyXG5cclxuICAuaW1hZ2VEZWZhdWx0e1xyXG4gICAgaGVpZ2h0OiA2NSU7XHJcbiAgICB3aWR0aDogNjUlO1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICBtYXJnaW46YXV0bztcclxuICAgIGJvcmRlci1yYWRpdXM6IDE1cHggMTVweCAxNXB4IDE1cHg7XHJcbiAgfVxyXG4iXX0= */";
+
+/***/ }),
+
+/***/ 8406:
+/*!*************************************************************!*\
+  !*** ./src/app/sercheble-select/sercheble-select.page.scss ***!
+  \*************************************************************/
+/***/ ((module) => {
+
+module.exports = "ion-toolbar {\n  --background: #66615B;\n  --color: white;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNlcmNoZWJsZS1zZWxlY3QucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UscUJBQUE7RUFDQSxjQUFBO0FBQ0YiLCJmaWxlIjoic2VyY2hlYmxlLXNlbGVjdC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24tdG9vbGJhciB7XHJcbiAgLS1iYWNrZ3JvdW5kOiAjNjY2MTVCO1xyXG4gIC0tY29sb3I6IHdoaXRlO1xyXG59XHJcbiJdfQ== */";
 
 /***/ })
 

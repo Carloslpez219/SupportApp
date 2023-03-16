@@ -14,9 +14,10 @@
   <ion-list>
     <ion-item>
       <ion-label>Categoría</ion-label>
-      <ion-select (ionChange)="selectCategoria($event)">
-        <ion-select-option *ngFor="let categoria of categorias" value="{{categoria.codigo}}">{{categoria.nombre}}</ion-select-option>
-      </ion-select>
+      {{categoriafound}}
+      <button ion-button icon-only (click)="selectCategoria()"  fill="clear">
+        <ion-icon name="caret-down" color="grey"></ion-icon>
+      </button>
     </ion-item>
     <ion-item>
       <ion-label>Incidente</ion-label>

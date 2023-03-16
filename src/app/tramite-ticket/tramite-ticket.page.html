@@ -86,7 +86,7 @@
   </ion-item-divider>
   <br>
   <ion-list>
-    <ion-item *ngFor="let paso of pasos" [disabled]="paso.puede_contestar" >
+    <ion-item *ngFor="let paso of pasos" [disabled]="!paso.puede_contestar" >
       <ion-label class="ion-text-wrap">{{paso.descripcion}}</ion-label>
       <ion-checkbox slot="start" [(ngModel)]="paso.checked" (ionChange)="onChange($event, paso)"></ion-checkbox>
       <ion-button (click)="observacion(paso)" expand="block" fill="clear" shape="round">

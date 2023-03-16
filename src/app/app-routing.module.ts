@@ -85,6 +85,10 @@ const routes: Routes = [
     path: 'uid',
     loadChildren: () => import('./uid/uid.module').then( m => m.UidPageModule)
   },
+  {
+    path: 'sercheble-select',
+    loadChildren: () => import('./sercheble-select/sercheble-select.module').then( m => m.SerchebleSelectPageModule)
+  },
 
 ];
 

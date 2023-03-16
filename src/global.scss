@@ -44,3 +44,12 @@
     width: 98%;
     text-align: left;
 }
+
+.alert-radio-label.sc-ion-alert-ios {
+  white-space: normal !important;
+}
+
+.alert-tappable.alert-radio{
+  height: auto;
+  contain: content;
+}

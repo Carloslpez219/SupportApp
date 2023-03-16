@@ -53,7 +53,7 @@ const routes = [
     },
     {
         path: 'tramite-ticket',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_tramite-ticket_tramite-ticket_page_ts"), __webpack_require__.e("node_modules_capacitor_camera_dist_esm_index_js-src_app_tramite-ticket_tramite-ticket_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./tramite-ticket/tramite-ticket.module */ 6396)).then(m => m.TramiteTicketPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_services_alert_service_ts-src_app_services_bpm_service_ts"), __webpack_require__.e("default-src_app_tramite-ticket_tramite-ticket_page_ts"), __webpack_require__.e("node_modules_capacitor_camera_dist_esm_index_js-src_app_sercheble-select_sercheble-select_pag-d58111")]).then(__webpack_require__.bind(__webpack_require__, /*! ./tramite-ticket/tramite-ticket.module */ 6396)).then(m => m.TramiteTicketPageModule)
     },
     {
         path: 'nuevo',
@@ -102,6 +102,10 @@ const routes = [
     {
         path: 'uid',
         loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_services_alert_service_ts-src_app_uid_uid_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./uid/uid.module */ 6241)).then(m => m.UidPageModule)
+    },
+    {
+        path: 'sercheble-select',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_sercheble-select_sercheble-select_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./sercheble-select/sercheble-select.module */ 577)).then(m => m.SerchebleSelectPageModule)
     },
 ];
 let AppRoutingModule = class AppRoutingModule {

@@ -14,9 +14,10 @@
   <ion-list>
     <ion-item>
       <ion-label>Activo</ion-label>
-      <ion-select (ionChange)="selectCategoria($event)">
-        <ion-select-option *ngFor="let activo of activos" value="{{activo.codigo}}">{{activo.nombre}}</ion-select-option>
-      </ion-select>
+      {{activofound}}
+      <ion-button (click)="selectCategoria()"  fill="clear" style="color: darkgray; zoom: 0.6; margin-right: -5px;">
+        <ion-icon name="caret-down" slot="icon-only"></ion-icon>
+      </ion-button>
     </ion-item>
     <ion-item>
       <ion-label>Falla :</ion-label>
@@ -28,7 +29,7 @@
     </ion-item>
     <br>
     <ion-label class="ion-padding">Fecha y Hora en la que ocurre la falla:</ion-label>
-    <ion-datetime [value]="maxDate.toISOString()" min="2020-01-01" (ionChange)="cambioFechaHasta($event)" style="margin-left: 20px;
+    <ion-datetime [value]="maxDate.toISOString()" [max]="hoy" (ionChange)="cambioFechaHasta($event)" style="margin-left: 20px;
     border-radius: 20px; margin-top: 10px;"></ion-datetime>
   </ion-list>
 <br>

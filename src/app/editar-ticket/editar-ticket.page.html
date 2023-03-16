@@ -15,9 +15,10 @@
   <ion-list>
     <ion-item>
       <ion-label>Categoría</ion-label>
-      <ion-select (ionChange)="selectCategoria($event)" [value]="categoriaActual">
-        <ion-select-option *ngFor="let categoria of categorias" value="{{categoria.codigo}}">{{categoria.nombre}}</ion-select-option>
-      </ion-select>
+      {{categoriafound}}
+      <ion-button (click)="selectCategoria()"  fill="clear" style="color: darkgray; zoom: 0.6; margin-right: -5px;">
+        <ion-icon name="caret-down" slot="icon-only"></ion-icon>
+      </ion-button>
     </ion-item>
     <ion-item>
       <ion-label>Prioridad</ion-label>
@@ -27,9 +28,10 @@
     </ion-item>
     <ion-item>
       <ion-label>Incidente</ion-label>
-      <ion-select (ionChange)="selectIncidente($event)" [value]="incidenteActual">
-        <ion-select-option *ngFor="let incidente of incidentes" value="{{incidente.codigo}}">{{incidente.nombre}}</ion-select-option>
-      </ion-select>
+      {{incidenteFound}}
+      <ion-button (click)="selectIncidente()"  fill="clear" style="color: darkgray; zoom: 0.6; margin-right: -5px;">
+        <ion-icon name="caret-down" slot="icon-only"></ion-icon>
+      </ion-button>
     </ion-item>
     <ion-item>
       <ion-label>Área</ion-label>
